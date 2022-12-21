@@ -70,10 +70,12 @@
                             <td>{{$record->institutionAddress}}</td>
                             <td>{{$record->phone}}</td>
                             <td>{{$record->email}}</td>
-                            <td>{{$record->term->termName}}</td>
-                            <td>{{$record->term->startDate}}</td>
-                            <td>{{$record->term->endDate}}</td>
-                            <td>{{$record->term->maxPossibleDays}}</td>
+                            @foreach($record->term as $term)
+                            <td>{{$term->termName}}</td>
+                            <td>{{$term->startDate}}</td>
+                            <td>{{$term->endDate}}</td>
+                            <td>{{$term->maxPossibleDays}}</td>
+                                @endforeach
                             <td>
 
                                 <a href="{{route("institutions.edit", $record->id)}}" class="btn btn-primary btn-sm">

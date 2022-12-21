@@ -179,7 +179,7 @@ class InstitutionController extends Controller
         }
         else
         {
-             $records= @json_decode(json_encode($response,true));
+              $records= @json_decode(json_encode($response,true));
             return view('institutions.view-institutions')->with('records',$records);
 
         }
@@ -197,7 +197,7 @@ class InstitutionController extends Controller
         }
         else
         {
-             $records= @json_decode(json_encode($response,true));
+              $records= @json_decode(json_encode($response,true));
             return view('institutions.update-institution')->with('record',$records);
 
         }
