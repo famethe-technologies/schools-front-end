@@ -46,17 +46,20 @@ class FeesController extends Controller
      */
     public function create()
     {
+        $base_url=config('app.base_url');
         $institution_url=config('app.institution_url');
 
-        $response = $this->tHttpClientWrapper->getRequest($institution_url.'/institutions/all');
+        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . '/classes/all');
+         $response = $this->tHttpClientWrapper->getRequest($institution_url.'/institution/find-all-institutions');
 
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-            $records= @json_decode(json_encode($response['dataList'],true));
-            return view('fees.create')->with('records',$records);
+             $records= @json_decode(json_encode($response,true));
+            $classes= @json_decode(json_encode($classesResponse['dataList'],true));
+            return view('fees.create')->with('records',$records)->with('classes', $classes);
 
         }
     }
@@ -73,27 +76,18 @@ class FeesController extends Controller
         $institution_url=config('app.institution_url');
         $data = [
 
-            'institutionAddress' => $request->institutionAddress,
-            'institutionCode' => $request->institutionCode,
-            'institutionName' => $request->institutionName,
-            'institutionType' => $request->institutionType,
-            'email' => $request->email,
-            'phone' => $request->phone,
+            'classId' => $request->classId,
+            'createdDate' => $request->createdDate . " " ."00:00:00",
+            'institutionId' => $request->institutionId,
+            'narration' => $request->narration,
+            'status' => $request->status,
+            'updatedDate' => $request->updatedDate . " " ."00:00:00"
 
-            "term" =>[
-                'endDate' => $request->endDate,
-                'maxPossibleDays' => $request->maxPossibleDays,
-                'startDate' => $request->termName,
+            ];
 
-            ],
+        return $response = $this->tHttpClientWrapper->postRequest($institution_url.'fees-structures/save',$data);
 
-
-        ];
-
-
-        return $response = $this->tHttpClientWrapper->postRequest($institution_url.'institution/create-institution',$data);
-
-        return redirect()->route('schools')->with('success','Institution Added Successfully!!');
+        return redirect()->route('fees.index')->with('success','Fees Added Successfully!!');
 
     }
 

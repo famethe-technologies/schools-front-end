@@ -35,11 +35,13 @@
         </div>
 
         <div class="card-body">
-            <form action="/update/staff/{{$record->id}}" method="post" enctype="multipart/form">
+            <form action="{{route("institutions.update", $record->id)}}}}" method="post" enctype="multipart/form">
                 @csrf
 
                 <input type="text" class="form-control" name="id" value="{{$record->id}} " hidden required>
-                <input type="text" class="form-control" name="termId" value="{{$record->term->id}} " hidden required>
+                @foreach($record->term as $term)
+                <input type="text" class="form-control" name="termId" value="{{$term->id}} " hidden required>
+                @endforeach
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -48,14 +50,14 @@
                     </div>
                     <div class="form-group col-md-4">
 
-                        <label for="surname">Institution Address</label>
-                        <input type="text" class="form-control"   name="institutionAddress"   value="{{$record->institutionAddress}}" required>
+                        <label for="surname">Institution Code</label>
+                        <input type="text" class="form-control"   name="institutionCode"  value="{{$record->institutionCode}}" required>
 
                     </div>
                     <div class="form-group col-md-4">
 
-                        <label for="surname">Institution Code</label>
-                        <input type="text" class="form-control"   name="institutionAddress"   value="{{$record->institutionCode}}" required>
+                        <label for="surname">Institution Address</label>
+                        <input type="text" class="form-control"   name="institutionAddress"   value="{{$record->institutionAddress}}" required>
 
                     </div>
 
@@ -80,28 +82,30 @@
                     </div>
 
                 </div>
+
+                @foreach($record->term as $term)
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="position">Term Name</label>
-                        <input type="text" class="form-control" name="termName" value="{{$record->termName}}" required>
+                        <input type="text" class="form-control" name="termName" value="{{$term->termName}}" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="phone">Max Days</label>
-                        <input type="number" class="form-control" name="maxPossibleDays" value=" {{$record->maxPossibleDays}}" required>
+                        <input type="number" class="form-control" name="maxPossibleDays" value="{{$term->maxPossibleDays}}" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="phone">Start Date</label>
-                        <input type="date" class="form-control" name="startDate" value=" {{$record->startDate}}" required>
+                        <input type="text" class="form-control" name="startDate" value="{{$term->startDate}}" required>
                     </div>
-
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="position">End Date</label>
-                        <input type="date" class="form-control" name="endDate" value="{{$record->endDate}}" required>
+                        <input type="text" class="form-control" name="endDate" value="{{$term->endDate}}" required>
                     </div>
-
                 </div>
+                @endforeach
+
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

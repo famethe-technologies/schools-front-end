@@ -38,17 +38,17 @@
             <form action="{{route("institutions.save")}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="firstname">Institution Name *</label>
                         <input type="text" class="form-control" name="institutionName" required>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
 
                         <label for="surname">Institution Code *</label>
                         <input type="text" class="form-control"   name="institutionCode" required>
 
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
 
                         <label for="surname">Institution type *</label>
                         <select class="form-control" name="institutionType" required>
@@ -57,49 +57,52 @@
                             <option value="High School">High School</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-3">
-
-                        <label for="surname">Institution Address *</label>
-                        <input type="text" class="form-control"   name="institutionAddress" required>
-
-                    </div>
 
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="firstname">Email *</label>
                         <input type="email" class="form-control" name="email" required>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="firstname">Phone *</label>
                         <input type="text" class="form-control" name="phone" required>
                     </div>
+                    <div class="form-group col-md-4">
+                        <label for="firstname">Term Name *</label>
+                        <input type="text" class="form-control" name="termName" required>
+                    </div>
+                </div>
+                <div class="form-row">
 
-                    <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
 
                         <label for="surname">Start Date </label>
                         <input type="date" class="form-control"   name="startDate" required>
 
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
 
                         <label for="surname">End Date </label>
                         <input type="date" class="form-control"   name="endDate" required>
 
                     </div>
 
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="firstname">Term Name *</label>
-                        <input type="text" class="form-control" name="termName" required>
-                    </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="firstname">Maximum Days *</label>
                         <input type="number" class="form-control" name="maxPossibleDays" required>
                     </div>
 
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+
+                        <label for="surname">Institution Address *</label>
+                        <textarea type="text" class="form-control"   name="institutionAddress" required></textarea>
+                    </div>
+
+                </div>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

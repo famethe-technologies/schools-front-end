@@ -72,9 +72,12 @@ Route::get('/add/institutions-view', [App\Http\Controllers\InstitutionController
 Route::post('/add/institutions', [App\Http\Controllers\InstitutionController::class, 'saveInstitution'])->name('institutions.save');
 Route::get('/institutions', [App\Http\Controllers\InstitutionController::class, 'getInstitutions'])->name('institutions.view');
 Route::get('/institutions/{id}', [App\Http\Controllers\InstitutionController::class, 'getInstitution'])->name('institutions.edit');
+Route::post('/update/institutions', [App\Http\Controllers\InstitutionController::class, 'updateInstitution'])->name('institutions.update');
+Route::any('/delete/institutions/{id}', [App\Http\Controllers\InstitutionController::class, 'deleteInstitution'])->name('institutions.destroy');
+
 
 
 /***************************Fees*********************/
 Route::resource('fees', FeesController::class);
-Route::any('/fees/update/{id}', [FeesController::class, 'update'])->name('fees.update');
+Route::post('/fees/update/{id}', [FeesController::class, 'update'])->name('fees.update');
 Route::any('/earning/delete/{id}', [FeesController::class, 'destroy'])->name('fees.destroy');

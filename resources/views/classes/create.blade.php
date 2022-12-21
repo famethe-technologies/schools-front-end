@@ -52,14 +52,14 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                    <label for="gender">Class Teacher</label>
+                        <label for="gender">Class Teacher</label>
 
-                 <select class="form-control" name="staff" required>
-                     @foreach($records as $record)
-                     <option value="{{$record->id}}">{{$record->firstname}} {{$record->surname}}</option>
-                         @endforeach
-                 </select>
-                        <div class="form-row">
+                         <select class="form-control" name="staff" required>
+                             @foreach($records as $record)
+                             <option value="{{$record->id}}">{{$record->firstname}} {{$record->surname}}</option>
+                                 @endforeach
+                         </select>
+                    </div>
                 </div>
                     <div class="form-group">
                        <br>

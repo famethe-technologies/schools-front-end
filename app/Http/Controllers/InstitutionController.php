@@ -160,11 +160,20 @@ class InstitutionController extends Controller
 
         ];
 
-       // return $data;
-
          $response = $this->tHttpClientWrapper->postRequest($institution_url.'institution/create-institution',$data);
 
-        return redirect()->route('institutions.view')->with('success','Institution Added Successfully!!');
+        if ($response['statusCode'] == 200)
+        {
+
+            return redirect()->route('institutions.view')->with('success','Institution Added Successfully!!');
+
+        }
+        else
+        {
+            return redirect()->route('institutions.view')->with('error','An error occurred while processing your request');
+        }
+
+
     }
 
     //get all institutions
@@ -190,7 +199,7 @@ class InstitutionController extends Controller
     {
         $institution_url=config('app.institution_url');
 
-        $response = $this->tHttpClientWrapper->getRequest($institution_url.'/institution/get=one-institution/'.$id);
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'institution/get-one-institution/'.$id);
 
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
@@ -232,9 +241,38 @@ class InstitutionController extends Controller
 
         // return $data;
 
-        $response = $this->tHttpClientWrapper->postRequest($institution_url.'institution/update-institution/'.$request->id,$data);
+         $response = $this->tHttpClientWrapper->postRequest($institution_url.'institution/update-institution/'.$request->id,$data);
 
-        return redirect()->route('institutions.view')->with('success','Institution Added Successfully!!');
+        if ($response['code'] == 200)
+        {
+
+            return redirect()->route('institutions.view')->with('success','Institution Updated Successfully!!');
+
+        }
+        else
+        {
+            return redirect()->route('institutions.view')->with('error','An error occurred while processing your request');
+        }
+
+    }
+
+    //delete institution
+    public function deleteInstitution($id)
+    {
+        $institution_url=config('app.institution_url');
+
+       return $response = $this->tHttpClientWrapper->deleteRequest($institution_url.'institution/delete-institution/'.$id);
+
+        if ($response['code'] == 200)
+        {
+
+            return redirect()->route('institutions.view')->with('success','Institution Deleted Successfully!!');
+
+        }
+        else
+        {
+            return redirect()->route('institutions.view')->with('error','An error occurred while processing your request');
+        }
     }
 
 
