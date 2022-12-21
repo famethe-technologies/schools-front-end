@@ -153,6 +153,104 @@
 
             </ul>
         </li>
+
+        <li class="nav-item has-treeview" id="prices">
+            <a href="#" class="nav-link" id="prices_link">
+                <i class="nav-icon fas fa-home"></i>
+                <p>
+                    {{__('Classes')}}
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+
+                <li class="nav-item">
+                    <a href="/create/class" class="nav-link" id="branches">
+                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <p>{{__('Add')}}</p>
+                    </a>
+                </li>
+
+
+
+                <li class="nav-item">
+                    <a href="/view/classes/{{Session::get('school_id')}}" class="nav-link" id="tests">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            {{__('View')}}
+                        </p>
+                    </a>
+                </li>
+
+
+
+            </ul>
+        <li class="nav-item has-treeview" id="prices">
+            <a href="#" class="nav-link" id="prices_link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                    {{__('Institutions')}}
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+
+                <li class="nav-item">
+                    <a href="{{route("saveInstitutionView")}}" class="nav-link" id="branches">
+                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <p>{{__('Add')}}</p>
+                    </a>
+                </li>
+
+
+
+                <li class="nav-item">
+                    <a href="{{route("getInstitutions")}}" class="nav-link" id="tests">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            {{__('View')}}
+                        </p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </li>
+
+        <li class="nav-item has-treeview" id="prices">
+            <a href="#" class="nav-link" id="prices_link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                    {{__('Fees')}}
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+
+                <li class="nav-item">
+                    <a href="{{route("fees.create")}}" class="nav-link" id="branches">
+                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <p>{{__('Add')}}</p>
+                    </a>
+                </li>
+
+
+
+                <li class="nav-item">
+                    <a href="{{route("fees.index")}}" class="nav-link" id="tests">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            {{__('View')}}
+                        </p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </li>
     </ul>
 </nav>
 

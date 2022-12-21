@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FeesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,7 +48,7 @@ Route::post('/add/sport-house', [App\Http\Controllers\SportsController::class, '
 Route::get('/edit/sport-house/{id}',[App\Http\Controllers\SportsController::class, 'edit'])->name('houses.edit');
 Route::post('/update/sport-house/{id}',[App\Http\Controllers\SportsController::class, 'update'])->name('houses.update');
 
-Route::get('/create/student', [App\Http\Controllers\StudentController::class, 'create'])->name('students');;
+Route::get('/create/student', [App\Http\Controllers\StudentController::class, 'create'])->name('students');
 Route::get('/view/students', [App\Http\Controllers\StudentController::class, 'index']);
 Route::post('/add/student', [App\Http\Controllers\StudentController::class, 'store']);
 
@@ -64,3 +65,15 @@ Route::post('update/user/{id}',[App\Http\Controllers\UserController::class, 'upd
 //Route::get('/search/transaction', [App\Http\Controllers\MerchantController::class, 'searchTransactions'])->name('transactions.search');
 //
 //Route::post('/search/transaction', [App\Http\Controllers\MerchantController::class, 'customTransactions']);
+
+
+/*******************************************Institutions***************************************/
+Route::get('/add/institutions-view', [App\Http\Controllers\InstitutionController::class, 'saveInstitutionView'])->name('saveInstitutionView');
+Route::post('/add/institutions', [App\Http\Controllers\InstitutionController::class, 'saveInstitution'])->name('saveInstitution');
+Route::get('/institutions', [App\Http\Controllers\InstitutionController::class, 'getInstitutions'])->name('getInstitutions');
+
+
+/***************************Fees*********************/
+Route::resource('fees', FeesController::class);
+Route::any('/fees/update/{id}', [FeesController::class, 'update'])->name('fees.update');
+Route::any('/earning/delete/{id}', [FeesController::class, 'destroy'])->name('fees.destroy');

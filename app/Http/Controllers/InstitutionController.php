@@ -60,6 +60,7 @@ class InstitutionController extends Controller
 
 
     }
+
     public function getSchoolById($id)
     {
         $base_url=config('app.base_url');
@@ -128,5 +129,61 @@ class InstitutionController extends Controller
 
         }
     }
+
+    //save institution page
+    public function saveInstitutionView()
+    {
+        return view("institutions.create");
+    }
+
+    //post save institution data
+    public function saveInstitution(Request $request)
+    {
+
+        $institution_url=config('app.institution_url');
+        $data = [
+
+            'institutionAddress' => $request->institutionAddress,
+            'institutionCode' => $request->institutionCode,
+            'institutionName' => $request->institutionName,
+            'institutionType' => $request->institutionType,
+            'email' => $request->email,
+            'phone' => $request->phone,
+
+            "term" =>[
+                'endDate' => $request->endDate,
+                'maxPossibleDays' => $request->maxPossibleDays,
+                'startDate' => $request->termName,
+
+            ],
+
+
+        ];
+
+
+         return $response = $this->tHttpClientWrapper->postRequest($institution_url.'institution/create-institution',$data);
+
+        return redirect()->route('schools')->with('success','Institution Added Successfully!!');
+    }
+
+    //get all institutions
+    public function getInstitutions()
+    {
+        $institution_url=config('app.institution_url');
+
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'/institution/find-all-institutions');
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= @json_decode(json_encode($response['dataList'],true));
+            return view('institutions.view-institutions')->with('records',$records);
+
+        }
+    }
+
+
 
 }

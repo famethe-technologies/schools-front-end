@@ -13,6 +13,7 @@ return [
     |
     */
     "base_url" => env('SCHOOL_API'),
+    "institution_url" => env('INSTITUTION_API'),
 
     'name' => env('APP_NAME', 'Laravel'),
 
