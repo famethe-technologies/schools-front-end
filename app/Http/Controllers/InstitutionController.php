@@ -149,21 +149,22 @@ class InstitutionController extends Controller
             'institutionType' => $request->institutionType,
             'email' => $request->email,
             'phone' => $request->phone,
-
             "term" =>[
-                'endDate' => $request->endDate,
+                [
+                'endDate' => $request->endDate . " " ."00:00:00",
                 'maxPossibleDays' => $request->maxPossibleDays,
-                'startDate' => $request->termName,
-
+                'startDate' => $request->startDate. " " . "00:00:00",
+                'termName' => $request->termName,
+                    ],
             ],
-
 
         ];
 
+       // return $data;
 
-         return $response = $this->tHttpClientWrapper->postRequest($institution_url.'institution/create-institution',$data);
+         $response = $this->tHttpClientWrapper->postRequest($institution_url.'institution/create-institution',$data);
 
-        return redirect()->route('schools')->with('success','Institution Added Successfully!!');
+        return redirect()->route('institutions.view')->with('success','Institution Added Successfully!!');
     }
 
     //get all institutions
@@ -178,11 +179,65 @@ class InstitutionController extends Controller
         }
         else
         {
-            $records= @json_decode(json_encode($response['dataList'],true));
+             $records= @json_decode(json_encode($response,true));
             return view('institutions.view-institutions')->with('records',$records);
 
         }
     }
+
+    //get institution to update
+    public function getInstitution($id)
+    {
+        $institution_url=config('app.institution_url');
+
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'/institution/get=one-institution/'.$id);
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+             $records= @json_decode(json_encode($response,true));
+            return view('institutions.update-institution')->with('record',$records);
+
+        }
+
+    }
+
+    //update institution
+    public function updateInstitution(Request $request)
+    {
+
+        $institution_url=config('app.institution_url');
+        $data = [
+
+            'id' => $request->id,
+            'institutionAddress' => $request->institutionAddress,
+            'institutionCode' => $request->institutionCode,
+            'institutionName' => $request->institutionName,
+            'institutionType' => $request->institutionType,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            "term" =>[
+                [
+                    'id' => $request->termId,
+                    'endDate' => $request->endDate . " " ."00:00:00",
+                    'maxPossibleDays' => $request->maxPossibleDays,
+                    'startDate' => $request->startDate. " " . "00:00:00",
+                    'termName' => $request->termName,
+                ],
+            ],
+
+        ];
+
+        // return $data;
+
+        $response = $this->tHttpClientWrapper->postRequest($institution_url.'institution/update-institution/'.$request->id,$data);
+
+        return redirect()->route('institutions.view')->with('success','Institution Added Successfully!!');
+    }
+
+
 
 
 

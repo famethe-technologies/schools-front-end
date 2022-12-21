@@ -198,7 +198,7 @@
 
 
                 <li class="nav-item">
-                    <a href="{{route("saveInstitutionView")}}" class="nav-link" id="branches">
+                    <a href="{{route("institutions.createView")}}" class="nav-link" id="branches">
                         <i class="fas fa-map-marked-alt nav-icon"></i>
                         <p>{{__('Add')}}</p>
                     </a>
@@ -207,7 +207,7 @@
 
 
                 <li class="nav-item">
-                    <a href="{{route("getInstitutions")}}" class="nav-link" id="tests">
+                    <a href="{{route("institutions.view")}}" class="nav-link" id="tests">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             {{__('View')}}

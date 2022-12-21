@@ -35,7 +35,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{route("saveInstitution")}}" method="post" enctype="multipart/form">
+            <form action="{{route("institutions.save")}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-3">
@@ -54,6 +54,7 @@
                         <select class="form-control" name="institutionType" required>
                             <option value="Private">Private</option>
                             <option value="Government">Government</option>
+                            <option value="High School">High School</option>
                         </select>
                     </div>
                     <div class="form-group col-md-3">

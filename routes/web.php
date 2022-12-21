@@ -68,9 +68,10 @@ Route::post('update/user/{id}',[App\Http\Controllers\UserController::class, 'upd
 
 
 /*******************************************Institutions***************************************/
-Route::get('/add/institutions-view', [App\Http\Controllers\InstitutionController::class, 'saveInstitutionView'])->name('saveInstitutionView');
-Route::post('/add/institutions', [App\Http\Controllers\InstitutionController::class, 'saveInstitution'])->name('saveInstitution');
-Route::get('/institutions', [App\Http\Controllers\InstitutionController::class, 'getInstitutions'])->name('getInstitutions');
+Route::get('/add/institutions-view', [App\Http\Controllers\InstitutionController::class, 'saveInstitutionView'])->name('institutions.createView');
+Route::post('/add/institutions', [App\Http\Controllers\InstitutionController::class, 'saveInstitution'])->name('institutions.save');
+Route::get('/institutions', [App\Http\Controllers\InstitutionController::class, 'getInstitutions'])->name('institutions.view');
+Route::get('/institutions/{id}', [App\Http\Controllers\InstitutionController::class, 'getInstitution'])->name('institutions.edit');
 
 
 /***************************Fees*********************/
