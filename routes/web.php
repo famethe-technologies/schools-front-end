@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FeesController;
+use App\Http\Controllers\ReceiptController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,3 +82,10 @@ Route::any('/delete/institutions/{id}', [App\Http\Controllers\InstitutionControl
 Route::resource('fees', FeesController::class);
 Route::post('/fees/update/{id}', [FeesController::class, 'update'])->name('fees.update');
 Route::any('/earning/delete/{id}', [FeesController::class, 'destroy'])->name('fees.destroy');
+
+/**********************************Receipt***********************/
+Route::resource('receipts', ReceiptController::class);
+
+
+
+

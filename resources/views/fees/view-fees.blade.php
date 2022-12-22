@@ -45,16 +45,10 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Inst Name</th>
-                        <th>Inst Code</th>
-                        <th>Inst Type</th>
-                        <th>Inst Address</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Term</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Max Days</th>
+                        <th>Narration</th>
+                        <th>Inst Id</th>
+                        <th>Class Id</th>
+                        <th>Status</th>
                         <th>Action</th>
 
 
@@ -64,21 +58,13 @@
                     @foreach($records as $record)
                         <tr>
                             <td>{{$record->id}}</td>
-                            <td>{{$record->institutionName}}</td>
-                            <td>{{$record->institutionCode}}</td>
-                            <td>{{$record->institutionType}}</td>
-                            <td>{{$record->institutionAddress}}</td>
-                            <td>{{$record->phone}}</td>
-                            <td>{{$record->email}}</td>
-                            @foreach($record->term as $term)
-                                <td>{{$term->termName}}</td>
-                                <td>{{$term->startDate}}</td>
-                                <td>{{$term->endDate}}</td>
-                                <td>{{$term->maxPossibleDays}}</td>
-                            @endforeach
+                            <td>{{$record->narration}}</td>
+                            <td>{{$record->institutionId}}</td>
+                            <td>{{$record->classId}}</td>
+                            <td>{{$record->status}}</td>
                             <td>
 
-                                <a href="{{route("institutions.edit", $record->id)}}" class="btn btn-primary btn-sm">
+                                <a href="{{route("fees.edit", $record->id)}}" class="btn btn-primary btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a>
 

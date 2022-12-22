@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Business\Services\THttpClientWrapper;
 
-
-class FeesController extends Controller
+class ReceiptController extends Controller
 {
+
 
     public function __construct(THttpClientWrapper $tHttpClientWrapper)
     {
@@ -23,12 +23,6 @@ class FeesController extends Controller
     public function index()
     {
         //
-        $institution_url=config('app.institution_url');
-
-        $response = $this->tHttpClientWrapper->getRequest($institution_url.'fees-structures/find-all');
-
-            $records= @json_decode(json_encode($response,true));
-            return view('fees.view-fees')->with('records',$records);
     }
 
     /**
@@ -39,25 +33,33 @@ class FeesController extends Controller
     public function create()
     {
         $base_url=config('app.base_url');
+        $institution_url=config('app.institution_url');
 
-        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/all');
+        $paymentMethodsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'paymentMethod/all');
+        $studentsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'student/all');
         $termsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'Term/all');
-         $response = $this->tHttpClientWrapper->getRequest($base_url.'institutions/all');
+        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/all');
+         $feesResponse = $this->tHttpClientWrapper->getRequest($institution_url.'fees-structures/find-all');
 
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-             $records= @json_decode(json_encode($response['dataList'],true));
-            $classes= @json_decode(json_encode($classesResponse['dataList'],true));
+            $paymentMethods= @json_decode(json_encode($paymentMethodsResponse['dataList'],true));
+            $students= @json_decode(json_encode($studentsResponse['dataList'],true));
             $terms= @json_decode(json_encode($termsResponse['dataList'],true));
-            return view('fees.create')->with('records',$records)
+            $fees= @json_decode(json_encode($feesResponse,true));
+            $classes= @json_decode(json_encode($classesResponse['dataList'],true));
+            return view('receipts.create')->with('paymentMethods',$paymentMethods)
+                ->with('students', $students)
+                ->with('fees', $fees)
                 ->with('classes', $classes)
                 ->with('terms', $terms);
 
         }
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -68,23 +70,28 @@ class FeesController extends Controller
     public function store(Request $request)
     {
         //
-        $institution_url=config('app.institution_url');
+        $base_url=config('app.base_url');
         $data = [
-
-            'classId' => $request->classId,
-            'createdDate' => $request->createdDate."T00:00:00.000Z",
-            'institutionId' => $request->institutionId,
+            'date' => $request->date."T00:00:00.000Z",
+            'amount' => $request->amount,
+            'description' => $request->description,
+            'receiptNo' => $request->receiptNo,
+            'classs' => $request->classs,
+            'currentRate' => $request->currentRate,
+            'feesId' => $request->feesId,
+            'studentId' => $request->studentId,
+            'paymentMethodId' => $request->paymentMethodId,
             'termId' => $request->termId,
-            'narration' => $request->narration,
-            'status' => $request->status,
-            'updatedDate' => $request->updatedDate ."T00:00:00.000Z"
+            'createdBy' => $request->createdBy,
+            'lastModifiedBy' => $request->lastModifiedBy,
             ];
 
-         $response = $this->tHttpClientWrapper->postRequest($institution_url.'fees-structures/save',$data);
+       return $response = $this->tHttpClientWrapper->postRequest($base_url.'Receipt',$data);
 
         return redirect()->route('fees.index')->with('success','Fees Added Successfully!!');
 
     }
+
 
     /**
      * Display the specified resource.

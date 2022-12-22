@@ -50,14 +50,14 @@
                     <div class="form-group col-md-4">
 
                         <label for="surname">Narration *</label>
-                        <input type="text" class="form-control"   name="institutionCode" required>
+                        <input type="text" class="form-control"   name="narration" required>
 
                     </div>
                     <div class="form-group col-md-4">
 
                         <label for="gender">Class</label>
 
-                        <select class="form-control" name="institutionId" required>
+                        <select class="form-control" name="classId" required>
                             @foreach($classes as $class)
                                 <option value="{{$class->id}}">{{$class->nameOfClass}} {{$class->code}}</option>
                             @endforeach
@@ -82,6 +82,18 @@
                     <div class="form-group col-md-4">
                         <label for="firstname">Date Updated *</label>
                         <input type="date" class="form-control" name="updatedDate" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="gender">Term</label>
+
+                        <select class="form-control" name="termId" required>
+                            @foreach($terms as $record)
+                                <option value="{{$record->id}}">{{$record->termName}} </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 

@@ -29,9 +29,14 @@ class HomeController extends Controller
     {
 
         //$base_url=env('base_url');
-        $base_url='http://localhost:4001/api/v1';
+       /* $base_url='http://localhost:4001/api/v1';
+
+        return $response = $this->tHttpClientWrapper->getRequest($base_url.'/institutions/all');*/
+
+        $base_url=config('app.base_url');
 
         $response = $this->tHttpClientWrapper->getRequest($base_url.'/institutions/all');
+
 
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
