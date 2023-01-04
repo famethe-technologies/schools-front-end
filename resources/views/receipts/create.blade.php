@@ -39,6 +39,14 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-4">
+                        <label for="gender">Institution</label>
+
+                        <select class="form-control" name="institutionId" required>
+                            @foreach($institutions as $record)
+                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
+                            @endforeach
+                        </select>
+                    </div><div class="form-group col-md-4">
                         <label for="gender">Student Name</label>
 
                         <select class="form-control" name="studentId" required>
@@ -53,73 +61,27 @@
                         <input type="text" class="form-control"   name="amount" required>
 
                     </div>
+
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-4">
 
                         <label for="surname">Description *</label>
                         <input type="text" class="form-control"   name="description" required>
                     </div>
-
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="gender">Term</label>
-                        <select class="form-control" name="termId" required>
-                            @foreach($terms as $record)
-                                <option value="{{$record->id}}">{{$record->termName}} </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="gender">Fees Structure</label>
-                        <select class="form-control" name="feesId" required>
-                            @foreach($fees as $record)
-                                <option value="{{$record->id}}">{{$record->narration}} </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="gender">Class</label>
-
-                        <select class="form-control" name="classs" required>
-                            @foreach($classes as $class)
-                                <option value="{{$class->id}}">{{$class->nameOfClass}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="gender">Payment Method</label>
-                        <select class="form-control" name="paymentMethodId" required>
+                        <select class="form-control" name="methodOfPayment" required>
                             @foreach($paymentMethods as $record)
-                                <option value="{{$record->id}}">{{$record->methodOfPayment}} </option>
+                                <option value="{{$record->methodOfPayment}}">{{$record->methodOfPayment}} </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="surname">Receipt No *</label>
-                        <input type="text" class="form-control"   name="receiptNo" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="gender">Current Rate</label>
-                        <input type="text" class="form-control"   name="currentRate" required>
+                        <input type="text" class="form-control"   name="receiptNumber" required>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="surname">Date *</label>
-                        <input type="date" class="form-control"   name="date" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="surname">Modified By</label>
-                        <input type="text" class="form-control"   name="lastModifiedBy" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="gender">Created By</label>
-                        <input type="text" class="form-control"   name="createdBy" required>
-                    </div>
-                </div>
-
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

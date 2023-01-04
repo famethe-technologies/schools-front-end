@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FeesController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ReceiptController;
 use Illuminate\Support\Facades\Route;
 
@@ -81,10 +82,17 @@ Route::any('/delete/institutions/{id}', [App\Http\Controllers\InstitutionControl
 /***************************Fees*********************/
 Route::resource('fees', FeesController::class);
 Route::post('/fees/update/{id}', [FeesController::class, 'update'])->name('fees.update');
-Route::any('/earning/delete/{id}', [FeesController::class, 'destroy'])->name('fees.destroy');
+Route::any('/fees/delete/{id}', [FeesController::class, 'destroy'])->name('fees.destroy');
 
 /**********************************Receipt***********************/
 Route::resource('receipts', ReceiptController::class);
+Route::post('/receipts/update/{id}', [ReceiptController::class, 'update'])->name('receipts.update');
+Route::any('/receipts/delete/{id}', [ReceiptController::class, 'destroy'])->name('receipts.destroy');
+
+/******************************Invoice****************************************/
+Route::resource('invoices', InvoiceController::class);
+Route::post('/invoices/update/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
+Route::any('/invoices/delete/{id}', [InvoiceController::class, 'destroy'])->name('invoice.destroy');
 
 
 

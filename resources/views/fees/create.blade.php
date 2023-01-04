@@ -68,6 +68,36 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
+                        <label for="gender">Term</label>
+
+                        <select class="form-control" name="termId" required>
+                            @foreach($terms as $record)
+                                <option value="{{$record->id}}">{{$record->termName}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="surname">Amount *</label>
+                        <input type="number" class="form-control"   name="amount" required>
+
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="status">Currency *</label>
+                        <select class="form-control" name="currency" required>
+                            <option value="USD">USD</option>
+                            <option value="RTGS">RTGS</option>
+                            <option value="RAND">RAND</option>
+                            <option value="KWACHA">KWACHA</option>
+                            <option value="PULA">PULA</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
                         <label for="status">Status *</label>
                         <select class="form-control" name="status" required>
                             <option value="Active">Active</option>
@@ -82,18 +112,6 @@
                     <div class="form-group col-md-4">
                         <label for="firstname">Date Updated *</label>
                         <input type="date" class="form-control" name="updatedDate" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="gender">Term</label>
-
-                        <select class="form-control" name="termId" required>
-                            @foreach($terms as $record)
-                                <option value="{{$record->id}}">{{$record->termName}} </option>
-                            @endforeach
-                        </select>
                     </div>
                 </div>
 

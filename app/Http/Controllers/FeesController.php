@@ -44,6 +44,7 @@ class FeesController extends Controller
         $termsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'Term/all');
          $response = $this->tHttpClientWrapper->getRequest($base_url.'institutions/all');
 
+
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
         }
@@ -77,6 +78,8 @@ class FeesController extends Controller
             'termId' => $request->termId,
             'narration' => $request->narration,
             'status' => $request->status,
+            'amount' => $request->amount,
+            'currency' => $request->currency,
             'updatedDate' => $request->updatedDate ."T00:00:00.000Z"
             ];
 

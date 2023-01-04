@@ -158,7 +158,7 @@
             <a href="#" class="nav-link" id="prices_link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
-                    {{__('Classes')}}
+                    {{__('Receipts')}}
                     <i class="right fas fa-angle-left"></i>
                 </p>
             </a>
@@ -166,16 +166,14 @@
 
 
                 <li class="nav-item">
-                    <a href="/create/class" class="nav-link" id="branches">
+                    <a href="{{route("receipts.create")}}" class="nav-link" id="branches">
                         <i class="fas fa-map-marked-alt nav-icon"></i>
                         <p>{{__('Add')}}</p>
                     </a>
                 </li>
 
-
-
                 <li class="nav-item">
-                    <a href="/view/classes/{{Session::get('school_id')}}" class="nav-link" id="tests">
+                    <a href="{{route("receipts.index")}}" class="nav-link" id="tests">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             {{__('View')}}
