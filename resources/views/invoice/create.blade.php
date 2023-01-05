@@ -62,7 +62,7 @@
 
                         <select class="form-control" name="classs" required>
                             @foreach($classes as $class)
-                                <option value="{{$class->nameOfClass}}">{{$class->nameOfClass}} {{$class->code}}</option>
+                                <option value="{{$class->id}}">{{$class->nameOfClass}} {{$class->code}}</option>
                             @endforeach
                         </select>
                     </div>

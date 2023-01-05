@@ -77,9 +77,16 @@ class ReceiptController extends Controller
             'studentId' => $request->studentId,
             ];
 
-       return $response = $this->tHttpClientWrapper->postRequest($institution_url.'receipts/create',$data);
+        $response = $this->tHttpClientWrapper->postRequest($institution_url.'receipts/create',$data);
 
-        return redirect()->route('fees.index')->with('success','Fees Added Successfully!!');
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            return redirect()->back();
+        }
+
 
     }
 

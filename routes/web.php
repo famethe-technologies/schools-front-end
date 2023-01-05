@@ -89,14 +89,22 @@ Route::resource('receipts', ReceiptController::class);
 Route::post('/receipts/update/{id}', [ReceiptController::class, 'update'])->name('receipts.update');
 Route::any('/receipts/delete/{id}', [ReceiptController::class, 'destroy'])->name('receipts.destroy');
 Route::get('/receipts/school/balance', [ReceiptController::class, 'getSchoolBalancePage'])->name('receipts.schoolBalancePage');
-Route::post('/receipts/get/school-balance', [ReceiptController::class, 'getSchoolBalance'])->name('receipts.schoolBalance');
+Route::post('/receipts/school-balance/report', [ReceiptController::class, 'getSchoolBalance'])->name('receipts.schoolBalance');
 Route::get('/receipts/student/balance', [ReceiptController::class, 'getStudentBalancePage'])->name('receipts.studentBalancePage');
-Route::post('/receipts/get/student-balance', [ReceiptController::class, 'getStudentBalance'])->name('receipts.studentBalance');
+Route::post('/receipts/student-balance/report', [ReceiptController::class, 'getStudentBalance'])->name('receipts.studentBalance');
 
 /******************************Invoice****************************************/
 Route::resource('invoices', InvoiceController::class);
 Route::post('/invoices/update/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
 Route::any('/invoices/delete/{id}', [InvoiceController::class, 'destroy'])->name('invoice.destroy');
+Route::get('/class/invoice', [InvoiceController::class, 'getClassInvoicePage'])->name('invoices.classPage');
+Route::post('/invoices/class/report', [InvoiceController::class, 'getClassInvoice'])->name('invoices.class');
+Route::get('/school/invoice/create', [InvoiceController::class, 'getSchoolInvoicePage'])->name('invoices.schoolPage');
+Route::post('/school/invoice/report', [InvoiceController::class, 'getSchoolInvoice'])->name('invoices.school');
+Route::get('/term/invoice/create', [InvoiceController::class, 'getTermInvoicePage'])->name('invoices.termPage');
+Route::post('/term/invoice/report', [InvoiceController::class, 'getTermInvoice'])->name('invoices.term');
+
+
 
 
 

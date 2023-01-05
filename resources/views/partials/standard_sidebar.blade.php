@@ -40,7 +40,7 @@
 
                 <li class="nav-item">
                     <a href="/staff" class="nav-link" id="branches">
-                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <i class="fas fa-plus nav-icon"></i>
                         <p>{{__('Add')}}</p>
                     </a>
                 </li>
@@ -49,7 +49,7 @@
 
                 <li class="nav-item">
                     <a href="/view/staff/{{Session::get('school_id')}}" class="nav-link" id="tests">
-                        <i class="nav-icon fas fa-home"></i>
+                        <i class="nav-icon fas fa-eye"></i>
                         <p>
                             {{__('View')}}
                         </p>
@@ -69,7 +69,7 @@
 
                 <li class="nav-item">
                     <a href="/create/student" class="nav-link" id="branches">
-                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <i class="fas fa-plus nav-icon"></i>
                         <p>{{__('Add')}}</p>
                     </a>
                 </li>
@@ -78,7 +78,7 @@
 
                 <li class="nav-item">
                     <a href="/view/students" class="nav-link" id="tests">
-                        <i class="nav-icon fas fa-home"></i>
+                        <i class="nav-icon fas fa-eye"></i>
                         <p>
                             {{__('View')}}
                         </p>
@@ -101,7 +101,7 @@
 
                 <li class="nav-item">
                     <a href="/create/class" class="nav-link" id="branches">
-                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <i class="fas fa-plus nav-icon"></i>
                         <p>{{__('Add')}}</p>
                     </a>
                 </li>
@@ -110,7 +110,7 @@
 
                 <li class="nav-item">
                     <a href="/view/classes/{{Session::get('school_id')}}" class="nav-link" id="tests">
-                        <i class="nav-icon fas fa-home"></i>
+                        <i class="nav-icon fas fa-eye"></i>
                         <p>
                             {{__('View')}}
                         </p>
@@ -122,7 +122,7 @@
             </ul>
                 <li class="nav-item has-treeview" id="prices">
                     <a href="#" class="nav-link" id="prices_link">
-                        <i class="nav-icon fas fa-book"></i>
+                        <i class="nav-icon fas fa-medal"></i>
                         <p>
                             {{__('Sport Houses')}}
                             <i class="right fas fa-angle-left"></i>
@@ -133,7 +133,7 @@
 
                         <li class="nav-item">
                             <a href="/create/sport-house" class="nav-link" id="branches">
-                                <i class="fas fa-map-marked-alt nav-icon"></i>
+                                <i class="fas fa-plus nav-icon"></i>
                                 <p>{{__('Add')}}</p>
                             </a>
                         </li>
@@ -142,7 +142,7 @@
 
                         <li class="nav-item">
                             <a href="/view/sport-houses" class="nav-link" id="tests">
-                                <i class="nav-icon fas fa-home"></i>
+                                <i class="nav-icon fas fa-eye"></i>
                                 <p>
                                     {{__('View')}}
                                 </p>
@@ -156,7 +156,7 @@
 
         <li class="nav-item has-treeview" id="prices">
             <a href="#" class="nav-link" id="prices_link">
-                <i class="nav-icon fas fa-home"></i>
+                <i class="nav-icon fas fa-receipt"></i>
                 <p>
                     {{__('Receipts')}}
                     <i class="right fas fa-angle-left"></i>
@@ -167,7 +167,7 @@
 
                 <li class="nav-item">
                     <a href="{{route("receipts.create")}}" class="nav-link" id="branches">
-                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <i class="fas fa-plus nav-icon"></i>
                         <p>{{__('Add')}}</p>
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
         <li class="nav-item has-treeview" id="prices">
             <a href="#" class="nav-link" id="prices_link">
-                <i class="nav-icon fas fa-book"></i>
+                <i class="nav-icon fas fa-school"></i>
                 <p>
                     {{__('Institutions')}}
                     <i class="right fas fa-angle-left"></i>
@@ -203,7 +203,7 @@
 
                 <li class="nav-item">
                     <a href="{{route("institutions.createView")}}" class="nav-link" id="branches">
-                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <i class="fas fa-plus nav-icon"></i>
                         <p>{{__('Add')}}</p>
                     </a>
                 </li>
@@ -212,7 +212,7 @@
 
                 <li class="nav-item">
                     <a href="{{route("institutions.view")}}" class="nav-link" id="tests">
-                        <i class="nav-icon fas fa-home"></i>
+                        <i class="nav-icon fas fa-eye"></i>
                         <p>
                             {{__('View')}}
                         </p>
@@ -225,7 +225,7 @@
 
         <li class="nav-item has-treeview" id="prices">
             <a href="#" class="nav-link" id="prices_link">
-                <i class="nav-icon fas fa-book"></i>
+                <i class="nav-icon fas fa-money-bill-wave"></i>
                 <p>
                     {{__('Fees')}}
                     <i class="right fas fa-angle-left"></i>
@@ -236,7 +236,7 @@
 
                 <li class="nav-item">
                     <a href="{{route("fees.create")}}" class="nav-link" id="branches">
-                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <i class="fas fa-plus nav-icon"></i>
                         <p>{{__('Add')}}</p>
                     </a>
                 </li>
@@ -245,7 +245,7 @@
 
                 <li class="nav-item">
                     <a href="{{route("fees.index")}}" class="nav-link" id="tests">
-                        <i class="nav-icon fas fa-home"></i>
+                        <i class="nav-icon fas fa-eye"></i>
                         <p>
                             {{__('View')}}
                         </p>
@@ -258,7 +258,7 @@
 
         <li class="nav-item has-treeview" id="prices">
             <a href="#" class="nav-link" id="prices_link">
-                <i class="nav-icon fas fa-book"></i>
+                <i class="nav-icon fas fa-file-invoice-dollar"></i>
                 <p>
                     {{__('Invoices')}}
                     <i class="right fas fa-angle-left"></i>
@@ -269,18 +269,31 @@
 
                 <li class="nav-item">
                     <a href="{{route("invoices.create")}}" class="nav-link" id="branches">
-                        <i class="fas fa-map-marked-alt nav-icon"></i>
-                        <p>{{__('Class Invoice')}}</p>
+                        <i class="fas fa-plus nav-icon"></i>
+                        <p>{{__('Add')}}</p>
                     </a>
                 </li>
-
-
-
                 <li class="nav-item">
-                    <a href="{{route("fees.index")}}" class="nav-link" id="tests">
+                    <a href="{{route("invoices.classPage")}}" class="nav-link" id="tests">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            {{__('Class Invoice')}}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route("invoices.schoolPage")}}" class="nav-link" id="tests">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             {{__('School Invoice')}}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route("invoices.termPage")}}" class="nav-link" id="tests">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            {{__('Term Invoice')}}
                         </p>
                     </a>
                 </li>

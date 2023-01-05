@@ -84,7 +84,15 @@ class InvoiceController extends Controller
             'updatedDate' => $request->updatedDate."T00:00:00.000Z",
         ];
 
-        return $response = $this->tHttpClientWrapper->postRequest($institution_url.'invoices/',$data);
+        $response = $this->tHttpClientWrapper->postRequest($institution_url.'invoices/',$data);
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            return redirect()->back();
+        }
 
     }
 
@@ -131,5 +139,127 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //class invoice Page
+    public function getClassInvoicePage()
+    {
+
+        $base_url=config('app.base_url');
+        $response = $this->tHttpClientWrapper->getRequest($base_url.'classes/all');
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= @json_decode(json_encode($response['dataList'],true));
+
+            return view('invoice.class-invoicePage')->with('classes', $records);
+
+        }
+
+    }
+
+    //Class Invoice Report
+    public function getClassInvoice(Request $request)
+    {
+
+        $institution_url=config('app.institution_url');
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'invoices/find-by-class-id/'. $request->classId);
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= @json_decode(json_encode($response['invoiceList'],true));
+
+            return view('invoice.class-invoice')->with('records', $records);
+
+        }
+
+    }
+
+    //Class invoice Page
+    public function getSchoolInvoicePage()
+    {
+        $base_url=config('app.base_url');
+        $response = $this->tHttpClientWrapper->getRequest($base_url.'institutions/all');
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+           $records= @json_decode(json_encode($response['dataList'],true));
+
+            return view('invoice.school-invoicePage')->with('institutions', $records);
+
+        }
+
+    }
+
+    //Class Invoice Report
+    public function getSchoolInvoice(Request $request)
+    {
+
+        $institution_url=config('app.institution_url');
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'invoices/find-by-school-id/'. $request->institutionId);
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= json_decode(json_encode($response['invoiceList'],true));
+
+            return view('invoice.school-invoice')->with('records', $records);
+
+        }
+
+    }
+
+    //Term invoice Page
+    public function getTermInvoicePage()
+    {
+        $base_url=config('app.base_url');
+        $response = $this->tHttpClientWrapper->getRequest($base_url.'institutions/all');
+        $termsResponse = $this->tHttpClientWrapper->getRequest($base_url.'Term/all');
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+           $terms= @json_decode(json_encode($termsResponse['dataList'],true));
+           $records= @json_decode(json_encode($response['dataList'],true));
+
+            return view('invoice.term-invoicePage')
+                ->with('terms', $terms)
+                ->with('institutions', $records);
+
+        }
+
+    }
+
+    //Class Invoice Report
+    public function getTermInvoice(Request $request)
+    {
+
+        $institution_url=config('app.institution_url');
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'invoices/generate-for-school/'. $request->institutionId. '/' . $request->termId);
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= json_decode(json_encode($response,true));
+
+            return view('invoice.term-invoice')->with('records', $records);
+
+        }
+
     }
 }
