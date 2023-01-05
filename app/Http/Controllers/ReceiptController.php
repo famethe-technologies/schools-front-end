@@ -144,7 +144,7 @@ class ReceiptController extends Controller
         {
             $records= @json_decode(json_encode($response['dataList'],true));
 
-            return view('receipts.school-balance')->with('institutions', $records);
+            return view('receipts.school-balancePage')->with('institutions', $records);
 
         }
 
@@ -155,16 +155,16 @@ class ReceiptController extends Controller
     {
 
         $institution_url=config('app.institution_url');
-        $response = $this->tHttpClientWrapper->getRequest($institution_url.'receipts/school-balance/'. $request->schoolId);
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'receipts/school-balance/'. $request->institutionId);
 
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-            $records= @json_decode(json_encode($response['dataList'],true));
+            $records= @json_decode(json_encode($response,true));
 
-            return view('receipts.create')->with('institutions', $records);
+            return view('receipts.school-balance')->with('records', $records);
 
         }
 
@@ -185,7 +185,27 @@ class ReceiptController extends Controller
         {
             $records= @json_decode(json_encode($response['dataList'],true));
 
-            return view('receipts.student-balance')->with('students', $records);
+            return view('receipts.student-balancePage')->with('students', $records);
+
+        }
+
+    }
+
+    //Student Balance Report
+    public function getStudentBalance(Request $request)
+    {
+
+        $institution_url=config('app.institution_url');
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'receipts/student-balance/'. $request->studentId);
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= @json_decode(json_encode($response,true));
+
+            return view('receipts.school-balance')->with('records', $records);
 
         }
 

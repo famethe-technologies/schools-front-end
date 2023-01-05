@@ -173,10 +173,18 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route("receipts.index")}}" class="nav-link" id="tests">
+                    <a href="{{route("receipts.schoolBalancePage")}}" class="nav-link" id="tests">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            {{__('View')}}
+                            {{__('School Balance')}}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route("receipts.studentBalancePage")}}" class="nav-link" id="tests">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            {{__('Student Balance')}}
                         </p>
                     </a>
                 </li>
@@ -262,7 +270,7 @@
                 <li class="nav-item">
                     <a href="{{route("invoices.create")}}" class="nav-link" id="branches">
                         <i class="fas fa-map-marked-alt nav-icon"></i>
-                        <p>{{__('Add')}}</p>
+                        <p>{{__('Class Invoice')}}</p>
                     </a>
                 </li>
 
@@ -272,7 +280,7 @@
                     <a href="{{route("fees.index")}}" class="nav-link" id="tests">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            {{__('View')}}
+                            {{__('School Invoice')}}
                         </p>
                     </a>
                 </li>

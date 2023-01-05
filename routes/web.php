@@ -89,7 +89,9 @@ Route::resource('receipts', ReceiptController::class);
 Route::post('/receipts/update/{id}', [ReceiptController::class, 'update'])->name('receipts.update');
 Route::any('/receipts/delete/{id}', [ReceiptController::class, 'destroy'])->name('receipts.destroy');
 Route::get('/receipts/school/balance', [ReceiptController::class, 'getSchoolBalancePage'])->name('receipts.schoolBalancePage');
-Route::get('/receipts/get/school-balance', [ReceiptController::class, 'getSchoolBalancePage'])->name('receipts.schoolBalancePage');
+Route::post('/receipts/get/school-balance', [ReceiptController::class, 'getSchoolBalance'])->name('receipts.schoolBalance');
+Route::get('/receipts/student/balance', [ReceiptController::class, 'getStudentBalancePage'])->name('receipts.studentBalancePage');
+Route::post('/receipts/get/student-balance', [ReceiptController::class, 'getStudentBalance'])->name('receipts.studentBalance');
 
 /******************************Invoice****************************************/
 Route::resource('invoices', InvoiceController::class);
