@@ -20,7 +20,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">{{__('Receipt')}}</li>
+                        <li class="breadcrumb-item active">{{__('Invoice')}}</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -31,11 +31,11 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Create New Receipt</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Add New Invoice</h6>
         </div>
 
         <div class="card-body">
-            <form action="{{route("receipts.store")}}" method="post" enctype="multipart/form">
+            <form action="{{route("invoices.store")}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -58,31 +58,72 @@
                     </div>
                     <div class="form-group col-md-4">
 
+                        <label for="gender">Class</label>
+
+                        <select class="form-control" name="classs" required>
+                            @foreach($classes as $class)
+                                <option value="{{$class->nameOfClass}}">{{$class->nameOfClass}} {{$class->code}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="gender">Fees</label>
+
+                        <select class="form-control" name="feesId" required>
+                            @foreach($fees as $record)
+                                <option value="{{$record->id}}">{{$record->narration}} - {{$record->amount}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="gender">Term</label>
+
+                        <select class="form-control" name="termId" required>
+                            @foreach($terms as $record)
+                                <option value="{{$record->id}}">{{$record->termName}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label for="surname">Amount *</label>
-                        <input type="text" class="form-control"   name="amount" required>
+                        <input type="number" class="form-control"   name="amount" required>
 
                     </div>
-
                 </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-4">
 
                         <label for="surname">Description *</label>
                         <input type="text" class="form-control"   name="description" required>
+
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="gender">Payment Method</label>
-                        <select class="form-control" name="methodOfPayment" required>
-                            @foreach($paymentMethods as $record)
-                                <option value="{{$record->methodOfPayment}}">{{$record->methodOfPayment}} </option>
-                            @endforeach
-                        </select>
+
+                        <label for="surname">Invoice Number *</label>
+                        <input type="text" class="form-control"   name="invoiceNumber" required>
+
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="surname">Receipt No *</label>
-                        <input type="text" class="form-control"   name="receiptNumber" required>
+                        <label for="firstname">Invoice Date *</label>
+                        <input type="date" class="form-control" name="invoiceDate" required>
                     </div>
                 </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="firstname">Date created *</label>
+                        <input type="date" class="form-control" name="createdDate" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="firstname">Date Updated *</label>
+                        <input type="date" class="form-control" name="updatedDate" required>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

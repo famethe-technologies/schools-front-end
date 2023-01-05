@@ -180,10 +180,8 @@
                         </p>
                     </a>
                 </li>
-
-
-
             </ul>
+
         <li class="nav-item has-treeview" id="prices">
             <a href="#" class="nav-link" id="prices_link">
                 <i class="nav-icon fas fa-book"></i>
@@ -230,6 +228,39 @@
 
                 <li class="nav-item">
                     <a href="{{route("fees.create")}}" class="nav-link" id="branches">
+                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <p>{{__('Add')}}</p>
+                    </a>
+                </li>
+
+
+
+                <li class="nav-item">
+                    <a href="{{route("fees.index")}}" class="nav-link" id="tests">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            {{__('View')}}
+                        </p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </li>
+
+        <li class="nav-item has-treeview" id="prices">
+            <a href="#" class="nav-link" id="prices_link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                    {{__('Invoices')}}
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+
+                <li class="nav-item">
+                    <a href="{{route("invoices.create")}}" class="nav-link" id="branches">
                         <i class="fas fa-map-marked-alt nav-icon"></i>
                         <p>{{__('Add')}}</p>
                     </a>

@@ -128,4 +128,67 @@ class ReceiptController extends Controller
     {
         //
     }
+
+    //school Balance Page
+    public function getSchoolBalancePage()
+    {
+
+        $base_url=config('app.base_url');
+        $response = $this->tHttpClientWrapper->getRequest($base_url.'institutions/all');
+
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= @json_decode(json_encode($response['dataList'],true));
+
+            return view('receipts.school-balance')->with('institutions', $records);
+
+        }
+
+    }
+
+    //School Balance Report
+    public function getSchoolBalance(Request $request)
+    {
+
+        $institution_url=config('app.institution_url');
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'receipts/school-balance/'. $request->schoolId);
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= @json_decode(json_encode($response['dataList'],true));
+
+            return view('receipts.create')->with('institutions', $records);
+
+        }
+
+    }
+
+    //student Balance Page
+    public function getStudentBalancePage()
+    {
+
+        $base_url=config('app.base_url');
+        $response = $this->tHttpClientWrapper->getRequest($base_url.'student/all');
+
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= @json_decode(json_encode($response['dataList'],true));
+
+            return view('receipts.student-balance')->with('students', $records);
+
+        }
+
+    }
+
 }
