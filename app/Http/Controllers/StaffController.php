@@ -32,9 +32,8 @@ class StaffController extends Controller
         }
     }
 
-    public function index($id)
+    public function index()
     {
-
         $base_url=config('app.base_url');;
 
         $response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/all');

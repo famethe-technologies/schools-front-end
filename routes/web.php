@@ -34,7 +34,7 @@ Route::post('/update/school/{id}',[App\Http\Controllers\InstitutionController::c
 
 /********************** Staff ********************************************/
 Route::get('/staff', [App\Http\Controllers\StaffController::class, 'create'])->name('staff');;
-Route::get('/view/staff/', [App\Http\Controllers\StaffController::class, 'index'])->name('staff.index');
+Route::get('/view/staff', [App\Http\Controllers\StaffController::class, 'index'])->name('staff.index');
 Route::post('/add/staff', [App\Http\Controllers\StaffController::class, 'store']);
 Route::get('/edit/staff/{id}',[App\Http\Controllers\StaffController::class, 'edit'])->name('staff.edit');
 Route::post('/update/staff/{id}',[App\Http\Controllers\StaffController::class, 'update'])->name('staff.update');
