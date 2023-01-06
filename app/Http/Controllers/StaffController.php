@@ -17,7 +17,19 @@ class StaffController extends Controller
     }
     public function create()
     {
-        return view('staff.create');
+
+        $base_url=config('app.base_url');;
+
+        $response = $this->tHttpClientWrapper->getRequest($base_url . 'institutions/all');
+
+        if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
+            return redirect()->back()->with(['error' => $response['message']]);
+        } else {
+            $records = @json_decode(json_encode($response['dataList'], true));
+
+            return view('staff.create')->with('records', $records);
+
+        }
     }
 
     public function index($id)
@@ -45,7 +57,7 @@ class StaffController extends Controller
               'gender'=>$request->gender,
               'position'=>$request->position,
               'nationalId'=>$request->national_id,
-              'institutionId'=>Session::get('school_id'),
+              'institutionId'=>$request->institutionId,
               'createdBy'=>Auth::user()->first_name,
              'lastModifiedBy'=> Auth::user()->first_name,
 
@@ -53,15 +65,13 @@ class StaffController extends Controller
 
 
         $response = $this->tHttpClientWrapper->postRequest($base_url.'/staff',$data);
-        if ($response['statusCode'] == 200)
-        {
 
-            return redirect()->route('staff')->with('success','Staff Member Added Successfully!!');
-
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-            return redirect()->route('staff')->with('error','An error occurred while processing your request');
+            return redirect()->route("staff.view")->with('success','Staff created Successfully!!');
         }
 
     }
@@ -111,6 +121,22 @@ class StaffController extends Controller
             //$record = @json_decode(json_encode($response['data'], true));
 
             return redirect('/view/staff/'.Session::get('school_id'))->with('success','Staff Member Record Updated Successfully!!');
+
+        }
+    }
+
+    public function viewStaff()
+    {
+        $base_url=config('app.base_url');
+
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/all');
+
+        if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
+            return redirect()->back()->with(['error' => $response['message']]);
+        } else {
+            $records = @json_decode(json_encode($response['dataList'], true));
+
+            return view('staff.edit')->with('records', $records);
 
         }
     }

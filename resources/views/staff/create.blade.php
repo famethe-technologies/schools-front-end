@@ -68,12 +68,16 @@
                         <label for="phone">National ID</label>
                         <input type="text" class="form-control" name="national_id">
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="gender">Institution</label>
 
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-
+                        <select class="form-control" name="institutionId" required>
+                            @foreach($records as $record)
+                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
+                            @endforeach
+                        </select>
                     </div>
+
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

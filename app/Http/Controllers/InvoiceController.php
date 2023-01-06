@@ -91,7 +91,7 @@ class InvoiceController extends Controller
         }
         else
         {
-            return redirect()->back();
+            return redirect()->back()->with('success','Invoice created Successfully!!');
         }
 
     }

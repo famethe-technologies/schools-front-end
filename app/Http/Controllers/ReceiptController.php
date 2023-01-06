@@ -84,7 +84,7 @@ class ReceiptController extends Controller
         }
         else
         {
-            return redirect()->back();
+            return redirect()->back()->with('success','Receipt created Successfully!!');
         }
 
 

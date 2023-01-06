@@ -48,7 +48,7 @@
 
 
                 <li class="nav-item">
-                    <a href="/view/staff/{{Session::get('school_id')}}" class="nav-link" id="tests">
+                    <a href="{{route("staff.getAll")}}}}" class="nav-link" id="tests">
                         <i class="nav-icon fas fa-eye"></i>
                         <p>
                             {{__('View')}}

@@ -32,11 +32,13 @@ Route::get('/edit/school/{id}',[App\Http\Controllers\InstitutionController::clas
 Route::post('/update/school/{id}',[App\Http\Controllers\InstitutionController::class, 'update'])->name('schools.update');
 //Staff
 
+/********************** Staff ********************************************/
 Route::get('/staff', [App\Http\Controllers\StaffController::class, 'create'])->name('staff');;
 Route::get('/view/staff/{id}', [App\Http\Controllers\StaffController::class, 'index'])->name('staff.index');
 Route::post('/add/staff', [App\Http\Controllers\StaffController::class, 'store']);
 Route::get('/edit/staff/{id}',[App\Http\Controllers\StaffController::class, 'edit'])->name('staff.edit');
 Route::post('/update/staff/{id}',[App\Http\Controllers\StaffController::class, 'update'])->name('staff.update');
+Route::get('/get/all/staff',[App\Http\Controllers\StaffController::class, 'viewStaff'])->name('staff.getAll');
 
 Route::get('/create/class', [App\Http\Controllers\ClassController::class, 'create'])->name('classes');;
 Route::get('/view/classes/{id}', [App\Http\Controllers\ClassController::class, 'index']);
@@ -76,8 +78,6 @@ Route::get('/institutions', [App\Http\Controllers\InstitutionController::class, 
 Route::get('/institutions/{id}', [App\Http\Controllers\InstitutionController::class, 'getInstitution'])->name('institutions.edit');
 Route::post('/update/institutions', [App\Http\Controllers\InstitutionController::class, 'updateInstitution'])->name('institutions.update');
 Route::any('/delete/institutions/{id}', [App\Http\Controllers\InstitutionController::class, 'deleteInstitution'])->name('institutions.destroy');
-
-
 
 /***************************Fees*********************/
 Route::resource('fees', FeesController::class);
