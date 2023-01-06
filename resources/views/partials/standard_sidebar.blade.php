@@ -37,15 +37,12 @@
             </a>
             <ul class="nav nav-treeview">
 
-
                 <li class="nav-item">
-                    <a href="/staff" class="nav-link" id="branches">
+                    <a href="{{route("staff.create")}}" class="nav-link" id="branches">
                         <i class="fas fa-plus nav-icon"></i>
                         <p>{{__('Add')}}</p>
                     </a>
                 </li>
-
-
 
                 <li class="nav-item">
                     <a href="{{route("staff.index")}}" class="nav-link" id="tests">
@@ -148,8 +145,6 @@
                                 </p>
                             </a>
                         </li>
-
-
 
             </ul>
         </li>

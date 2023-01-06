@@ -53,15 +53,22 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                     <label for="gender">Gender</label>
-                 <select class="form-control" name="gender" required>
-                     <option value="Female">Female</option>
-                     <option value="Male">Male</option>
-                 </select>
+                     <select class="form-control" name="gender" required>
+                         <option value="Female">Female</option>
+                         <option value="Male">Male</option>
+                     </select>
                 </div>
                     <div class="form-group col-md-6">
                         <label for="position">Position</label>
-                        <input type="text" class="form-control" name="position">
-                    </div>
+                        <select class="form-control" name="position" required>
+                            <option value="Headmaster">Headmaster</option>
+                            <option value="Deputy Headmaster">Deputy Headmaster</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Secretary">Secretary</option>
+                            <option value="Senior Teacher">Senior Teacher</option>
+                            <option value="Swimming Coach">Swimming Coach</option>
+                        </select>
+                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -70,7 +77,6 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="gender">Institution</label>
-
                         <select class="form-control" name="institutionId" required>
                             @foreach($records as $record)
                                 <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>

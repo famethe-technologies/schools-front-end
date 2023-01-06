@@ -17,8 +17,7 @@ class StaffController extends Controller
     }
     public function create()
     {
-
-        $base_url=config('app.base_url');;
+        $base_url=config('app.base_url');
 
         $response = $this->tHttpClientWrapper->getRequest($base_url . 'institutions/all');
 
@@ -28,7 +27,6 @@ class StaffController extends Controller
             $records = @json_decode(json_encode($response['dataList'], true));
 
             return view('staff.create')->with('records', $records);
-
         }
     }
 
@@ -47,6 +45,7 @@ class StaffController extends Controller
 
         }
     }
+
     public function store(Request $request)
     {
         $base_url=config('app.base_url');
@@ -70,7 +69,7 @@ class StaffController extends Controller
         }
         else
         {
-            return redirect()->route("staff.view")->with('success','Staff created Successfully!!');
+            return redirect()->route("staff.index")->with('success','Staff created Successfully!!');
         }
 
     }
@@ -82,17 +81,14 @@ class StaffController extends Controller
 
         $response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/by-id/'.$id);
 
-
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
         } else {
           $record = @json_decode(json_encode($response['data'], true));
 
             return view('staff.edit')->with('record', $record);
-
         }
     }
-
 
     public function update(Request $request,$id)
     {

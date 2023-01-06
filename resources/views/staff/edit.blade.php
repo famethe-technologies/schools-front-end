@@ -35,7 +35,7 @@
         </div>
 
         <div class="card-body">
-            <form action="/update/staff/{{$record->id}}" method="post" enctype="multipart/form">
+            <form action="{{route("staff.update",$record->id)}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -43,12 +43,10 @@
                         <input type="text" class="form-control" name="firstname" value="{{$record->firstname}} "  required>
                     </div>
                     <div class="form-group col-md-6">
-
                         <label for="surname">Surname</label>
                         <input type="text" class="form-control"   name="surname"   value="{{$record->surname}}" required>
 
                     </div>
-
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
