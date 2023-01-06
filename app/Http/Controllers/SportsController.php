@@ -60,17 +60,14 @@ class SportsController extends Controller
 
         ];
         $response = $this->tHttpClientWrapper->postRequest($base_url.'/sporthouse',$data);
-        if ($response['statusCode'] == 200)
-        {
-            return redirect()->route('houses')->with('success','Sport House Added Successfully!!');
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-            return redirect()->back()->with('error','An error occurred while processing your request');
+            return redirect()->route('houses')->with('success','Sport House Added Successfully!!');
         }
-
-
-
     }
 
     public function edit($id)

@@ -50,14 +50,17 @@ class InstitutionController extends Controller
             'institutionType' => $request->type,
             'createdBy' => Auth::user()->first_name,
             'lastModifiedBy' =>'',
-
         ];
-
 
         $response = $this->tHttpClientWrapper->postRequest($base_url.'/institutions',$data);
 
-        return redirect()->route('schools')->with('success','School Added Successfully!!');
-
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            return redirect()->route('schools.index')->with('success','Institution Added Successfully!!');
+        }
 
     }
 
@@ -265,18 +268,11 @@ class InstitutionController extends Controller
 
         if ($response['code'] == 200)
         {
-
             return redirect()->route('institutions.view')->with('success','Institution Deleted Successfully!!');
-
         }
         else
         {
             return redirect()->route('institutions.view')->with('error','An error occurred while processing your request');
         }
     }
-
-
-
-
-
 }

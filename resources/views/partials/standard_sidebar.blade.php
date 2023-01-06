@@ -77,7 +77,7 @@
 
 
                 <li class="nav-item">
-                    <a href="/view/students" class="nav-link" id="tests">
+                    <a href="{{route("students.view")}}" class="nav-link" id="tests">
                         <i class="nav-icon fas fa-eye"></i>
                         <p>
                             {{__('View')}}
@@ -109,7 +109,7 @@
 
 
                 <li class="nav-item">
-                    <a href="/view/classes/{{Session::get('school_id')}}" class="nav-link" id="tests">
+                    <a href="{{route('classes.index')}}" class="nav-link" id="tests">
                         <i class="nav-icon fas fa-eye"></i>
                         <p>
                             {{__('View')}}
@@ -141,7 +141,7 @@
 
 
                         <li class="nav-item">
-                            <a href="/view/sport-houses" class="nav-link" id="tests">
+                            <a href="{{route("houses.index")}}" class="nav-link" id="tests">
                                 <i class="nav-icon fas fa-eye"></i>
                                 <p>
                                     {{__('View')}}
@@ -211,7 +211,7 @@
 
 
                 <li class="nav-item">
-                    <a href="{{route("institutions.view")}}" class="nav-link" id="tests">
+                    <a href="{{route("schools.index")}}" class="nav-link" id="tests">
                         <i class="nav-icon fas fa-eye"></i>
                         <p>
                             {{__('View')}}

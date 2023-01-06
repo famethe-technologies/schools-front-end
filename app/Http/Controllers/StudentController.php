@@ -110,16 +110,12 @@ class StudentController extends Controller
 
         $response = $this->tHttpClientWrapper->postRequest($base_url.'/student',$data);
 
-        if ($response['statusCode'] == 200)
-        {
-            return redirect()->route('students.view')->with('success','Student  Added Successfully!!');
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-            return redirect()->route('students')->with('error','An error occurred while processing your request');
+            return redirect()->route('students.view')->with('success','Student Added Successfully!!');
         }
-
-
-
     }
 }

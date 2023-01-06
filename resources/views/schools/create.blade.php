@@ -36,7 +36,7 @@
         </div>
 
         <div class="card-body">
-            <form action="/school/add" method="post" enctype="multipart/form">
+            <form action="{{route('school.store')}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">

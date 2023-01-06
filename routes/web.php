@@ -23,18 +23,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/schools', [App\Http\Controllers\InstitutionController::class, 'index'])->name('schools');
+Route::get('/view/schools', [App\Http\Controllers\InstitutionController::class, 'index'])->name('schools.index');
 Route::get('/add/school', [App\Http\Controllers\InstitutionController::class, 'create'])->name('school.add');
-Route::post('/school/add', [App\Http\Controllers\InstitutionController::class, 'store']);
+Route::post('/school/add', [App\Http\Controllers\InstitutionController::class, 'store'])->name('school.store');
 Route::get('/school/{id}', [App\Http\Controllers\InstitutionController::class, 'getSchoolById']);
 Route::get('/get/schools', [App\Http\Controllers\InstitutionController::class, 'ajax']);
 Route::get('/edit/school/{id}',[App\Http\Controllers\InstitutionController::class, 'edit'])->name('schools.edit');
 Route::post('/update/school/{id}',[App\Http\Controllers\InstitutionController::class, 'update'])->name('schools.update');
-//Staff
+
 
 /********************** Staff ********************************************/
 Route::get('/staff', [App\Http\Controllers\StaffController::class, 'create'])->name('staff');;
-Route::get('/staff/all', [App\Http\Controllers\StaffController::class, 'index'])->name('staff.index');
+Route::get('/view/staff/', [App\Http\Controllers\StaffController::class, 'index'])->name('staff.index');
 Route::post('/add/staff', [App\Http\Controllers\StaffController::class, 'store']);
 Route::get('/edit/staff/{id}',[App\Http\Controllers\StaffController::class, 'edit'])->name('staff.edit');
 Route::post('/update/staff/{id}',[App\Http\Controllers\StaffController::class, 'update'])->name('staff.update');
@@ -72,7 +72,7 @@ Route::post('update/user/{id}',[App\Http\Controllers\UserController::class, 'upd
 
 
 /*******************************************Institutions***************************************/
-Route::get('/add/institutions-view', [App\Http\Controllers\InstitutionController::class, 'saveInstitutionView'])->name('institutions.createView');
+Route::get('/add/new/institution', [App\Http\Controllers\InstitutionController::class, 'saveInstitutionView'])->name('institutions.createView');
 Route::post('/add/institutions', [App\Http\Controllers\InstitutionController::class, 'saveInstitution'])->name('institutions.save');
 Route::get('/institutions', [App\Http\Controllers\InstitutionController::class, 'getInstitutions'])->name('institutions.view');
 Route::get('/institutions/{id}', [App\Http\Controllers\InstitutionController::class, 'getInstitution'])->name('institutions.edit');

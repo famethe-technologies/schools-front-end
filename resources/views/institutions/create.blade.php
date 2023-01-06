@@ -35,7 +35,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{route("institutions.save")}}" method="post" enctype="multipart/form">
+            <form action="{{route("school.store")}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -69,38 +69,10 @@
                         <input type="text" class="form-control" name="phone" required>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="firstname">Term Name *</label>
-                        <input type="text" class="form-control" name="termName" required>
-                    </div>
-                </div>
-                <div class="form-row">
-
-                <div class="form-group col-md-4">
-
-                        <label for="surname">Start Date </label>
-                        <input type="date" class="form-control"   name="startDate" required>
-
-                    </div>
-                    <div class="form-group col-md-4">
-
-                        <label for="surname">End Date </label>
-                        <input type="date" class="form-control"   name="endDate" required>
-
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label for="firstname">Maximum Days *</label>
-                        <input type="number" class="form-control" name="maxPossibleDays" required>
-                    </div>
-
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-
                         <label for="surname">Institution Address *</label>
                         <textarea type="text" class="form-control"   name="institutionAddress" required></textarea>
-                    </div>
 
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>

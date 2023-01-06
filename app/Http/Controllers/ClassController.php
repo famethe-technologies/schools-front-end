@@ -63,19 +63,14 @@ class ClassController extends Controller
 
         ];
         $response = $this->tHttpClientWrapper->postRequest($base_url.'/classes',$data);
-        if ($response['statusCode'] == 200)
-        {
 
-            return redirect()->route('classes')->with('success','Class Added Successfully!!');
-
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-            return redirect()->route('classes.index')->with('error','An error occurred while processing your request');
+            return redirect()->route('classes')->with('success','Class Added Successfully!!');
         }
-
-
-
     }
 
 

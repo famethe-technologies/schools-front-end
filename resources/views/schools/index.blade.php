@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title')
     {{__('Dashboard')}}
@@ -36,24 +36,6 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Schools</h6>
         </div>
-        @if ($message = Session::get('success'))
-            <div id="alert" class="alert alert-success  alert-block">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>{{ $message }}</strong>
-            </div>
-        @endif
-
-
-        @if ($message = Session::get('error'))
-            <div id="alert"  class="alert alert-danger alert-block">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>{{ $message }}</strong>
-            </div>
-        @endif
         <div class="card-body">
             <div class="table-responsive">
                 <table id="example" class="table table-striped table-hover table-bordered"  width="100%">
@@ -67,7 +49,6 @@
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Action</th>
-
                     </tr>
                     </thead>
                     <tbody>
