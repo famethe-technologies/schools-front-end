@@ -39,8 +39,11 @@
                         <th>Id</th>
                         <th>Class Name</th>
                         <th>Class Code</th>
-                        <th>School</th>
                         <th>Class Teacher</th>
+                        <th>Position</th>
+                        <th>Gender</th>
+                        <th>Institution Name</th>
+                        <th>Institution Code</th>
                         <th>Action</th>
 
 
@@ -52,8 +55,11 @@
                             <td>{{$record->id}}</td>
                             <td>{{$record->nameOfClass}}</td>
                             <td>{{$record->code}}</td>
-                            <td>{{$record->staff->institution->institutionName}}</td>
                             <td>{{$record->staff->firstname}} {{$record->staff->surname}}</td>
+                            <td>{{$record->staff->position}}</td>
+                            <td>{{$record->staff->gender}}</td>
+                            <td>{{$record->staff->institution->institutionName}}</td>
+                            <td>{{$record->staff->institution->institutionCode}}</td>
                             <td>
 
                                    <a href="/edit/class/{{$record->id}}" class="btn btn-primary btn-sm">

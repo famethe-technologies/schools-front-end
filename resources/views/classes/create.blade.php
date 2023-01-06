@@ -55,10 +55,19 @@
                         <label for="gender">Class Teacher</label>
 
                          <select class="form-control" name="staff" required>
-                             @foreach($records as $record)
+                             @foreach($staff as $record)
                              <option value="{{$record->id}}">{{$record->firstname}} {{$record->surname}}</option>
                                  @endforeach
                          </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="gender">Institution</label>
+
+                        <select class="form-control" name="institutionId" required>
+                            @foreach($institutions as $record)
+                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                     <div class="form-group">

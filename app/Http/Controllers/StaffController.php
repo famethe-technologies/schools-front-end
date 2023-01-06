@@ -37,7 +37,7 @@ class StaffController extends Controller
 
         $base_url=config('app.base_url');;
 
-        $response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/by-institution-id/'.$id);
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/all');
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);

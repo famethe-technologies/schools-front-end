@@ -18,7 +18,18 @@ class SportsController extends Controller
     }
     public function create()
     {
-        return view('sports.create');
+        $base_url=config('app.base_url');
+        $id= Session::get('school_id');
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/institutions/all');
+
+        if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
+            return redirect()->back()->with(['error' => $response['message']]);
+        } else {
+            $records = @json_decode(json_encode($response['dataList'], true));
+
+            return view('sports.create')->with('records', $records);
+
+        }
     }
 
     public function index()
@@ -26,7 +37,7 @@ class SportsController extends Controller
 
         $base_url=config('app.base_url');
         $id= Session::get('school_id');
-        $response = $this->tHttpClientWrapper->getRequest($base_url . '/sporthouse/by-institution-id/'.$id);
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/sporthouse/all');
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
@@ -43,7 +54,7 @@ class SportsController extends Controller
         $data = [
             'houseName'=>$request->sport_house,
             'colours'=>$request->colours,
-            'institutionId'=>Session::get('school_id'),
+            'institutionId'=>$request->institutionId,
             'createdBy'=>Auth::user()->first_name,
             'lastModifiedBy'=> Auth::user()->first_name,
 
@@ -51,13 +62,11 @@ class SportsController extends Controller
         $response = $this->tHttpClientWrapper->postRequest($base_url.'/sporthouse',$data);
         if ($response['statusCode'] == 200)
         {
-
             return redirect()->route('houses')->with('success','Sport House Added Successfully!!');
-
         }
         else
         {
-            return redirect()->route('houses')->with('error','An error occurred while processing your request');
+            return redirect()->back()->with('error','An error occurred while processing your request');
         }
 
 

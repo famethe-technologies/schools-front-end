@@ -200,7 +200,7 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
 
                         <label for="surname">Class</label>
                         <select type="text" class="form-control"   name="class_id" required>
@@ -209,6 +209,15 @@
                             @endforeach
                         </select>
 
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="gender">Institution</label>
+
+                        <select class="form-control" name="institutionId" required>
+                            @foreach($institutions as $record)
+                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
+                            @endforeach
+                        </select>
                     </div>
 {{--                    <div class="form-group col-md-6">--}}
 {{--                        <label for="phone">Parent/Guardian</label>--}}
@@ -221,7 +230,7 @@
 {{--                        </select>--}}
 {{--                    </div>--}}
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="phone">Date Enrolled</label>
                         <input type="date" class="form-control"   name="date_enrolled" required>
                     </div>
@@ -244,7 +253,7 @@
 
                         <div class="form-group col-md-3">
                                     <label for="surname">Surname</label>
-                                    <input type="email" class="form-control" placeholder="{{__('Surname')}}" name="surname"  required>
+                                    <input type="text" class="form-control" placeholder="{{__('Surname')}}" name="surname"  required>
                         </div>
 
 

@@ -34,26 +34,26 @@ Route::post('/update/school/{id}',[App\Http\Controllers\InstitutionController::c
 
 /********************** Staff ********************************************/
 Route::get('/staff', [App\Http\Controllers\StaffController::class, 'create'])->name('staff');;
-Route::get('/view/staff/{id}', [App\Http\Controllers\StaffController::class, 'index'])->name('staff.index');
+Route::get('/staff/all', [App\Http\Controllers\StaffController::class, 'index'])->name('staff.index');
 Route::post('/add/staff', [App\Http\Controllers\StaffController::class, 'store']);
 Route::get('/edit/staff/{id}',[App\Http\Controllers\StaffController::class, 'edit'])->name('staff.edit');
 Route::post('/update/staff/{id}',[App\Http\Controllers\StaffController::class, 'update'])->name('staff.update');
-Route::get('/get/all/staff',[App\Http\Controllers\StaffController::class, 'viewStaff'])->name('staff.getAll');
+Route::get('/staff/',[App\Http\Controllers\StaffController::class, 'viewStaff'])->name('staff.getAll');
 
 Route::get('/create/class', [App\Http\Controllers\ClassController::class, 'create'])->name('classes');;
-Route::get('/view/classes/{id}', [App\Http\Controllers\ClassController::class, 'index']);
+Route::get('/view/classes', [App\Http\Controllers\ClassController::class, 'index'])->name('classes.index');
 Route::post('/add/class', [App\Http\Controllers\ClassController::class, 'store']);
 Route::get('/edit/class/{id}',[App\Http\Controllers\ClassController::class, 'edit'])->name('classes.edit');
 Route::post('/update/class/{id}',[App\Http\Controllers\ClassController::class, 'update'])->name('classes.update');
 
 Route::get('/create/sport-house', [App\Http\Controllers\SportsController::class, 'create'])->name('houses');;
-Route::get('/view/sport-houses', [App\Http\Controllers\SportsController::class, 'index']);
+Route::get('/view/sport-houses', [App\Http\Controllers\SportsController::class, 'index'])->name('houses.index');
 Route::post('/add/sport-house', [App\Http\Controllers\SportsController::class, 'store']);
 Route::get('/edit/sport-house/{id}',[App\Http\Controllers\SportsController::class, 'edit'])->name('houses.edit');
 Route::post('/update/sport-house/{id}',[App\Http\Controllers\SportsController::class, 'update'])->name('houses.update');
 
 Route::get('/create/student', [App\Http\Controllers\StudentController::class, 'create'])->name('students');
-Route::get('/view/students', [App\Http\Controllers\StudentController::class, 'index']);
+Route::get('/view/students', [App\Http\Controllers\StudentController::class, 'index'])->name('students.view');
 Route::post('/add/student', [App\Http\Controllers\StudentController::class, 'store']);
 
 

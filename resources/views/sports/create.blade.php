@@ -50,12 +50,24 @@
                     </div>
 
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="gender">Institution</label>
+
+                        <select class="form-control" name="institutionId" required>
+                            @foreach($records as $record)
+                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
 
                     <div class="form-group">
                        <br>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                     </div>
-                </div>
+
 
             </form>
         </div>

@@ -19,26 +19,30 @@ class StudentController extends Controller
     {
         $base_url=config('app.base_url');
         $id=Session::get('school_id');
-        $houses = $this->tHttpClientWrapper->getRequest($base_url . '/sporthouse/by-institution-id/'.$id);
-        $classes = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id/'.$id);
+        $housesResponse = $this->tHttpClientWrapper->getRequest($base_url . '/sporthouse/all');
+        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . '/classes/all');
+        $institutionsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'institutions/all');
+
         if (isset($houses["statusCode"]) && $houses["statusCode"] != "200" && isset($classes["statusCode"]) && $classes["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $classes['message']]);
         } else {
-            $houses = @json_decode(json_encode($houses['dataList'], true));
-            $classes = @json_decode(json_encode($classes['dataList'], true));
+            $houses = @json_decode(json_encode($housesResponse['dataList'], true));
+            $classes = @json_decode(json_encode($classesResponse['dataList'], true));
+            $institutions = @json_decode(json_encode($institutionsResponse['dataList'], true));
 
-            return view('students.create')->with('houses', $houses)->with('classes',$classes);
+            return view('students.create')->with('houses', $houses)
+                ->with('classes',$classes)
+                ->with('institutions',$institutions);
 
         }
 
     }
 
-    public function index($id)
+    public function index()
     {
         $base_url=config('app.base_url');
-        $id=Session::get('school_id');
 
-        $response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/by-institution-id/'.$id);
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/student/all');
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
@@ -49,6 +53,7 @@ class StudentController extends Controller
 
         }
     }
+
     public function store(Request $request)
     {
         $base_url=config('app.base_url');
@@ -104,12 +109,10 @@ class StudentController extends Controller
 //return $data;
 
         $response = $this->tHttpClientWrapper->postRequest($base_url.'/student',$data);
-        return $response;
+
         if ($response['statusCode'] == 200)
         {
-
-            return redirect()->route('students')->with('success','Student  Added Successfully!!');
-
+            return redirect()->route('students.view')->with('success','Student  Added Successfully!!');
         }
         else
         {
