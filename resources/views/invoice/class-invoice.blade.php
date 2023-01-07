@@ -47,12 +47,12 @@
                         <th>Id</th>
                         <th>Amount</th>
                         <th>Description</th>
-                        <th>InstitutionID</th>
-                        <th>StudentID</th>
+                        <th>Institution</th>
+                        <th>Student</th>
                         <th>TermID</th>
                         <th>Class</th>
-                        <th>Invoice Number</th>
-                        <th>Invoice Date</th>
+{{--                        <th>Invoice Number</th>--}}
+{{--                        <th>Invoice Date</th>--}}
 
                     </tr>
                     </thead>
@@ -60,14 +60,14 @@
                     @foreach($records as $record)
                     <tr>
                         <td>{{$record->id}}</td>
-                        <td>{{$record->amount}}</td>
+                        <td>{{ number_format($record->amount,2)}}</td>
                         <td>{{$record->description}}</td>
-                        <td>{{$record->institutionId}}</td>
-                        <td>{{$record->studentId}}</td>
+                        <td>{{$record->school}}</td>
+                        <td>{{$record->student}}</td>
                         <td>{{$record->termId}}</td>
                         <td>{{$record->classs}}</td>
-                        <td>{{$record->invoiceNumber}}</td>
-                        <td>{{$record->invoiceDate}}</td>
+{{--                        <td>{{$record->invoiceNumber}}</td>--}}
+{{--                        <td>{{$record->created_date}}</td>--}}
                     </tr>
                     @endforeach
                     </tbody>

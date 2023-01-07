@@ -57,6 +57,10 @@
                                       <i class="fa fa-edit"></i>
                                    </a>
 
+                                <a href="/view-balance/{{ $record->id }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-money-bill"></i>
+                                </a>
+
                                      <form method="POST" action="" class="d-inline">
                                          <input type="hidden" name="_method" value="delete">
                                          <button type="submit" class="btn btn-danger btn-sm delete_branch">

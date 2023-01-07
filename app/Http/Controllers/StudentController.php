@@ -118,4 +118,36 @@ class StudentController extends Controller
             return redirect()->route('students.view')->with('success','Student Added Successfully!!');
         }
     }
+
+    public function viewBalance ($id)
+    {
+        $institution_url=config('app.institution_url');
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'receipts/student-balance/'. $id);
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= @json_decode(json_encode($response,true));
+            return view('receipts.school-balance')->with('records', $records);
+        }
+
+    }
+
+    public function viewSchoolBalance ($id)
+    {
+        $institution_url=config('app.institution_url');
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'receipts/school-balance/'. $id);
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= @json_decode(json_encode($response,true));
+            return view('receipts.school-balance')->with('records', $records);
+        }
+
+    }
 }

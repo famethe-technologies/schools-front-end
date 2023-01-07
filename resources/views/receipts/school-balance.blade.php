@@ -36,7 +36,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">School Balance</h6>
+            <h6 class="m-0 font-weight-bold text-primary"> Balance</h6>
         </div>
 
         <div class="card-body">
@@ -44,16 +44,12 @@
                 <table  id ="example" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Balance</th>
-
-
                     </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td>{{$records->balance}}</td>
+                            <td>{{ number_format($records->balance,2)}}</td>
                         </tr>
                     </tbody>
                 </table>

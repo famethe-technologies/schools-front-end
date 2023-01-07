@@ -77,6 +77,9 @@
                             <td>{{$term->maxPossibleDays}}</td>
                                 @endforeach
                             <td>
+                                <a href="/view-school-balance/{{ $record->id }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-money-bill"></i>
+                                </a>
 
                                 <a href="{{route("institutions.edit", $record->id)}}" class="btn btn-primary btn-sm">
                                     <i class="fa fa-edit"></i>

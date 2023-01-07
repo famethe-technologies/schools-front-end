@@ -63,6 +63,10 @@
                             <td>{{$record->email}}</td>
                             <td>
 
+                                <a href="/view-school-balance/{{ $record->id }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-money-bill"></i>
+                                </a>
+
                                 <a href="/edit/school/{{$record->id}}" class="btn btn-primary btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a>

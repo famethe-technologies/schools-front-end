@@ -54,6 +54,9 @@ Route::post('/update/sport-house/{id}',[App\Http\Controllers\SportsController::c
 
 Route::get('/create/student', [App\Http\Controllers\StudentController::class, 'create'])->name('students');
 Route::get('/view/students', [App\Http\Controllers\StudentController::class, 'index'])->name('students.view');
+Route::get('/view/students', [App\Http\Controllers\StudentController::class, 'index'])->name('students.view');
+Route::get('/view-balance/{id}', [App\Http\Controllers\StudentController::class, 'viewBalance']);
+Route::get('/view-school-balance/{id}', [App\Http\Controllers\StudentController::class, 'viewSchoolBalance']);
 Route::post('/add/student', [App\Http\Controllers\StudentController::class, 'store']);
 
 
