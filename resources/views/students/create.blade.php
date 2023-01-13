@@ -219,6 +219,17 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group col-md-4">
+                        <label for="firstname">Student Type</label>
+                        <select class="form-control" name="studentType" required>
+                            <option value="Trustee">Trustee</option>
+                            <option value="Teaching Staff">Teaching Staff</option>
+                            <option value="Admin Staff">Admin Staff</option>
+                            <option value="Ancillary Staff">Ancillary Staff</option>
+                            <option value="Full Scholarship">Full Scholarship</option>
+                            <option value="Partial Scholarship">Partial Scholarship</option>
+                        </select>
+                    </div>
 {{--                    <div class="form-group col-md-6">--}}
 {{--                        <label for="phone">Parent/Guardian</label>--}}
 {{--                        @include('students.parent_modal')--}}

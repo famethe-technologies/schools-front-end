@@ -74,6 +74,7 @@ class StudentController extends Controller
             'religion'=> $request->religion,
             'denomination'=>'string',
             'pastor'=> 'string',
+            'studentType'=> $request->studentType,
             'medicalAid'=> $request->medical_aid,
             'medicalAidNo'=> $request->medical_aid_no,
             'dateEnrolled'=> $request->date_enrolled,
