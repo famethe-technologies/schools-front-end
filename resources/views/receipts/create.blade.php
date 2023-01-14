@@ -67,8 +67,15 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
 
+
                         <label for="surname">Description *</label>
-                        <input type="text" class="form-control"   name="description" required>
+                        <select class="form-control" name="description" required>
+                            <option value="TUITION">TUITION</option>
+                            <option value="UNIFORM">UNIFORM</option>
+                            <option value="LEVY">LEVY</option>
+                            <option value="OTHER">OTHER</option>
+                        </select>
+
                     </div>
                     <div class="form-group col-md-4">
                         <label for="gender">Payment Method</label>

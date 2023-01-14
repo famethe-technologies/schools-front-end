@@ -67,6 +67,12 @@
                             <option value="Secretary">Secretary</option>
                             <option value="Senior Teacher">Senior Teacher</option>
                             <option value="Swimming Coach">Swimming Coach</option>
+                            <option value="Bursar">Bursar</option>
+                            <option value="Sports Teacher">Sports Teacher</option>
+                            <option value="Administrator Clerk">Administrator Clerk</option>
+                            <option value="Ancilary Staff">Ancillary Staff</option>
+                            <option value="Boarding Master">Boarding Master</option>
+                            <option value="Boarding Matron">Boarding Matron</option>
                         </select>
                      </div>
                 </div>

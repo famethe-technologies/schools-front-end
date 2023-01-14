@@ -50,6 +50,26 @@ class UserController extends Controller
 
     }
 
+
+    public function update($id){
+
+       $user = User::whereId($id)->first();
+       if($user->account_status == 'ACTIVE'){
+           $user->account_status='BLOCKED';
+           $user->save();
+           return $this->show();
+
+       }
+
+        if($user->account_status == 'BLOCKED'){
+            $user->account_status='ACTIVE';
+            $user->save();
+            return $this->show();
+
+        }
+
+    }
+
     public function register(Request $request) {
 
         try {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -53,6 +54,23 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+      //  return $request->all();
+       // return $this->sendFailedLoginResponse($request);
+
+
+        $user = User::where('email', $request->email)->first();
+        if(!$user){
+            session()->flash('error','Login failed');
+            return view('auth.login');
+        }
+
+        if($user->account_status !='ACTIVE'){
+            session()->flash('error','Account locked');
+            return view('auth.login');
+        }
+
+
+
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle

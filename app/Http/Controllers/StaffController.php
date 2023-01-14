@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Business\Services\THttpClientWrapper;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -135,4 +136,9 @@ class StaffController extends Controller
 
         }
     }
+
+    public function checkIfStaffExists(Request  $request) {
+        $id = $request->nationalId;
+        return $result =  Staff::where('national_id',$id)->first();
+}
 }

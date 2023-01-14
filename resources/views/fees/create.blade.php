@@ -47,12 +47,18 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
 
-                        <label for="surname">Narration *</label>
-                        <input type="text" class="form-control"   name="narration" required>
 
-                    </div>
+                        <div class="form-group col-md-4">
+                            <label for="status">Narration</label>
+                            <select class="form-control" name="narration" required>
+                                <option value="TUITION">TUITION</option>
+                                <option value="UNIFORM">UNIFORM</option>
+                                <option value="LEVY">LEVY</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
+                        </div>
+
                     <div class="form-group col-md-4">
 
                         <label for="gender">Class</label>
@@ -97,7 +103,7 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-4" hidden>
                         <label for="status">Status *</label>
                         <select class="form-control" name="status" required>
                             <option value="Active">Active</option>
@@ -109,10 +115,10 @@
                         <label for="firstname">Date created *</label>
                         <input type="date" class="form-control" name="createdDate" required>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="firstname">Date Updated *</label>
-                        <input type="date" class="form-control" name="updatedDate" required>
-                    </div>
+{{--                    <div class="form-group col-md-4">--}}
+{{--                        <label for="firstname">Date Updated *</label>--}}
+{{--                        <input type="date" class="form-control" name="updatedDate" required>--}}
+{{--                    </div>--}}
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>

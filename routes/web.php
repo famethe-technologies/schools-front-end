@@ -39,6 +39,7 @@ Route::post('/add/staff', [App\Http\Controllers\StaffController::class, 'store']
 Route::get('/edit/staff/{id}',[App\Http\Controllers\StaffController::class, 'edit'])->name('staff.edit');
 Route::post('/update/staff/{id}',[App\Http\Controllers\StaffController::class, 'update'])->name('staff.update');
 Route::get('/staff/',[App\Http\Controllers\StaffController::class, 'viewStaff'])->name('staff.getAll');
+Route::any('/staff-check/',[App\Http\Controllers\StaffController::class, 'checkIfStaffExists'])->name('checkIfStaffExists');
 
 Route::get('/create/class', [App\Http\Controllers\ClassController::class, 'create'])->name('classes');;
 Route::get('/view/classes', [App\Http\Controllers\ClassController::class, 'index'])->name('classes.index');
@@ -67,6 +68,7 @@ Route::get('view/users',[App\Http\Controllers\UserController::class, 'show']);
 Route::get('create/user',[App\Http\Controllers\UserController::class, 'create']);
 Route::post('register/user',[App\Http\Controllers\UserController::class, 'register']);
 Route::post('update/user/{id}',[App\Http\Controllers\UserController::class, 'update']);
+Route::get('edit/user/{id}',[App\Http\Controllers\UserController::class, 'update']);
 //Route::get('/daily/transaction', [App\Http\Controllers\MerchantController::class, 'dailyTransactions'])->name('transactions.daily');
 //
 //Route::get('/search/transaction', [App\Http\Controllers\MerchantController::class, 'searchTransactions'])->name('transactions.search');

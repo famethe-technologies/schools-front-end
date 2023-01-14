@@ -10,6 +10,35 @@
         {{__('Login ')}}
     </span>
 
+        @if (session('error'))
+            <div style="text-align: center;"> <div class="alert alert-danger" id="flash-message">
+                    {{ session('error') }}
+                </div>
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div style="text-align: center;"> <div class="alert alert-danger" id="flash-message">
+                    {{ session('success') }}
+                </div>
+            </div>
+        @endif
+
+
+        <style>
+            #flash-message {
+                animation: fadeOut 5s forwards;
+            }
+
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+
+        </style>
+
         <div class="wrap-input100 validate-input @if($errors->has('email')) error-validation @endif">
             <input class="input100" type="email" name="email" id="email" value="{{old('email')}}" required>
             <span class="focus-input100"></span>
@@ -34,6 +63,10 @@
             <div>
                 <a href="" class="txt1">
                     {{__('Forgot Password?')}}
+                </a>
+
+                <a href="/register" class="txt1">
+                    {{__('Register')}}
                 </a>
             </div>
         </div>
