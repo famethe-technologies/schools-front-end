@@ -38,16 +38,7 @@
             <form action="{{route("receipts.store")}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="gender">Institution</label>
-
-                        <select class="form-control" name="institutionId" required>
-                            @foreach($institutions as $record)
-                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-8">
                         <label for="gender">Student Name</label>
 
                         <select class="form-control" name="studentId" required>
@@ -80,9 +71,8 @@
                     <div class="form-group col-md-4">
                         <label for="gender">Payment Method</label>
                         <select class="form-control" name="methodOfPayment" required>
-                            @foreach($paymentMethods as $record)
-                                <option value="{{$record->methodOfPayment}}">{{$record->methodOfPayment}} </option>
-                            @endforeach
+                            <option value="USD">USD</option>
+                            <option value="SWIPE-USD">SWIPE-USD</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">

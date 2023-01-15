@@ -49,7 +49,7 @@
                             <td>{{$record->dob}}</td>
                             <td>{{$record->classes->staff->institution->institutionName}}</td>
                             <td>{{$record->classes->nameOfClass}}</td>
-                            <td>{{$record->sporthouse->houseName}}</td>
+                            <td>{{$record->sporthouse->houseName ?? null}}</td>
                             <td>{{$record->dateEnrolled}}</td>
                             <td>
 

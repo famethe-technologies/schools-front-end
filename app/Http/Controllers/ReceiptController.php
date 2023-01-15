@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Business\Services\THttpClientWrapper;
+use Illuminate\Support\Facades\Auth;
 
 class ReceiptController extends Controller
 {
@@ -32,12 +33,12 @@ class ReceiptController extends Controller
      */
     public function create()
     {
-        $base_url=config('app.base_url');
+         $base_url=config('app.base_url');
         $institution_url=config('app.institution_url');
 
-        $paymentMethodsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'paymentMethod/all');
-        $studentsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'student/all');
-        $response = $this->tHttpClientWrapper->getRequest($base_url.'institutions/all');
+        //return $paymentMethodsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'paymentMethod/all');
+        $id = Auth::user()->institution_id;
+        $studentsResponse = $this->tHttpClientWrapper->getRequest($base_url . '/student/by-institution-id/'. $id);
 
 
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
@@ -45,14 +46,12 @@ class ReceiptController extends Controller
         }
         else
         {
-            $paymentMethods= @json_decode(json_encode($paymentMethodsResponse['dataList'],true));
+           // $paymentMethods= @json_decode(json_encode($paymentMethodsResponse['dataList'],true));
             $students= @json_decode(json_encode($studentsResponse['dataList'],true));
-            $records= @json_decode(json_encode($response['dataList'],true));
 
 
-            return view('receipts.create')->with('paymentMethods',$paymentMethods)
-                ->with('students', $students)
-                ->with('institutions', $records);
+            return view('receipts.create')
+                ->with('students', $students);
 
         }
     }
@@ -66,12 +65,12 @@ class ReceiptController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = Auth::user()->institution_id;
         $institution_url=config('app.institution_url');
         $data = [
             'amount' => $request->amount,
             'description' => $request->description,
-            'institutionId' => $request->institutionId,
+            'institutionId' => $id,
             'methodOfPayment' => $request->methodOfPayment,
             'receiptNumber' => $request->receiptNumber,
             'studentId' => $request->studentId,

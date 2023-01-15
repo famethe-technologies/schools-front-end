@@ -22,7 +22,7 @@
         @endif
 
         @if (session('success'))
-            <div style="text-align: center;"> <div class="alert alert-danger" id="flash-message">
+            <div style="text-align: center;"> <div class="alert alert-success" id="flash-message">
                     {{ session('success') }}
                 </div>
             </div>
@@ -31,7 +31,7 @@
 
         <style>
             #flash-message {
-                animation: fadeOut 5s forwards;
+                animation: fadeOut 10s forwards;
             }
 
             @keyframes fadeOut {

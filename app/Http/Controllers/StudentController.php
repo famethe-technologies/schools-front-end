@@ -41,7 +41,8 @@ class StudentController extends Controller
     {
         $base_url=config('app.base_url');
 
-        $response = $this->tHttpClientWrapper->getRequest($base_url . '/student/all');
+        $id = Auth::user()->institution_id;
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/student/by-institution-id/'. $id);
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);

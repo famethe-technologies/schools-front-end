@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Business\Services\THttpClientWrapper;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -69,12 +70,15 @@ class InstitutionController extends Controller
         $base_url=config('app.base_url');
         $response = $this->tHttpClientWrapper->getRequest($base_url.'/institutions/by-id/'.$id);
 
+        $user =  User::find(Auth::user()->id);
+        $user->institution_id = $id;
+        $user->save();
+
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-
             $records= @json_decode(json_encode($response['data'],true));
             Session::put('school', $records->institutionName);
             Session::put('school_id', $id);

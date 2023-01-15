@@ -29,9 +29,39 @@
 @endsection
 @section('content')
 
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Create Term Invoice</h6>
+
+            @if (session('error'))
+                <div style="text-align: center;"> <div class="alert alert-danger" id="flash-message">
+                        {{ session('error') }}
+                    </div>
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div style="text-align: center;"> <div class="alert alert-danger" id="flash-message">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            @endif
+
+
+            <style>
+                #flash-message {
+                    animation: fadeOut 5s forwards;
+                }
+
+                @keyframes fadeOut {
+                    to {
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                }
+
+            </style>
         </div>
 
         <div class="card-body">
@@ -42,18 +72,16 @@
                         <label for="gender">Institution</label>
 
                         <select class="form-control" name="institutionId" required>
-                            @foreach($institutions as $record)
-                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
-                            @endforeach
+                                <option value="{{$id}}">{{$institutionName}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="gender">Term</label>
 
                         <select class="form-control" name="termId" required>
-                            @foreach($terms as $record)
-                                <option value="{{$record->id}}">{{$record->termName}} </option>
-                            @endforeach
+                                <option value="1">1 </option>
+                                <option value="2">2 </option>
+                                <option value="3">3 </option>
                         </select>
                     </div>
                 </div>

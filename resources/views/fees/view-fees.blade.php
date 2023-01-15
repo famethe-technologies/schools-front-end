@@ -47,8 +47,6 @@
                         <th>Id</th>
                         <th>Amount</th>
                         <th>Narration</th>
-                        <th>Inst Id</th>
-                        <th>Class Id</th>
                         <th>Term Id</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -62,8 +60,6 @@
                             <td>{{$record->id}}</td>
                             <td>{{$record->amount}}</td>
                             <td>{{$record->narration}}</td>
-                            <td>{{$record->institutionId}}</td>
-                            <td>{{$record->classId}}</td>
                             <td>{{$record->termId}}</td>
                             <td>{{$record->status}}</td>
                             <td>

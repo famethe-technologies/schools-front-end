@@ -42,9 +42,8 @@
                         <label for="gender">Institution</label>
 
                         <select class="form-control" name="institutionId" required>
-                            @foreach($institutions as $record)
-                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
-                            @endforeach
+                                <option value="{{$id}}">{{$institutionName}}</option>
+
                         </select>
                     </div>
                 </div>

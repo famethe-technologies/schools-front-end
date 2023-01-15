@@ -38,18 +38,7 @@
             <form action="{{route("fees.store")}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="gender">Institution</label>
-
-                        <select class="form-control" name="institutionId" required>
-                            @foreach($records as $record)
-                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-8">
                             <label for="status">Narration</label>
                             <select class="form-control" name="narration" required>
                                 <option value="TUITION">TUITION</option>
@@ -77,9 +66,10 @@
                         <label for="gender">Term</label>
 
                         <select class="form-control" name="termId" required>
-                            @foreach($terms as $record)
-                                <option value="{{$record->id}}">{{$record->termName}} </option>
-                            @endforeach
+                                <option value="1">1 </option>
+                                <option value="2">2 </option>
+                                <option value="3">3 </option>
+
                         </select>
                     </div>
 
@@ -111,10 +101,10 @@
                             <option value="Suspended">Suspended</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="firstname">Date created *</label>
-                        <input type="date" class="form-control" name="createdDate" required>
-                    </div>
+{{--                    <div class="form-group col-md-4">--}}
+{{--                        <label for="firstname">Date created *</label>--}}
+{{--                        <input type="date" class="form-control" name="createdDate" required>--}}
+{{--                    </div>--}}
 {{--                    <div class="form-group col-md-4">--}}
 {{--                        <label for="firstname">Date Updated *</label>--}}
 {{--                        <input type="date" class="form-control" name="updatedDate" required>--}}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Business\Services\THttpClientWrapper;
+use Illuminate\Support\Facades\Auth;
 
 
 class FeesController extends Controller
@@ -25,7 +26,8 @@ class FeesController extends Controller
         //
         $institution_url=config('app.institution_url');
 
-        $response = $this->tHttpClientWrapper->getRequest($institution_url.'fees-structures/find-all');
+        $id = Auth::user()->institution_id;
+         $response = $this->tHttpClientWrapper->getRequest($institution_url.'/fees-structures/by-school-id/'. $id);
 
             $records= @json_decode(json_encode($response,true));
             return view('fees.view-fees')->with('records',$records);
@@ -39,23 +41,16 @@ class FeesController extends Controller
     public function create()
     {
         $base_url=config('app.base_url');
-
-        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/all');
-        $termsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'Term/all');
-         $response = $this->tHttpClientWrapper->getRequest($base_url.'institutions/all');
-
-
+        $id = Auth::user()->institution_id;
+        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id/' . $id);
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-             $records= @json_decode(json_encode($response['dataList'],true));
             $classes= @json_decode(json_encode($classesResponse['dataList'],true));
-            $terms= @json_decode(json_encode($termsResponse['dataList'],true));
-            return view('fees.create')->with('records',$records)
-                ->with('classes', $classes)
-                ->with('terms', $terms);
+            return view('fees.create')
+                ->with('classes', $classes);
 
         }
     }
@@ -70,18 +65,19 @@ class FeesController extends Controller
     {
         //
         $institution_url=config('app.institution_url');
+        $id = Auth::user()->id;
         $data = [
 
             'classId' => $request->classId,
-            'createdDate' => $request->createdDate."T00:00:00.000Z",
-            'institutionId' => $request->institutionId,
+            'institutionId' => $id,
             'termId' => $request->termId,
             'narration' => $request->narration,
             'status' => $request->status,
             'amount' => $request->amount,
             'currency' => $request->currency,
-            'updatedDate' => $request->updatedDate ."T00:00:00.000Z"
+            'createdBy' => $id
             ];
+
 
          $response = $this->tHttpClientWrapper->postRequest($institution_url.'fees-structures/save',$data);
 

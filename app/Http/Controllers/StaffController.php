@@ -118,8 +118,8 @@ class StaffController extends Controller
             return redirect()->back()->with(['error' => $response['message']]);
         } else {
             //$record = @json_decode(json_encode($response['data'], true));
-
-            return redirect('/view/staff/'.Session::get('school_id'))->with('success','Staff Member Record Updated Successfully!!');
+            return redirect()->route("staff.index")->with('success','Staff created updated!!');
+            //return redirect('/view/staff/'.Session::get('school_id'))->with('success','Staff Member Record Updated Successfully!!');
 
         }
     }
