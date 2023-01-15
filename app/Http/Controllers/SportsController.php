@@ -19,9 +19,8 @@ class SportsController extends Controller
     public function create()
     {
         $base_url=config('app.base_url');
-        $id= Session::get('school_id');
-        $response = $this->tHttpClientWrapper->getRequest($base_url . '/institutions/all');
-
+        $id = Auth::user()->institution_id;
+        $response = $this->tHttpClientWrapper->getRequest($base_url . 'sporthouse/by-institution-id/'. $id);
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
         } else {
@@ -36,8 +35,8 @@ class SportsController extends Controller
     {
 
         $base_url=config('app.base_url');
-        $id= Session::get('school_id');
-        $response = $this->tHttpClientWrapper->getRequest($base_url . '/sporthouse/all');
+        $id = Auth::user()->institution_id;
+        $response = $this->tHttpClientWrapper->getRequest($base_url . 'sporthouse/by-institution-id/'. $id);
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
@@ -51,10 +50,11 @@ class SportsController extends Controller
     public function store(Request $request)
     {
         $base_url=config('app.base_url');
+        $id = Auth::user()->institution_id;
         $data = [
             'houseName'=>$request->sport_house,
             'colours'=>$request->colours,
-            'institutionId'=>$request->institutionId,
+            'institutionId'=>$id,
             'createdBy'=>Auth::user()->first_name,
             'lastModifiedBy'=> Auth::user()->first_name,
 
@@ -92,11 +92,12 @@ class SportsController extends Controller
     public function update(Request $request,$id)
     {
 
+        $iid = Auth::user()->institution_id;
         $data = [
             'id'=>$id,
             'houseName'=>$request->sport_house,
             'colours'=>$request->colours,
-            'institutionId'=>Session::get('school_id'),
+            'institutionId'=>$iid,
             'createdBy'=>Auth::user()->first_name,
             'lastModifiedBy'=> Auth::user()->first_name,
 

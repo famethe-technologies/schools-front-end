@@ -34,19 +34,14 @@ class HomeController extends Controller
         return $response = $this->tHttpClientWrapper->getRequest($base_url.'/institutions/all');*/
 
         $base_url=config('app.base_url');
-
         $response = $this->tHttpClientWrapper->getRequest($base_url.'/institutions/all');
-
-
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-
           $schools=$response['dataList'];
             return view('home')->with('schools',$schools);
-
         }
         return view('home');
     }

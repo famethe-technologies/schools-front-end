@@ -210,15 +210,15 @@
                         </select>
 
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="gender">Institution</label>
+{{--                    <div class="form-group col-md-4">--}}
+{{--                        <label for="gender">Institution</label>--}}
 
-                        <select class="form-control" name="institutionId" required>
-                            @foreach($institutions as $record)
-                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+{{--                        <select class="form-control" name="institutionId" required>--}}
+{{--                            @foreach($institutions as $record)--}}
+{{--                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
                     <div class="form-group col-md-4">
                         <label for="firstname">Student Type</label>
                         <select class="form-control" name="studentType" required>

@@ -35,7 +35,8 @@ class StaffController extends Controller
     {
         $base_url=config('app.base_url');;
 
-        $response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/all');
+        $id = Auth::user()->institution_id;
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/by-institution-id/'. $id);
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
@@ -50,13 +51,14 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         $base_url=config('app.base_url');
+        $id = Auth::user()->institution_id;
         $data = [
               'firstname'=>$request->firstname,
               'surname'=>$request->surname,
               'gender'=>$request->gender,
               'position'=>$request->position,
               'nationalId'=>$request->national_id,
-              'institutionId'=>$request->institutionId,
+              'institutionId'=>$id,
               'createdBy'=>Auth::user()->first_name,
              'lastModifiedBy'=> Auth::user()->first_name,
 
@@ -94,6 +96,7 @@ class StaffController extends Controller
     public function update(Request $request,$id)
     {
 
+        $id = Auth::user()->institution_id;
         $data = [
             'id'=>$id,
             'firstname'=>$request->firstname,
@@ -101,7 +104,7 @@ class StaffController extends Controller
             'gender'=>$request->gender,
             'position'=>$request->position,
             'nationalId'=>$request->national_id,
-            'institutionId'=>Session::get('school_id'),
+            'institutionId'=>$id,
             'createdBy'=>Auth::user()->first_name,
             'lastModifiedBy'=> Auth::user()->first_name,
 

@@ -18,14 +18,14 @@ class ClassController extends Controller
     public function create()
     {
         $base_url=config('app.base_url');
-        $id=Session::get('school_id');
-        $response = $this->tHttpClientWrapper->getRequest($base_url . '/institutions/all');
-        $staffResponse = $this->tHttpClientWrapper->getRequest($base_url . '/staff/all');
+        $id = Auth::user()->institution_id;
+        $response = $this->tHttpClientWrapper->getRequest($base_url . 'institutions/by-id/'. $id);
+        $staffResponse = $this->tHttpClientWrapper->getRequest($base_url . '/staff/by-institution-id/'. $id);
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
         } else {
-            $institutions = @json_decode(json_encode($response['dataList'], true));
+            $institutions = @json_decode(json_encode($response['data'], true));
             $staff = @json_decode(json_encode($staffResponse['dataList'], true));
 
             return view('classes.create')
@@ -38,8 +38,8 @@ class ClassController extends Controller
     {
 
         $base_url=config('app.base_url');
-
-        $response = $this->tHttpClientWrapper->getRequest($base_url . '/classes/all');
+        $id = Auth::user()->institution_id;
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id/' . $id);
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
@@ -53,11 +53,12 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         $base_url=config('app.base_url');
+        $id = Auth::user()->institution_id;
         $data = [
             'nameOfClass'=>$request->class_name,
             'code'=>$request->code,
             'staffId'=>$request->staff,
-            'institutionId'=>$request->institutionId,
+            'institutionId'=>$id,
             'createdBy'=>Auth::user()->first_name,
             'lastModifiedBy'=> Auth::user()->first_name,
 
@@ -100,12 +101,13 @@ class ClassController extends Controller
 
     public function update(Request $request,$id)
     {
+        $iid = Auth::user()->institution_id;
         $data = [
             'id'=>$id,
             'nameOfClass'=>$request->class_name,
             'code'=>$request->code,
             'staffId'=>$request->staff,
-            'institutionId'=>Session::get('school_id'),
+            'institutionId'=>$iid,
             'createdBy'=>Auth::user()->first_name,
             'lastModifiedBy'=> Auth::user()->first_name,
 
@@ -113,7 +115,7 @@ class ClassController extends Controller
 
         $base_url=config('app.base_url');
 
-     $response = $this->tHttpClientWrapper->patchRequest($base_url . '/classes/update/'.$id,$data);
+        $response = $this->tHttpClientWrapper->patchRequest($base_url . '/classes/update/'.$id,$data);
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);

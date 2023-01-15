@@ -86,12 +86,12 @@
                                     <i class="fa fa-edit"></i>
                                 </a>
 
-                                <form method="POST" action="" class="d-inline">
-                                    <input type="hidden" name="_method" value="delete">
-                                    <button type="submit" class="btn btn-danger btn-sm delete_branch">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
+{{--                                <form method="POST" action="" class="d-inline">--}}
+{{--                                    <input type="hidden" name="_method" value="delete">--}}
+{{--                                    <button type="submit" class="btn btn-danger btn-sm delete_branch">--}}
+{{--                                        <i class="fa fa-trash"></i>--}}
+{{--                                    </button>--}}
+{{--                                </form>--}}
                             </td>
                         </tr>
                     @endforeach

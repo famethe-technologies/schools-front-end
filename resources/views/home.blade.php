@@ -30,14 +30,12 @@
 @section('content')
     <div class="row">
         @foreach($schools as $school)
-
             <div class="card">
                 <br>
                 <img src="/img/badge3.png" style="width:30%" class="center">
                 <h1>{{$school['institutionCode']}}</h1>
                 <p class="title"></p>
                 <p>{{$school['institutionName']}}</p>
-
                 <a href="/school/{{$school['id']}}" class="btn btn-primary">{{__('More info')}} <i class="fas fa-arrow-circle-right"></i></a>
                 <p></p>
             </div>

@@ -18,21 +18,20 @@ class StudentController extends Controller
     public function create()
     {
         $base_url=config('app.base_url');
-        $id=Session::get('school_id');
-        $housesResponse = $this->tHttpClientWrapper->getRequest($base_url . '/sporthouse/all');
-        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . '/classes/all');
-        $institutionsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'institutions/all');
+        $id = Auth::user()->institution_id;
+        $housesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'sporthouse/by-institution-id/'. $id);
+        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/by-institution-id/' . $id);
+        //$institutionsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'institutions/by-id/'. $id);
 
         if (isset($houses["statusCode"]) && $houses["statusCode"] != "200" && isset($classes["statusCode"]) && $classes["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $classes['message']]);
         } else {
             $houses = @json_decode(json_encode($housesResponse['dataList'], true));
             $classes = @json_decode(json_encode($classesResponse['dataList'], true));
-            $institutions = @json_decode(json_encode($institutionsResponse['dataList'], true));
+         //   $institutions = @json_decode(json_encode($institutionsResponse['data'], true));
 
             return view('students.create')->with('houses', $houses)
-                ->with('classes',$classes)
-                ->with('institutions',$institutions);
+                ->with('classes',$classes);
 
         }
 
@@ -57,7 +56,8 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $base_url=config('app.base_url');
-        $id=Session::get('school_id');
+        //$id=Session::get('school_id');
+        $id = Auth::user()->institution_id;
         $data = [
             'studentFirstName'=> $request->student_firstname,
             'studentSurname'=> $request->student_surname,

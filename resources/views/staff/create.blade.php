@@ -61,18 +61,20 @@
                     <div class="form-group col-md-6">
                         <label for="position">Position</label>
                         <select class="form-control" name="position" required>
-                            <option value="Headmaster">Headmaster</option>
-                            <option value="Deputy Headmaster">Deputy Headmaster</option>
-                            <option value="Teacher">Teacher</option>
-                            <option value="Secretary">Secretary</option>
-                            <option value="Senior Teacher">Senior Teacher</option>
-                            <option value="Swimming Coach">Swimming Coach</option>
-                            <option value="Bursar">Bursar</option>
-                            <option value="Sports Teacher">Sports Teacher</option>
-                            <option value="Administrator Clerk">Administrator Clerk</option>
-                            <option value="Ancilary Staff">Ancillary Staff</option>
-                            <option value="Boarding Master">Boarding Master</option>
-                            <option value="Boarding Matron">Boarding Matron</option>
+                            <option value="headmaster">Headmaster</option>
+{{--                            <option value="Deputy Headmaster">Deputy Headmaster</option>--}}
+                            <option value="teacher">Teacher</option>
+                            <option value="bursar">Bursar</option>
+                            <option value="superadmin">Super Admin</option>
+                            <option value="it-support">IT Support</option>
+{{--                            <option value="Senior Teacher">Senior Teacher</option>--}}
+{{--                            <option value="Swimming Coach">Swimming Coach</option>--}}
+{{--                            <option value="Bursar">Bursar</option>--}}
+{{--                            <option value="Sports Teacher">Sports Teacher</option>--}}
+{{--                            <option value="Administrator Clerk">Administrator Clerk</option>--}}
+{{--                            <option value="Ancilary Staff">Ancillary Staff</option>--}}
+{{--                            <option value="Boarding Master">Boarding Master</option>--}}
+{{--                            <option value="Boarding Matron">Boarding Matron</option>--}}
                         </select>
                      </div>
                 </div>
@@ -81,14 +83,14 @@
                         <label for="phone">National ID</label>
                         <input type="text" class="form-control" name="national_id">
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="gender">Institution</label>
-                        <select class="form-control" name="institutionId" required>
-                            @foreach($records as $record)
-                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+{{--                    <div class="form-group col-md-6">--}}
+{{--                        <label for="gender">Institution</label>--}}
+{{--                        <select class="form-control" name="institutionId" required>--}}
+{{--                            @foreach($records as $record)--}}
+{{--                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
 
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
