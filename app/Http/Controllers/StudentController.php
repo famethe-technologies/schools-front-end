@@ -152,4 +152,99 @@ class StudentController extends Controller
         }
 
     }
+
+    //edit student
+    public function edit($id)
+    {
+        $base_url=config('app.base_url');
+        $institutionId = Auth::user()->institution_id;
+
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/student/by-id/'. $id);
+        $housesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'sporthouse/by-institution-id/' . $institutionId);
+        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/by-institution-id/' . $institutionId);
+        $institutionsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'institutions/all');
+
+        if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
+            return redirect()->back()->with(['error' => $response['message']]);
+        } else {
+            $records = @json_decode(json_encode($response['data'], true));
+            $houses = @json_decode(json_encode($housesResponse['dataList'], true));
+            $classes = @json_decode(json_encode($classesResponse['dataList'], true));
+            $institutions = @json_decode(json_encode($institutionsResponse['dataList'], true));
+
+            return view('students.edit')->with('record', $records)
+                ->with('houses', $houses)
+                ->with('classes', $classes)
+                ->with('institutions', $institutions);
+        }
+
+    }
+
+    //update student
+    public function update(Request $request, $id)
+    {
+        $base_url=config('app.base_url');
+
+        $data = [
+            'studentFirstName'=> $request->student_firstname,
+            'studentSurname'=> $request->student_surname,
+            'route'=> $request->route,
+            'nationalId'=> $request->student_national_id,
+            'dob'=> $request->dob,
+            'birthEntryNo'=> $request->birth_entry_no,
+            'gender'=> $request->student_gender,
+            'passportNo'=> $request->passport_no,
+            'race'=> $request->race,
+            'bloodGroup'=> $request->blood_group,
+            'disabilities'=> $request->disabilities,
+            'mainLanguage'=> $request->main_language,
+            'religion'=> $request->religion,
+            'denomination'=>$request->denomination,
+            'pastor'=> $request->pastor,
+            'studentType'=> $request->studentType,
+            'medicalAid'=> $request->medical_aid,
+            'medicalAidNo'=> $request->medical_aid_no,
+            'dateEnrolled'=> $request->date_enrolled,
+            'residentialAddress'=> $request->residential_address,
+            'studentPhone'=> $request->student_phone,
+            'studentEmail'=> $request->student_email,
+            'specialDiet'=> $request->special_diet,
+            'allergies'=> $request->allergies,
+            'specialMedicalRequirements'=> $request->special_medical_requirements,
+            'sportingDescription'=> $request->sporting_description,
+            'sportsHouseId'=> $request->sport_house,
+            'institutionId'=>$request->institutionId,
+            'classId'=> $request->class_id,
+            'parentGuardianDTO'=> [
+                'id'=>$request->parent_guardian_id,
+                'nationalId'=> $request->national_id,
+                'firstname'=> $request->firstname,
+                'surname'=> $request->surname,
+                'relationship'=> $request->relationship,
+                'residentialAddress'=> $request->address,
+                'phone'=> $request->phone,
+                'email'=> $request->email,
+                'employer'=> $request->employer,
+                'occupation'=> $request->occupation,
+                'createdBy'=>Auth::user()->first_name,
+                'lastModifiedBy'=> Auth::user()->first_name,
+            ],
+
+            'createdBy'=>Auth::user()->first_name,
+            'lastModifiedBy'=> Auth::user()->first_name,
+
+        ];
+        //return $data;
+
+        $response = $this->tHttpClientWrapper->patchRequest($base_url.'/student/update/' . $id,$data);
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            return redirect()->route('students.view')->with('success','Student Updated Successfully!!');
+        }
+    }
+
 }

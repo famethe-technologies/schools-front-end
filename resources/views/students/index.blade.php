@@ -5,13 +5,13 @@
 
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Staff Members</h1>
+    <h1 class="h3 mb-2 text-gray-800">Students</h1>
 
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Schools</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Students</h6>
         </div>
 
         <div class="card-body">
@@ -53,7 +53,7 @@
                             <td>{{$record->dateEnrolled}}</td>
                             <td>
 
-                                   <a href="" class="btn btn-primary btn-sm">
+                                   <a href="{{route("students.edit", $record->id)}}" class="btn btn-primary btn-sm">
                                       <i class="fa fa-edit"></i>
                                    </a>
 
@@ -76,9 +76,5 @@
             </div>
         </div>
     </div>
-
-
-
-
 
 @endsection

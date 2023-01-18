@@ -87,7 +87,6 @@ class InstitutionController extends Controller
         }
     }
 
-
     public function edit($id)
     {
 
@@ -105,7 +104,6 @@ class InstitutionController extends Controller
 
         }
     }
-
 
     public function update(Request $request,$id)
     {
@@ -144,7 +142,7 @@ class InstitutionController extends Controller
     }
 
     //post save institution data
-    public function saveInstitution(Request $request)
+   public function saveInstitution(Request $request)
     {
 
         $institution_url=config('app.institution_url');
