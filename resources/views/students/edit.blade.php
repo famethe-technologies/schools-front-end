@@ -133,26 +133,17 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="firstname">Student Email</label>
                         <input type="text" class="form-control" name="student_email" value="{{$record->studentEmail}}" required>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="surname">Special Diet</label>
                         <input type="text" class="form-control"   name="special_diet" value="{{$record->specialDiet}}" >
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="firstname">Sporting Description</label>
                         <input type="text" class="form-control" name="sporting_description" value="{{$record->sportingDescription}}" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="surname">Sports House</label>
-                        <select type="text" class="form-control"   name="sport_house" required>
-                           {{-- <option value="{{$record->sporthouse}}">{{$record->sporthouse}}</option>--}}
-                        @foreach($houses as $house)
-                                <option value="{{$house->id}}">{{$house->houseName}}</option>
-                            @endforeach
-                        </select>
                     </div>
                 </div>
 
@@ -245,7 +236,7 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <label for="Phone">Phone</label>
-                                            <input type="number" class="form-control" name="phone" id="create_address" value="{{$record->parentguardian->nationalId}}"  required>
+                                            <input type="number" class="form-control" name="phone" id="create_address" value="{{$record->parentguardian->phone}}"  required>
                                         </div>
                                     </div>
 

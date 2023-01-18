@@ -212,7 +212,7 @@ class StudentController extends Controller
             'allergies'=> $request->allergies,
             'specialMedicalRequirements'=> $request->special_medical_requirements,
             'sportingDescription'=> $request->sporting_description,
-            'sportsHouseId'=> $request->sport_house,
+            //'sportsHouseId'=> $request->sport_house,
             'institutionId'=>$request->institutionId,
             'classId'=> $request->class_id,
             'parentGuardianDTO'=> [
