@@ -160,7 +160,6 @@ class StudentController extends Controller
         $institutionId = Auth::user()->institution_id;
 
         $response = $this->tHttpClientWrapper->getRequest($base_url . '/student/by-id/'. $id);
-        $housesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'sporthouse/by-institution-id/' . $institutionId);
         $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/by-institution-id/' . $institutionId);
         $institutionsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'institutions/all');
 
@@ -168,12 +167,10 @@ class StudentController extends Controller
             return redirect()->back()->with(['error' => $response['message']]);
         } else {
             $records = @json_decode(json_encode($response['data'], true));
-            $houses = @json_decode(json_encode($housesResponse['dataList'], true));
             $classes = @json_decode(json_encode($classesResponse['dataList'], true));
             $institutions = @json_decode(json_encode($institutionsResponse['dataList'], true));
 
             return view('students.edit')->with('record', $records)
-                ->with('houses', $houses)
                 ->with('classes', $classes)
                 ->with('institutions', $institutions);
         }
