@@ -98,6 +98,10 @@ Route::get('/receipts/school/balance', [ReceiptController::class, 'getSchoolBala
 Route::post('/receipts/school-balance/report', [ReceiptController::class, 'getSchoolBalance'])->name('receipts.schoolBalance');
 Route::get('/receipts/student/balance', [ReceiptController::class, 'getStudentBalancePage'])->name('receipts.studentBalancePage');
 Route::post('/receipts/student-balance/report', [ReceiptController::class, 'getStudentBalance'])->name('receipts.studentBalance');
+Route::get('/receipts/print/page', [ReceiptController::class, 'getReceiptPage'])->name('receipts.printPage');
+Route::post('/receipts/print/report', [ReceiptController::class, 'printReceipt'])->name('receipts.print');
+Route::get('/cpc/print/page', [ReceiptController::class, 'getCPCPage'])->name('receipts.cpcPage');
+Route::post('/cpc/print/report', [ReceiptController::class, 'printCPC'])->name('receipts.printCPC');
 
 /******************************Invoice****************************************/
 Route::resource('invoices', InvoiceController::class);

@@ -217,4 +217,84 @@ class ReceiptController extends Controller
 
     }
 
+    //receipt page
+    public function getReceiptPage()
+    {
+        $base_url=config('app.base_url');
+        $response = $this->tHttpClientWrapper->getRequest($base_url.'student/all');
+
+        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+            return redirect()->back()->with(['error' => $response['message']]);
+        }
+        else
+        {
+            $records= @json_decode(json_encode($response['dataList'],true));
+
+            return view('receipts.print-statement')->with('students', $records);
+
+        }
+
+    }
+
+    //print receipt
+    public function printReceipt(Request $request)
+    {
+        $user = Auth::user()->first_name;
+
+        $receipt_url=config('app.receipt_url');
+        //$response = $this->tHttpClientWrapper->getRequest($receipt_url.'receipts/print-statement/'. $id . '/' .$user);
+
+        $url = $receipt_url.'receipts/print-statement/'. $request->studentId . '/' .$user;
+        $CurlConnect = curl_init();
+        curl_setopt($CurlConnect, CURLOPT_URL, $url);
+        curl_setopt($CurlConnect, CURLOPT_CUSTOMREQUEST,   'GET');
+        curl_setopt($CurlConnect, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($CurlConnect, CURLOPT_HTTPHEADER, array(
+            ""));
+        $Result = curl_exec($CurlConnect);
+
+        header('Cache-Control: public');
+        header('Content-type: application/pdf');
+        header('Content-Disposition: attachment; filename="new.pdf"');
+        header('Content-Length: '.strlen($Result));
+        //echo $Result;
+        echo "<script>window.open('".$Result."', '_blank')</script>";
+
+    }
+
+    //cpc page
+    public function getCPCPage()
+    {
+            return view('receipts.print-cpc');
+    }
+
+    //print cpc
+    public function printCPC(Request $request)
+    {
+        $user = Auth::user()->first_name;
+        $institutionId = Auth::user()->institution_id;;
+
+        $receipt_url=config('app.receipt_url');
+        //$response = $this->tHttpClientWrapper->getRequest($receipt_url.'receipts/print-statement/'. $id . '/' .$user);
+
+        $url = $receipt_url.'receipts/print-cpc/'. $request->startDate . '/' .$request->endDate.'/' . $institutionId .'/' .$user;
+        $CurlConnect = curl_init();
+        curl_setopt($CurlConnect, CURLOPT_URL, $url);
+        curl_setopt($CurlConnect, CURLOPT_CUSTOMREQUEST,   'GET');
+        curl_setopt($CurlConnect, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($CurlConnect, CURLOPT_HTTPHEADER, array(
+            ""));
+        $Result = curl_exec($CurlConnect);
+
+        header('Cache-Control: public');
+        header('Content-type: application/pdf');
+        header('Content-Disposition: attachment; filename="new.pdf"');
+        header('Content-Length: '.strlen($Result));
+        //echo $Result;
+        echo "<script>window.open('".$Result."', '_blank')</script>";
+
+    }
+
+
+
 }

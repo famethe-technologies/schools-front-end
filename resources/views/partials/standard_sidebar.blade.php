@@ -615,6 +615,18 @@
                             <p>{{__('Add')}}</p>
                         </a>
                     </li>
+                        <li class="nav-item">
+                            <a href="{{route("receipts.printPage")}}" class="nav-link" id="branches">
+                                <i class="fas fa-print nav-icon"></i>
+                                <p>{{__('Print Receipts')}}</p>
+                            </a>
+                        </li>
+                    <li class="nav-item">
+                            <a href="{{route("receipts.cpcPage")}}" class="nav-link" id="branches">
+                                <i class="fas fa-print nav-icon"></i>
+                                <p>{{__('Print CPC')}}</p>
+                            </a>
+                        </li>
 
                     {{--                <li class="nav-item">--}}
                     {{--                    <a href="{{route("receipts.schoolBalancePage")}}" class="nav-link" id="tests">--}}
