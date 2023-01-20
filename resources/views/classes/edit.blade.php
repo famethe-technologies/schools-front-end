@@ -35,12 +35,12 @@
         </div>
 
         <div class="card-body">
-            <form action="/update/class/{{$record->id}}" method="post" enctype="multipart/form">
+            <form action="{{route("classes.update", $record->id)}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="firstname">Class Name</label>
-                        <input type="text" class="form-control" name="class_name"  value="{{$record->nameOfClass}}"required>
+                        <input type="text" class="form-control" name="class_name"  value="{{$record->nameOfClass}}" required>
                     </div>
                     <div class="form-group col-md-6">
 
@@ -48,26 +48,23 @@
                         <input type="text" class="form-control"   name="code" value="{{$record->code}}" required>
 
                     </div>
-
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                    <label for="gender">Class Teacher</label>
+                        <label for="gender">Class Teacher</label>
 
-                 <select class="form-control" name="staff" required>
-{{--                     <option value="">{{$record->firstname}} {{$record->surname}}</option>--}}
-                     @foreach($staff as $member)
-                     <option value="{{$member->id}}">{{$member->firstname}} {{$member->surname}}</option>
-                         @endforeach
-                 </select>
-                        <div class="form-row">
+                         <select class="form-control" name="staff" required>
+                             @foreach($staff as $member)
+                             <option value="{{$member->id}}">{{$member->firstname}} {{$member->surname}}</option>
+                                 @endforeach
+                         </select>
+                    <div >
                 </div>
+                        <br>
                     <div class="form-group">
-                        <input type="hidden" class="form-control"   name="created_by" value="">
-                       <br>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                     </div>
-                </div>
+
 
             </form>
         </div>

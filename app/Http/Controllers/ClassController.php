@@ -79,8 +79,8 @@ class ClassController extends Controller
     {
 
         $base_url=config('app.base_url');
-        $school_id=Session::get('school_id');
-        $staff_response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/by-institution-id/'.$school_id);
+        $institutionId = Auth::user()->institution_id;
+        $staff_response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/by-institution-id/'.$institutionId);
         $class_response = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-id/'.$id);
 
         if (isset($staff_response["statusCode"]) && $staff_response["statusCode"] != "200") {
@@ -92,8 +92,6 @@ class ClassController extends Controller
             $record = @json_decode(json_encode($class_response['data'], true));
 
             return view('classes.edit')->with('record', $record)->with('staff',$staff);
-
-
         }
 
     }
@@ -101,16 +99,15 @@ class ClassController extends Controller
 
     public function update(Request $request,$id)
     {
-        $iid = Auth::user()->institution_id;
+        $institutionId = Auth::user()->institution_id;
         $data = [
             'id'=>$id,
             'nameOfClass'=>$request->class_name,
             'code'=>$request->code,
             'staffId'=>$request->staff,
-            'institutionId'=>$iid,
+            'institutionId'=>$institutionId,
             'createdBy'=>Auth::user()->first_name,
             'lastModifiedBy'=> Auth::user()->first_name,
-
         ];
 
         $base_url=config('app.base_url');
@@ -122,7 +119,7 @@ class ClassController extends Controller
         } else {
             //$record = @json_decode(json_encode($response['data'], true));
 
-            return redirect('/view/classes/'.Session::get('school_id'))->with('success','Class Record Updated Successfully!!');
+            return redirect()->route("classes.index")->with('success','Class Record Updated Successfully!!');
 
         }
     }

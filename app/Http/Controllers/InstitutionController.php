@@ -18,7 +18,6 @@ class InstitutionController extends Controller
     }
     public function index()
     {
-
         $base_url=config('app.base_url');
 
         $response = $this->tHttpClientWrapper->getRequest($base_url.'/institutions/all');
