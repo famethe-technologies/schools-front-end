@@ -50,7 +50,7 @@
                     <div class="form-group col-md-4">
                         <label for="gender">Student Name</label>
 
-                        <select class="form-control" name="studentId" required>
+                        <select class="form-control js-example-basic-single" name="studentId" required>
                             @foreach($students as $record)
                                 <option value="{{$record->id}}">{{$record->studentFirstName}} {{$record->studentSurname}}</option>
                             @endforeach
@@ -138,5 +138,10 @@
     <!-- Switch -->
     <script src="{{url('plugins/swtich-netliva/js/netliva_switch.js')}}"></script>
     <script src="{{url('js/admin/dashboard.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 @endsection
 
