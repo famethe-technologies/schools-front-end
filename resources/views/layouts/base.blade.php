@@ -59,9 +59,6 @@
         }
     </style>
     @include('partials.head')
-
-
-
 </head>
 <body class="hold-transition sidebar-mini layout-fixed text-sm">
 

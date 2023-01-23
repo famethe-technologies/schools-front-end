@@ -46,17 +46,13 @@
                         <label for="firstname">End Date *</label>
                         <input type="date" class="form-control" name="endDate"  required>
                     </div>
-
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
     </div>
-
-
 @endsection
-
 
 @section('scripts')
     <!-- Switch -->

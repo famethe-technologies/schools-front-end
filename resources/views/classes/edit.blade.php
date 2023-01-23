@@ -56,9 +56,9 @@
                          <select class="form-control" name="staff" required>
                              @foreach($staff as $member)
                              <option value="{{$member->id}}">{{$member->firstname}} {{$member->surname}}</option>
-                                 @endforeach
+                             @endforeach
                          </select>
-                    <div >
+                    <div>
                 </div>
                         <br>
                     <div class="form-group">

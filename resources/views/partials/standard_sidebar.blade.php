@@ -485,14 +485,12 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
-
                     <li class="nav-item">
                         <a href="{{route("staff.create")}}" class="nav-link" id="branches">
                             <i class="fas fa-plus nav-icon"></i>
                             <p>{{__('Add')}}</p>
                         </a>
                     </li>
-
                     <li class="nav-item">
                         <a href="{{route("staff.index")}}" class="nav-link" id="tests">
                             <i class="nav-icon fas fa-eye"></i>
@@ -512,16 +510,12 @@
                 </a>
                 <ul class="nav nav-treeview">
 
-
                     <li class="nav-item">
                         <a href="/create/student" class="nav-link" id="branches">
                             <i class="fas fa-plus nav-icon"></i>
                             <p>{{__('Add')}}</p>
                         </a>
                     </li>
-
-
-
                     <li class="nav-item">
                         <a href="{{route("students.view")}}" class="nav-link" id="tests">
                             <i class="nav-icon fas fa-eye"></i>
@@ -530,9 +524,6 @@
                             </p>
                         </a>
                     </li>
-
-
-
                 </ul>
             <li class="nav-item has-treeview" id="prices">
                 <a href="#" class="nav-link" id="prices_link">
@@ -543,17 +534,12 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
-
-
                     <li class="nav-item">
                         <a href="/create/class" class="nav-link" id="branches">
                             <i class="fas fa-plus nav-icon"></i>
                             <p>{{__('Add')}}</p>
                         </a>
                     </li>
-
-
-
                     <li class="nav-item">
                         <a href="{{route('classes.index')}}" class="nav-link" id="tests">
                             <i class="nav-icon fas fa-eye"></i>
@@ -562,8 +548,6 @@
                             </p>
                         </a>
                     </li>
-
-
 
                 </ul>
             <li class="nav-item has-treeview" id="prices">
@@ -575,7 +559,6 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
-
 
                     <li class="nav-item">
                         <a href="/create/sport-house" class="nav-link" id="branches">
@@ -656,16 +639,12 @@
                 </a>
                 <ul class="nav nav-treeview">
 
-
                     <li class="nav-item">
                         <a href="{{route("institutions.createView")}}" class="nav-link" id="branches">
                             <i class="fas fa-plus nav-icon"></i>
                             <p>{{__('Add')}}</p>
                         </a>
                     </li>
-
-
-
                     <li class="nav-item">
                         <a href="{{route("schools.index")}}" class="nav-link" id="tests">
                             <i class="nav-icon fas fa-eye"></i>
@@ -674,7 +653,6 @@
                             </p>
                         </a>
                     </li>
-
 
                 </ul>
             </li>

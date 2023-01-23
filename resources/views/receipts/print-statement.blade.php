@@ -55,9 +55,7 @@
     </div>
     </div>
 
-
 @endsection
-
 
 @section('scripts')
     <!-- Switch -->

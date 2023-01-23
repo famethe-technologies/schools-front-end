@@ -19,10 +19,7 @@
             </a>
           </div>
         </div>
-
-
         @include('partials.admin_sidebar')
-
     </div>
 </aside>
 <!-- /.sidebar -->
