@@ -67,13 +67,17 @@ class ReceiptController extends Controller
     {
         $id = Auth::user()->institution_id;
         $institution_url=config('app.institution_url');
-        $data = [
+         $data = [
             'amount' => $request->amount,
+            'currency' => $request->currency,
+            'receiptDate' => $request->receiptDate . 'T00:00:58.573Z',
             'description' => $request->description,
             'institutionId' => $id,
             'methodOfPayment' => $request->methodOfPayment,
             'receiptNumber' => $request->receiptNumber,
             'studentId' => $request->studentId,
+            'createdBy' => Auth::user()->email
+
             ];
 
         $response = $this->tHttpClientWrapper->postRequest($institution_url.'receipts/create',$data);

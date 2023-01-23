@@ -71,13 +71,27 @@
                     <div class="form-group col-md-4">
                         <label for="gender">Payment Method</label>
                         <select class="form-control" name="methodOfPayment" required>
-                            <option value="USD">USD</option>
+                            <option value="USD CASH">USD</option>
+                            <option value="ZAR CASH">USD</option>
                             <option value="SWIPE-USD">SWIPE-USD</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="gender">Currency</label>
+                        <select class="form-control" name="currency" required>
+                            <option value="USD">USD</option>
+                            <option value="ZWL">ZWL</option>
+                            <option value="ZAR">ZAR</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="surname">Receipt No *</label>
                         <input type="text" class="form-control"   name="receiptNumber" required>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="surname">Receipt Date</label>
+                        <input type="date" class="form-control"   name="receiptDate" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
