@@ -71,8 +71,11 @@
                     <div class="form-group col-md-4">
                         <label for="gender">Payment Method</label>
                         <select class="form-control" name="methodOfPayment" required>
-                            <option value="USD">USD</option>
-                            <option value="SWIPE-USD">SWIPE-USD</option>
+                            <option value="USD-Cash">USD-Cash</option>
+                            <option value="Nostro">Nostro</option>
+                            <option value="Eco-Cash">Eco-Cash</option>
+                            <option value="Bond-Cash">Bond-Cash</option>
+                            <option value="Rtgs">Rtgs</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
