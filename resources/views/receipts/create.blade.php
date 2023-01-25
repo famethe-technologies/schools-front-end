@@ -48,12 +48,9 @@
                         </select>
                     </div>
                     <div class="form-group col-md-4">
-
                         <label for="surname">Amount *</label>
                         <input type="text" class="form-control"   name="amount" required>
-
                     </div>
-
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -66,7 +63,6 @@
                             <option value="LEVY">LEVY</option>
                             <option value="OTHER">OTHER</option>
                         </select>
-
                     </div>
                     <div class="form-group col-md-4">
                         <label for="gender">Payment Method</label>

@@ -256,75 +256,59 @@
                 <div class="card-body" id="create_parent_inputs">
                     <div class="row">
                         <div class="form-group col-md-3">
-
                             <label for="surname">First Name</label>
                             <input type="text" class="form-control" placeholder="{{__('First Name')}}" name="firstname"  required>
-
                         </div>
-
                         <div class="form-group col-md-3">
-                                    <label for="surname">Surname</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Surname')}}" name="surname"  required>
+                            <label for="surname">Surname</label>
+                            <input type="text" class="form-control" placeholder="{{__('Surname')}}" name="surname"  required>
                         </div>
 
 
                         <div class="form-group col-md-3">
-                                    <label for="surname">National ID</label>
-                                    <input type="text" class="form-control" placeholder="{{__('National-ID')}}" name="national_id"  id="create_phone" required>
-
+                            <label for="surname">National ID</label>
+                            <input type="text" class="form-control" placeholder="{{__('National-ID')}}" name="national_id"  id="create_phone" required>
                         </div>
                         <div class="col-lg-3">
-                                        <label for="Phone">Phone</label>
-                                        <input type="number" class="form-control" placeholder="{{__('Phone')}}" name="phone" id="create_address"  required>
+                            <label for="Phone">Phone</label>
+                            <input type="number" class="form-control" placeholder="{{__('Phone')}}" name="phone" id="create_address"  required>
                         </div>
                     </div>
                     <div class="row">
-
-
                         <div class="form-group col-md-3">
                             <label for="Gender">Gender</label>
-                                        <select class="form-control" name="gender" placeholder="{{__('Gender')}}" id="create_gender" required>
-                                            <option value="" disabled selected>{{__('Select Gender')}}</option>
-                                            <option value="male" >{{__('Male')}}</option>
-                                            <option value="female">{{__('Female')}}</option>
-                                        </select>
-
+                                <select class="form-control" name="gender" placeholder="{{__('Gender')}}" id="create_gender" required>
+                                    <option value="" disabled selected>{{__('Select Gender')}}</option>
+                                    <option value="male" >{{__('Male')}}</option>
+                                    <option value="female">{{__('Female')}}</option>
+                                </select>
                         </div>
-
                         <div class="form-group col-md-3">
                             <label for="Gender">Relationship</label>
                             <input type="text" class="form-control datepicker" placeholder="{{__('Relationship')}}" name="relationship" required id="create_dob">
-
-
-                    </div>
+                        </div>
                         <div class="form-group col-md-3">
                             <label for="Gender">Email</label>
                             <input type="email" class="form-control" placeholder="{{__('Email')}}" name="email" id="create_address"  required>
-
                         </div>
                         <div class="form-group col-md-3">
-                        <label for="Gender">Occupation</label>
-                                        <input type="text" class="form-control datepicker" placeholder="{{__('Occupation')}}" name="occupation" required id="create_dob">
-                                    </div>
-
+                            <label for="Gender">Occupation</label>
+                            <input type="text" class="form-control datepicker" placeholder="{{__('Occupation')}}" name="occupation" required id="create_dob">
                         </div>
-                                   <div class="row">
+                    </div>
+                   <div class="row">
 
-                                     <div class="form-group col-md-6">
-                                       <label for="Gender">Employer</label>
+                         <div class="form-group col-md-6">
+                           <label for="Gender">Employer</label>
+                            <input type="text" class="form-control datepicker" placeholder="{{__('Employer')}}" name="employer" required id="create_dob">
+                        </div>
+                        <div class="form-group col-md-6">
+                        <label for="Gender">Address</label>
+                        <input type="text" class="form-control" placeholder="{{__('Address')}}" name="address"  required>
+                        </div>
 
-                                        <input type="text" class="form-control datepicker" placeholder="{{__('Employer')}}" name="employer" required id="create_dob">
-                                    </div>
-
-
-                            <div class="form-group col-md-6">
-                                <label for="Gender">Address</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Address')}}" name="address"  required>
-
-                               </div>
-
-                                       <button type="submit" class="btn btn-primary btn-lg btn-block">{{__('Submit')}}</button>
-                                 </div>
+                           <button type="submit" class="btn btn-primary btn-lg btn-block">{{__('Submit')}}</button>
+                    </div>
 
 
 

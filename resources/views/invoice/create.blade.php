@@ -40,7 +40,6 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="gender">Institution</label>
-
                         <select class="form-control" name="institutionId" required>
                             @foreach($institutions as $record)
                                 <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
@@ -49,7 +48,6 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="gender">Student Name</label>
-
                         <select class="form-control js-example-basic-single" name="studentId" required>
                             @foreach($students as $record)
                                 <option value="{{$record->id}}">{{$record->studentFirstName}} {{$record->studentSurname}}</option>
@@ -57,9 +55,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-4">
-
                         <label for="gender">Class</label>
-
                         <select class="form-control" name="classs" required>
                             @foreach($classes as $class)
                                 <option value="{{$class->id}}">{{$class->nameOfClass}} {{$class->code}}</option>
@@ -67,11 +63,9 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="gender">Fees</label>
-
                         <select class="form-control" name="feesId" required>
                             @foreach($fees as $record)
                                 <option value="{{$record->id}}">{{$record->narration}} - {{$record->amount}} </option>
@@ -80,7 +74,6 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="gender">Term</label>
-
                         <select class="form-control" name="termId" required>
                             @foreach($terms as $record)
                                 <option value="{{$record->id}}">{{$record->termName}} </option>
@@ -90,22 +83,17 @@
                     <div class="form-group col-md-4">
                         <label for="surname">Amount *</label>
                         <input type="number" class="form-control"   name="amount" required>
-
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
-
                         <label for="surname">Description *</label>
                         <input type="text" class="form-control"   name="description" required>
-
                     </div>
                     <div class="form-group col-md-4">
-
                         <label for="surname">Invoice Number *</label>
                         <input type="text" class="form-control"   name="invoiceNumber" required>
-
                     </div>
                     <div class="form-group col-md-4">
                         <label for="firstname">Invoice Date *</label>
