@@ -245,12 +245,14 @@ class ReceiptController extends Controller
     //print receipt
     public function printReceipt(Request $request)
     {
+
+
         $user = Auth::user()->first_name;
 
-        $receipt_url=config('app.receipt_url');
+        $receipt_url=env('RECEIPT_API');
         //$response = $this->tHttpClientWrapper->getRequest($receipt_url.'receipts/print-statement/'. $id . '/' .$user);
 
-        $url = $receipt_url.'receipts/print-statement/'. $request->studentId . '/' .$user;
+           $url = $receipt_url.'receipts/print-statement/'. $request->studentId . '/' .$user;
         $CurlConnect = curl_init();
         curl_setopt($CurlConnect, CURLOPT_URL, $url);
         curl_setopt($CurlConnect, CURLOPT_CUSTOMREQUEST,   'GET');
@@ -277,13 +279,16 @@ class ReceiptController extends Controller
     //print cpc
     public function printCPC(Request $request)
     {
+        //return $request->all();
         $user = Auth::user()->first_name;
         $institutionId = Auth::user()->institution_id;;
+        $receipt_url=env('RECEIPT_API');
+        if($request->type == 'NONE'){
+            $url = $receipt_url.'receipts/print-cpc/'. $request->startDate . '/' .$request->endDate.'/' . $institutionId .'/' .$user;
+        }else{
+            $url = $receipt_url.'receipts/print-cpc/'. $request->startDate . '/' .$request->endDate.'/' . $institutionId .'/' .$user . '/' . $request->type;
+        }
 
-        $receipt_url=config('app.receipt_url');
-        //$response = $this->tHttpClientWrapper->getRequest($receipt_url.'receipts/print-statement/'. $id . '/' .$user);
-
-        $url = $receipt_url.'receipts/print-cpc/'. $request->startDate . '/' .$request->endDate.'/' . $institutionId .'/' .$user;
         $CurlConnect = curl_init();
         curl_setopt($CurlConnect, CURLOPT_URL, $url);
         curl_setopt($CurlConnect, CURLOPT_CUSTOMREQUEST,   'GET');

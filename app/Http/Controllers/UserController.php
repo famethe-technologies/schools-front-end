@@ -68,6 +68,15 @@ class UserController extends Controller
 
         }
 
+        if($user->account_status == 'PENDING ACTIVATION'){
+            $user->account_status='ACTIVE';
+            $user->save();
+            return $this->show();
+
+        }
+
+
+
     }
 
     public function register(Request $request) {

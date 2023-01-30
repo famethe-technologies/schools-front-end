@@ -40,6 +40,7 @@ Route::get('/edit/staff/{id}',[App\Http\Controllers\StaffController::class, 'edi
 Route::post('/update/staff/{id}',[App\Http\Controllers\StaffController::class, 'update'])->name('staff.update');
 Route::get('/staff/',[App\Http\Controllers\StaffController::class, 'viewStaff'])->name('staff.getAll');
 Route::any('/staff-check/',[App\Http\Controllers\StaffController::class, 'checkIfStaffExists'])->name('checkIfStaffExists');
+Route::any('/staff-user-registration/{id}',[App\Http\Controllers\StaffController::class, 'staffUser'])->name('checkIfStaffExists');
 
 Route::get('/create/class', [App\Http\Controllers\ClassController::class, 'create'])->name('classes');;
 Route::get('/view/classes', [App\Http\Controllers\ClassController::class, 'index'])->name('classes.index');

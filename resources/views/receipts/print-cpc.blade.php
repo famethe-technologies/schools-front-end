@@ -46,7 +46,18 @@
                         <label for="firstname">End Date *</label>
                         <input type="date" class="form-control" name="endDate"  required>
                     </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="firstname">Type</label>
+                        <select class="form-control" name="type" required>
+                            <option value="NONE">NONE</option>
+                            <option value="UNIFORM">UNIFORM</option>
+                            <option value="TUITION">TUITION</option>
+                        </select>
+                    </div>
+
                 </div>
+                <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

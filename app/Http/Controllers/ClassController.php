@@ -78,6 +78,7 @@ class ClassController extends Controller
     public function edit($id)
     {
 
+       // return $id;
         $base_url=config('app.base_url');
         $institutionId = Auth::user()->institution_id;
         $staff_response = $this->tHttpClientWrapper->getRequest($base_url . '/staff/by-institution-id/'.$institutionId);

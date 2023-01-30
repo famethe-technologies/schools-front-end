@@ -143,5 +143,9 @@ class StaffController extends Controller
     public function checkIfStaffExists(Request  $request) {
         $id = $request->nationalId;
         return $result =  Staff::where('national_id',$id)->first();
-}
+    }
+
+    public function staffUser($id){
+        return 1;
+    }
 }

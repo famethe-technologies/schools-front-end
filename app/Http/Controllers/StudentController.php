@@ -42,12 +42,13 @@ class StudentController extends Controller
         $base_url=config('app.base_url');
 
         $id = Auth::user()->institution_id;
+
         $response = $this->tHttpClientWrapper->getRequest($base_url . '/student/by-institution-id/'. $id);
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
         } else {
-            $records = @json_decode(json_encode($response['dataList'], true));
+            $records = @json_decode(json_encode($response, true));
 
             return view('students.index')->with('records', $records);
 
@@ -160,7 +161,7 @@ class StudentController extends Controller
         $institutionId = Auth::user()->institution_id;
 
         $response = $this->tHttpClientWrapper->getRequest($base_url . '/student/by-id/'. $id);
-        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/by-institution-id/' . $institutionId);
+         $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/by-institution-id/' . $institutionId);
         $institutionsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'institutions/all');
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {

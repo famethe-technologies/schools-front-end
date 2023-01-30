@@ -41,8 +41,6 @@
                         <th>House Name</th>
                         <th>House Colours</th>
                         <th>Action</th>
-
-
                     </tr>
                     </thead>
                     <tbody>

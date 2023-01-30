@@ -83,8 +83,9 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+       // return $request->all();
         $id = "'" .  $request->ref . "'";
-        $staff = DB::select(DB::raw("SELECT * FROM staff where national_id=$id limit 1"));
+         $staff = DB::select(DB::raw("SELECT * FROM staff where national_id=$id limit 1"));
 
         if($staff){
             $email = User::whereEmail($request->email)->first();
@@ -108,7 +109,7 @@ class RegisterController extends Controller
             $user->institution_id = $staff[0]->institution;
             $user->account_status = 'PENDING ACTIVATION';
             $user->role = $staff[0]->position;
-            $user->password = Hash::make($request->email);
+            $user->password = Hash::make($request->password);
             $user->staff_id = $staff[0]->id;
             $user->save();
 
@@ -116,7 +117,7 @@ class RegisterController extends Controller
             return view('auth.register');
         }
 
-        session()->flash('error','Staff is already registered');
+        session()->flash('error','Not  registered as staff');
         return view('auth.register');
 
     }

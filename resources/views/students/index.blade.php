@@ -23,14 +23,9 @@
                         <th>First Name</th>
                         <th>Surname</th>
                         <th>Gender</th>
-                        <th>National ID</th>
-                        <th>Passport No</th>
-                        <th>Race</th>
-                        <th>DOB</th>
-                        <th>Institution</th>
                         <th>Class</th>
-                        <th>SportHouse</th>
-                        <th>Date Enrolled</th>
+                        <th>Grade</th>
+                        <th>Type</th>
                         <th>Action</th>
 
 
@@ -40,17 +35,12 @@
                     @foreach($records as $record)
                         <tr>
                             <td>{{$record->id}}</td>
-                            <td>{{$record->studentFirstName}}</td>
-                            <td>{{$record->studentSurname}}</td>
+                            <td>{{$record->firstname}}</td>
+                            <td>{{$record->surname}}</td>
                             <td>{{$record->gender}}</td>
-                            <td>{{$record->nationalId}}</td>
-                            <td>{{$record->passportNo}}</td>
-                            <td>{{$record->race}}</td>
-                            <td>{{$record->dob}}</td>
-                            <td>{{$record->classes->staff->institution->institutionName}}</td>
-                            <td>{{$record->classes->nameOfClass}}</td>
-                            <td>{{$record->sporthouse->houseName ?? null}}</td>
-                            <td>{{$record->dateEnrolled}}</td>
+                            <td>{{$record->classname}}</td>
+                            <td>{{$record->grade}}</td>
+                            <td>{{$record->type}}</td>
                             <td>
 
                                    <a href="{{route("students.edit", $record->id)}}" class="btn btn-primary btn-sm">
