@@ -162,13 +162,29 @@
                     <div class="form-group col-md-3">
                         <label for="surname">Class</label>
                         <select type="text" class="form-control"   name="class_id" required>
-                            <option value="{{$record->classes->id}}">{{$record->classes->nameOfClass}}</option>
+                            @if(isset($record->classes))
+                            <option value="{{$record->classes->id}}">{{$record->classes->nameOfClass | $record->classes->code}}</option>
+                            @endIf
                         @foreach($classes as $class)
-                                <option value="{{$class->id}}">{{$class->nameOfClass}}</option>
+                                <option value="{{$class->id}}">{{$class->nameOfClass .'  |  '. $class->code}}</option>
                             @endforeach
                         </select>
 
                     </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="surname">Sporting Houses</label>
+                        <select type="text" class="form-control"   name="sport_house" required>
+                            @if(isset($record->sporthouse))
+                            <option value="{{$record->sporthouse->id}}">{{$record->sporthouse->colours}}</option>
+                            @endif
+                            @foreach($sportHouse as $class)
+                                <option value="{{$class->id}}">{{$class->houseName .'  |  '. $class->colours}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+
                     <div class="form-group col-md-3">
                         <label for="gender">Institution</label>
                         <select class="form-control" name="institutionId" required>
@@ -182,6 +198,7 @@
                         <label for="firstname">Student Type</label>
                         <select class="form-control" name="studentType" required>
                             <option value="{{$record->studentType}}">{{$record->studentType}}</option>
+                            <option value="Normal">Normal</option>
                             <option value="Trustee">Trustee</option>
                             <option value="Teaching Staff">Teaching Staff</option>
                             <option value="Admin Staff">Admin Staff</option>

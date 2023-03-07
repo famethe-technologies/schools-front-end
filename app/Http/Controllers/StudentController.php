@@ -6,6 +6,7 @@ use App\Business\Services\THttpClientWrapper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
@@ -48,8 +49,7 @@ class StudentController extends Controller
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
         } else {
-            $records = @json_decode(json_encode($response, true));
-
+             $records = @json_decode(json_encode($response, true));
             return view('students.index')->with('records', $records);
 
         }
@@ -59,12 +59,19 @@ class StudentController extends Controller
     {
         $base_url=config('app.base_url');
         //$id=Session::get('school_id');
+
+        if(strtolower($request->student_national_id) == 'nill' || is_null($request->student_national_id)){
+            $nationalId = Str::uuid()->toString();
+        }else{
+           $nationalId =  $request->student_national_id;
+        }
+
         $id = Auth::user()->institution_id;
-        $data = [
+         $data = [
             'studentFirstName'=> $request->student_firstname,
             'studentSurname'=> $request->student_surname,
             'route'=> 'string',
-            'nationalId'=> $request->student_national_id,
+            'nationalId'=> $nationalId,
             'dob'=> $request->dob,
             'birthEntryNo'=> $request->birth_entry_no,
             'gender'=> $request->student_gender,
@@ -92,7 +99,7 @@ class StudentController extends Controller
             'classId'=> $request->class_id,
             'parentGuardianDTO'=> [
                                 'id'=>0,
-                                'nationalId'=> $request->national_id,
+                                'nationalId'=> $nationalId,
                                 'firstname'=> $request->firstname,
                                  'surname'=> $request->surname,
                                  'relationship'=> $request->relationship,
@@ -112,9 +119,9 @@ class StudentController extends Controller
 //return $data;
 
         $response = $this->tHttpClientWrapper->postRequest($base_url.'/student',$data);
-
-        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
-            return redirect()->back()->with(['error' => $response['message']]);
+        if(isset($response["errorId"])){
+            return redirect()->route('students.view')->with('success','Failed to register student');
+            //return redirect()->back()->with(['error' => 'Failed to register student']);
         }
         else
         {
@@ -161,7 +168,8 @@ class StudentController extends Controller
         $institutionId = Auth::user()->institution_id;
 
         $response = $this->tHttpClientWrapper->getRequest($base_url . '/student/by-id/'. $id);
-         $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/by-institution-id/' . $institutionId);
+        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/by-institution-id/' . $institutionId);
+        $sportHouses = $this->tHttpClientWrapper->getRequest($base_url . 'sporthouse/by-institution-id/' . $institutionId);
         $institutionsResponse = $this->tHttpClientWrapper->getRequest($base_url . 'institutions/all');
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
@@ -170,9 +178,11 @@ class StudentController extends Controller
             $records = @json_decode(json_encode($response['data'], true));
             $classes = @json_decode(json_encode($classesResponse['dataList'], true));
             $institutions = @json_decode(json_encode($institutionsResponse['dataList'], true));
+            $sportHouse = @json_decode(json_encode($sportHouses['dataList'], true));
 
             return view('students.edit')->with('record', $records)
                 ->with('classes', $classes)
+                ->with('sportHouse', $sportHouse)
                 ->with('institutions', $institutions);
         }
 
@@ -210,7 +220,7 @@ class StudentController extends Controller
             'allergies'=> $request->allergies,
             'specialMedicalRequirements'=> $request->special_medical_requirements,
             'sportingDescription'=> $request->sporting_description,
-            //'sportsHouseId'=> $request->sport_house,
+            'sportsHouseId'=> $request->sport_house,
             'institutionId'=>$request->institutionId,
             'classId'=> $request->class_id,
             'parentGuardianDTO'=> [
@@ -236,8 +246,9 @@ class StudentController extends Controller
 
         $response = $this->tHttpClientWrapper->patchRequest($base_url.'/student/update/' . $id,$data);
 
-        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
-            return redirect()->back()->with(['error' => $response['message']]);
+        if(isset($response["errorId"])){
+            return redirect()->route('students.view')->with('success','Failed to register student');
+            //return redirect()->back()->with(['error' => 'Failed to register student']);
         }
         else
         {

@@ -50,18 +50,17 @@
                     </div>
 
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="gender">Institution</label>
+{{--                <div class="form-row">--}}
+{{--                    <div class="form-group col-md-6">--}}
+{{--                        <label for="gender">Institution</label>--}}
 
-                        <select class="form-control" name="institutionId" required>
-                            @foreach($records as $record)
-                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                </div>
+{{--                        <select class="form-control" name="institutionId" required>--}}
+{{--                            @foreach($records as $record)--}}
+{{--                                <option value="{{$record->id}}">{{$record->institutionName}} {{$record->institutionCode}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
                     <div class="form-group">
                        <br>

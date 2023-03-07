@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Business\Services\THttpClientWrapper;
 use App\Models\Staff;
+use App\Models\AppUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class StaffController extends Controller
 {
@@ -96,7 +97,9 @@ class StaffController extends Controller
     public function update(Request $request,$id)
     {
 
-        $id = Auth::user()->institution_id;
+
+
+        $insti = Auth::user()->institution_id;
         $data = [
             'id'=>$id,
             'firstname'=>$request->firstname,
@@ -104,7 +107,7 @@ class StaffController extends Controller
             'gender'=>$request->gender,
             'position'=>$request->position,
             'nationalId'=>$request->national_id,
-            'institutionId'=>$id,
+            'institutionId'=>$insti,
             'createdBy'=>Auth::user()->first_name,
             'lastModifiedBy'=> Auth::user()->first_name,
 
@@ -113,14 +116,16 @@ class StaffController extends Controller
         $base_url=config('app.base_url');
 
         $response = $this->tHttpClientWrapper->patchRequest($base_url . '/staff/update/'.$id,$data);
-
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
         } else {
-            //$record = @json_decode(json_encode($response['data'], true));
-            return redirect()->route("staff.index")->with('success','Staff created updated!!');
-            //return redirect('/view/staff/'.Session::get('school_id'))->with('success','Staff Member Record Updated Successfully!!');
+             $user =  AppUsers::where('staff_id',$id)->first();
+            if(isset($user)){
+                $user->role=strtolower($request->position);
+                $user->save();
 
+            }
+            return redirect()->route("staff.index")->with('success','Staff created updated!!');
         }
     }
 

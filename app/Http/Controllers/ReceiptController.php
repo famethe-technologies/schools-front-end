@@ -47,11 +47,11 @@ class ReceiptController extends Controller
         else
         {
            // $paymentMethods= @json_decode(json_encode($paymentMethodsResponse['dataList'],true));
-            $students= @json_decode(json_encode($studentsResponse['dataList'],true));
+           // $students= @json_decode(json_encode($studentsResponse['dataList'],true));
 
 
             return view('receipts.create')
-                ->with('students', $students);
+                ->with('students', $studentsResponse);
 
         }
     }

@@ -222,6 +222,7 @@
                     <div class="form-group col-md-4">
                         <label for="firstname">Student Type</label>
                         <select class="form-control" name="studentType" required>
+                            <option value="Normal">Normal</option>
                             <option value="Trustee">Trustee</option>
                             <option value="Teaching Staff">Teaching Staff</option>
                             <option value="Admin Staff">Admin Staff</option>

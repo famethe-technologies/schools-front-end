@@ -59,7 +59,21 @@
                 </div>
                     <div class="form-group col-md-6">
                         <label for="position">Position</label>
-                        <input type="text" class="form-control" name="position" value="{{$record->position}}">
+                        <select class="form-control" name="position" required>
+                            <option value="{{$record->position}}">{{$record->position}}</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="bursar">Bursar</option>
+                            <option value="superadmin">Super Admin</option>
+                            <option value="it-support">IT Support</option>
+                            <option value="Senior Teacher">Senior Teacher</option>
+                            <option value="Swimming Coach">Swimming Coach</option>
+                            <option value="Bursar">Bursar</option>
+                            <option value="Sports Teacher">Sports Teacher</option>
+                            <option value="Administrator Clerk">Administrator Clerk</option>
+                            <option value="Ancilary Staff">Ancillary Staff</option>
+                            <option value="Boarding Master">Boarding Master</option>
+                            <option value="Boarding Matron">Boarding Matron</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-row">

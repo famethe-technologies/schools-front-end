@@ -39,7 +39,7 @@ class ClassController extends Controller
 
         $base_url=config('app.base_url');
         $id = Auth::user()->institution_id;
-        $response = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id/' . $id);
+         $response = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id/' . $id);
 
         if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
             return redirect()->back()->with(['error' => $response['message']]);
@@ -65,8 +65,8 @@ class ClassController extends Controller
         ];
         $response = $this->tHttpClientWrapper->postRequest($base_url.'/classes',$data);
 
-        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
-            return redirect()->back()->with(['error' => $response['message']]);
+        if(isset($response["errorId"] )){
+            return redirect()->route('classes')->with('success','Class with code name Test already taken');
         }
         else
         {

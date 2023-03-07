@@ -43,7 +43,7 @@
 
                         <select class="form-control js-example-basic-single" name="studentId" required>
                             @foreach($students as $record)
-                                <option value="{{$record->id}}">{{$record->studentFirstName}} {{$record->studentSurname}}</option>
+                                <option value="{{$record['id']}}">{{$record['firstname']}} {{$record['surname']}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -61,19 +61,17 @@
                             <option value="TUITION">TUITION</option>
                             <option value="UNIFORM">UNIFORM</option>
                             <option value="LEVY">LEVY</option>
+                            <option value="EXAM FEE">EXAM FEE</option>
+                            <option value="TRANSPORT">TRANSPORT</option>
+                            <option value="WINTER BEVERAGES">WINTER BEVERAGES</option>
+                            <option value="BOARDING FEE">BOARDING FEE</option>
+                            <option value="ICT LEVY">ICT LEVY</option>
+                            <option value="HOLIDAY LESSONS">HOLIDAY LESSONS</option>
+                            <option value="CALA LEVY">CALA LEVY</option>
                             <option value="OTHER">OTHER</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="gender">Payment Method</label>
-                        <select class="form-control" name="methodOfPayment" required>
-                            <option value="USD-Cash">USD-Cash</option>
-                            <option value="Nostro">Nostro</option>
-                            <option value="Eco-Cash">Eco-Cash</option>
-                            <option value="Bond-Cash">Bond-Cash</option>
-                            <option value="Rtgs">Rtgs</option>
-                        </select>
-                    </div>
+
                     <div class="form-group col-md-4">
                         <label for="surname">Receipt No *</label>
                         <input type="text" class="form-control"   name="receiptNumber" required>
