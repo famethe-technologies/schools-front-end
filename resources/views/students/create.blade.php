@@ -30,6 +30,7 @@
         </div><!-- /.container-fluid -->
     </div>
 @endsection
+
 @section('content')
 
     <div class="card shadow mb-4">
@@ -154,6 +155,7 @@
 
                 </div>
                 <div class="form-row">
+
                     <div class="form-group col-md-3">
                         <label for="firstname">Student Email</label>
                         <input type="text" class="form-control" name="student_email" required>

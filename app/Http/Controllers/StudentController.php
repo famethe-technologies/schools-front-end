@@ -60,7 +60,7 @@ class StudentController extends Controller
         $base_url=config('app.base_url');
         //$id=Session::get('school_id');
 
-        if(strtolower($request->student_national_id) == 'nill' || is_null($request->student_national_id)){
+        if(strtolower($request->student_national_id) == 'nill'){
             $nationalId = Str::uuid()->toString();
         }else{
            $nationalId =  $request->student_national_id;
@@ -116,11 +116,11 @@ class StudentController extends Controller
             'lastModifiedBy'=> Auth::user()->first_name,
 
         ];
-//return $data;
+
 
         $response = $this->tHttpClientWrapper->postRequest($base_url.'/student',$data);
         if(isset($response["errorId"])){
-            return redirect()->route('students.view')->with('success','Failed to register student');
+            return redirect()->route('students.view')->with('failed',$response['errors'][0]['message']);
             //return redirect()->back()->with(['error' => 'Failed to register student']);
         }
         else
@@ -193,11 +193,16 @@ class StudentController extends Controller
     {
         $base_url=config('app.base_url');
 
+        if(strtolower($request->student_national_id) == 'nill' || is_null($request->student_national_id)){
+            $nationalId = Str::uuid()->toString();
+        }else{
+            $nationalId =  $request->student_national_id;
+        }
         $data = [
             'studentFirstName'=> $request->student_firstname,
             'studentSurname'=> $request->student_surname,
             'route'=> $request->route,
-            'nationalId'=> $request->student_national_id,
+            'nationalId'=> $nationalId,
             'dob'=> $request->dob,
             'birthEntryNo'=> $request->birth_entry_no,
             'gender'=> $request->student_gender,
@@ -225,7 +230,7 @@ class StudentController extends Controller
             'classId'=> $request->class_id,
             'parentGuardianDTO'=> [
                 'id'=>$request->parent_guardian_id,
-                'nationalId'=> $request->national_id,
+                'nationalId'=> $nationalId,
                 'firstname'=> $request->firstname,
                 'surname'=> $request->surname,
                 'relationship'=> $request->relationship,
@@ -247,7 +252,7 @@ class StudentController extends Controller
         $response = $this->tHttpClientWrapper->patchRequest($base_url.'/student/update/' . $id,$data);
 
         if(isset($response["errorId"])){
-            return redirect()->route('students.view')->with('success','Failed to register student');
+            return redirect()->route('students.view')->with('failed',$response['errors'][0]['message']);
             //return redirect()->back()->with(['error' => 'Failed to register student']);
         }
         else

@@ -23,6 +23,7 @@
                         <th>First Name</th>
                         <th>Surname</th>
                         <th>Gender</th>
+                        <th>National-ID</th>
                         <th>Class</th>
                         <th>Grade</th>
                         <th>Type</th>
@@ -38,6 +39,7 @@
                             <td>{{$record->firstname}}</td>
                             <td>{{$record->surname}}</td>
                             <td>{{$record->gender}}</td>
+                            <td>{{$record->identification}}</td>
                             <td>{{$record->classname}}</td>
                             <td>{{$record->grade}}</td>
                             <td>{{$record->type}}</td>

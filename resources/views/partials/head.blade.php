@@ -18,7 +18,7 @@
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="{{url('img/ms-icon-144x144.png')}}">
 <meta name="theme-color" content="#ffffff">
-<!-- Tell the browser to be responsive to screen width -->
+<!-- Tell the browser to be responfsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{url('plugins/fontawesome-free/css/all.min.css')}}">
