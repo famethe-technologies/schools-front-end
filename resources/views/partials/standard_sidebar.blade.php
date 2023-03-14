@@ -723,6 +723,16 @@
                             </p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{route("invoices.classPage")}}" class="nav-link" id="tests">
+                            {{--                        <i class="nav-icon fas fa-home"></i>--}}
+                            <p>
+                                {{__('Generate Class Invoices')}}
+                            </p>
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a href="{{route("invoices.termPage")}}" class="nav-link" id="tests">
                             {{--                        <i class="nav-icon fas fa-home"></i>--}}

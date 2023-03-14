@@ -113,6 +113,7 @@ Route::get('/school/invoice/create', [InvoiceController::class, 'getSchoolInvoic
 Route::post('/school/invoice/report', [InvoiceController::class, 'getSchoolInvoice'])->name('invoices.school');
 Route::get('/term/invoice/create', [InvoiceController::class, 'getTermInvoicePage'])->name('invoices.termPage');
 Route::post('/term/invoice/report', [InvoiceController::class, 'getTermInvoice'])->name('invoices.term');
+Route::post('/generate-class-invoice', [InvoiceController::class, 'generateClassInvoice'])->name('generateClassInvoice');
 
 
 

@@ -31,29 +31,20 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Class Invoices</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Create School Invoice</h6>
         </div>
 
         <div class="card-body">
-            <form action="{{route("generateClassInvoice")}}" method="post" enctype="multipart/form">
+            <form action="{{route("invoices.school")}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="gender">Class</label>
-                        <select class="form-control" name="classId" required>
-                            @foreach($classes as $class)
-                                <option value="{{$class->id}}">{{$class->nameOfClass}} {{$class->code}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <label for="gender">Institution</label>
 
-                    <div class="form-group col-md-6">
-                        <label for="gender">Term</label>
-                    <select class="form-control" name="termId" required>
-                        <option value="1">1 </option>
-                        <option value="2">2 </option>
-                        <option value="3">3 </option>
-                    </select>
+                        <select class="form-control" name="institutionId" required>
+                                <option value="{{$id}}">{{$institutionName}}</option>
+
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
