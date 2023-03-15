@@ -46,6 +46,7 @@ Route::get('/view/classes', [App\Http\Controllers\ClassController::class, 'index
 Route::post('/add/class', [App\Http\Controllers\ClassController::class, 'store']);
 Route::get('/edit/class/{id}',[App\Http\Controllers\ClassController::class, 'edit'])->name('classes.edit');
 Route::post('/update/class/{id}',[App\Http\Controllers\ClassController::class, 'update'])->name('classes.update');
+Route::get('/view-by-class/{id}',[App\Http\Controllers\ClassController::class, 'viewByClass']);
 
 Route::get('/create/sport-house', [App\Http\Controllers\SportsController::class, 'create'])->name('houses');;
 Route::get('/view/sport-houses', [App\Http\Controllers\SportsController::class, 'index'])->name('houses.index');

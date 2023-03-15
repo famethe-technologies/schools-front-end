@@ -124,4 +124,21 @@ class ClassController extends Controller
 
         }
     }
+
+    public function viewByClass($id)
+    {
+        $base_url=config('app.base_url');
+
+        // $id = Auth::user()->institution_id;
+
+         $response = $this->tHttpClientWrapper->getRequest($base_url . '/student/by-class-id/'. $id);
+
+        if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
+            return redirect()->back()->with(['error' => $response['message']]);
+        } else {
+            $records = @json_decode(json_encode($response, true));
+            return view('students.index')->with('records', $records);
+
+        }
+    }
 }
