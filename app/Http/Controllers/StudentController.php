@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Business\Services\THttpClientWrapper;
+use App\Models\Fees;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -259,6 +260,34 @@ class StudentController extends Controller
         {
             return redirect()->route('students.view')->with('success','Student Updated Successfully!!');
         }
+    }
+
+    public function singleInvoiceView($id){
+
+        $ids = Auth::user()->institution_id;
+        $fees = Fees::where('institution_id', $ids)->get();
+        return view('students.single-invoice')->with([
+           'id' => $id,
+            'fees' => $fees
+        ]);
+    }
+
+    public function generateSingleInvoice(Request $request){
+        $schools = Auth::user()->institution_id;
+        $user= Auth::user()->email;
+        $url = env('RECEIPT_API') . "invoices/generate-for-student/$schools/$request->feesId/$request->termId/$user/$request->studentId";
+        $response  = $this->tHttpClientWrapper->getRequest($url);
+        if(isset($response["status"])){
+            return redirect()->route('students.view')->with('failed',$response['message']);
+        }else{
+            return redirect()->route('students.view')->with('success','Student Added Successfully!!');
+        }
+
+
+
+//        return view('students.single-invoice')->with([
+//           'id' => $id
+//        ]);
     }
 
 

@@ -61,6 +61,8 @@ Route::post('/update/student/{id}', [App\Http\Controllers\StudentController::cla
 Route::get('/view-balance/{id}', [App\Http\Controllers\StudentController::class, 'viewBalance']);
 Route::get('/view-school-balance/{id}', [App\Http\Controllers\StudentController::class, 'viewSchoolBalance']);
 Route::post('/add/student', [App\Http\Controllers\StudentController::class, 'store']);
+Route::get('/single-invoice-view/{id}', [App\Http\Controllers\StudentController::class, 'singleInvoiceView']);
+Route::post('/single-invoice-view', [App\Http\Controllers\StudentController::class, 'generateSingleInvoice'])->name('generateSingleInvoice');
 
 
 //Route::get('/view/students', [App\Http\Controllers\StudentController::class, 'index']);

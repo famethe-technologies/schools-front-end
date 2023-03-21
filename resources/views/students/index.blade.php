@@ -46,11 +46,14 @@
                             <td>
 
                                    <a href="{{route("students.edit", $record->id)}}" class="btn btn-primary btn-sm">
-                                      <i class="fa fa-edit"></i>
+                                      <i>View</i>
                                    </a>
 
-                                <a href="/view-balance/{{ $record->id }}" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-money-bill"></i>
+                                <a href="/view-balance/{{ $record->id }}" class="btn btn-success btn-sm">
+                                    <i>Balance</i>
+                                </a>
+                                <a href="/single-invoice-view/{{ $record->id }}" class="btn btn-danger btn-sm">
+                                    <i>Invoice</i>
                                 </a>
 
 {{--                                     <form method="POST" action="" class="d-inline">--}}

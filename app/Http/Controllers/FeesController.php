@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fees;
 use Illuminate\Http\Request;
 use App\Business\Services\THttpClientWrapper;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class FeesController extends Controller
@@ -78,9 +80,7 @@ class FeesController extends Controller
             'createdBy' => $id
             ];
 
-
          $response = $this->tHttpClientWrapper->postRequest($institution_url.'fees-structures/save',$data);
-
         return redirect()->route('fees.index')->with('success','Fees Added Successfully!!');
 
     }
@@ -93,7 +93,7 @@ class FeesController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -104,7 +104,8 @@ class FeesController extends Controller
      */
     public function edit($id)
     {
-        //
+         $fees = Fees::find($id);
+        return view('fees.update-fees')->with('records', $fees);
     }
 
     /**
@@ -116,7 +117,17 @@ class FeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //return $request->all();
+        $fees = Fees::find($id);
+        $fees->narration=$request->narration;
+        $fees->term_id=$request->termId;
+        $fees->amount=$request->amount;
+        $fees->currency=$request->currency;
+        $fees->status=$request->status;
+        $fees->save();
+        return redirect()->route('fees.index')->with('success','Fees edited Successfully!!');
+
+
     }
 
     /**
