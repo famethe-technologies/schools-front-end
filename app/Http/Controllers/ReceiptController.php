@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
+use Couchbase\QueryException;
+use Exception;
 use Illuminate\Http\Request;
 use App\Business\Services\THttpClientWrapper;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReceiptController extends Controller
 {
@@ -303,7 +307,57 @@ class ReceiptController extends Controller
         header('Content-Length: '.strlen($Result));
         //echo $Result;
         echo "<script>window.open('".$Result."', '_blank')</script>";
+    }
 
+    public function bulkView(){
+        return view('receipts.bulk');
+    }
+
+
+
+    public function postBulkReceipts(Request $request){
+        ini_set('max_execution_time', '60000');
+
+         $request->all();
+
+
+        $file     = $request->file('files');
+       // $fileName = $file->getClientOriginalName();
+         $contents = $file->getContent();
+
+
+        try {
+            $read = fopen($file, "r");
+            while (($fileopen = fgetcsv($read, 1000, ",")) !== false) {
+                $studentId = $fileopen[0];
+                $amount = $fileopen[2];
+                $reference = $fileopen[3];
+
+                $arr =[];
+                if($amount > 5){
+                    
+                    return redirect()->back()->with(['error' => 'Amount cannot be bulk receipted']);
+                }
+
+                $studentId= Student::where('id', $studentId)->first();
+                if(!isset($studentId)){
+                    return redirect()->back()->with(['error' => "Student with ID $studentId not found"]);
+                }
+
+                try {
+                    DB::beginTransaction();
+
+
+                }catch(QueryException $e){
+                    DB::rollBack();
+                }
+
+            }
+
+        }catch (Exception $exception){
+
+
+        }
     }
 
 

@@ -47,6 +47,8 @@ Route::post('/add/class', [App\Http\Controllers\ClassController::class, 'store']
 Route::get('/edit/class/{id}',[App\Http\Controllers\ClassController::class, 'edit'])->name('classes.edit');
 Route::post('/update/class/{id}',[App\Http\Controllers\ClassController::class, 'update'])->name('classes.update');
 Route::get('/view-by-class/{id}',[App\Http\Controllers\ClassController::class, 'viewByClass']);
+Route::get('/class-change-status/{id}',[App\Http\Controllers\ClassController::class, 'destroy']);
+Route::get('/class-view-all',[App\Http\Controllers\ClassController::class, 'viewAllClass'])->name('viewAllClass');
 
 Route::get('/create/sport-house', [App\Http\Controllers\SportsController::class, 'create'])->name('houses');;
 Route::get('/view/sport-houses', [App\Http\Controllers\SportsController::class, 'index'])->name('houses.index');
@@ -92,6 +94,7 @@ Route::any('/delete/institutions/{id}', [App\Http\Controllers\InstitutionControl
 Route::resource('fees', FeesController::class);
 Route::post('/fees/update/{id}', [FeesController::class, 'update'])->name('fees.update');
 Route::any('/fees/delete/{id}', [FeesController::class, 'destroy'])->name('fees.destroy');
+Route::any('/fees-configs/{id}', [FeesController::class, 'classFees']);
 
 /**********************************Receipt***********************/
 Route::resource('receipts', ReceiptController::class);
@@ -105,6 +108,8 @@ Route::get('/receipts/print/page', [ReceiptController::class, 'getReceiptPage'])
 Route::post('/receipts/print/report', [ReceiptController::class, 'printReceipt'])->name('receipts.print');
 Route::get('/cpc/print/page', [ReceiptController::class, 'getCPCPage'])->name('receipts.cpcPage');
 Route::post('/cpc/print/report', [ReceiptController::class, 'printCPC'])->name('receipts.printCPC');
+Route::get('/bulk-receipting', [ReceiptController::class, 'bulkView'])->name('receipts.create-bulk');
+Route::post('/bulk-receipting', [ReceiptController::class, 'postBulkReceipts'])->name('receipts.bulk');
 
 /******************************Invoice****************************************/
 Route::resource('invoices', InvoiceController::class);

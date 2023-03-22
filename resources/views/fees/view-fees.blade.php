@@ -37,7 +37,12 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Fees</h6>
+            <br>
+            <div>
+                <a href="{{route('fees.create')}}">Create Class Profile</a>
+            </div>
         </div>
+
 
         <div class="card-body">
             <div class="table-responsive">
@@ -60,7 +65,7 @@
                             <td>{{$record->id}}</td>
                             <td>{{$record->amount}}</td>
                             <td>{{$record->narration}}</td>
-                            <td>{{$record->termId}}</td>
+                            <td>{{$record->term_id}}</td>
                             <td>{{$record->status}}</td>
                             <td>
 

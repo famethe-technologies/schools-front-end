@@ -28,8 +28,11 @@ class FeesController extends Controller
         //
         $institution_url=config('app.institution_url');
 
+
+
         $id = Auth::user()->institution_id;
-         $response = $this->tHttpClientWrapper->getRequest($institution_url.'/fees-structures/by-school-id/'. $id);
+         $institution_url.'/fees-structures/by-school-id/'. $id;
+         $response = $this->tHttpClientWrapper->getRequest($institution_url.'fees-structures/by-school-id/'. $id);
 
             $records= @json_decode(json_encode($response,true));
             return view('fees.view-fees')->with('records',$records);
@@ -42,19 +45,21 @@ class FeesController extends Controller
      */
     public function create()
     {
-        $base_url=config('app.base_url');
-        $id = Auth::user()->institution_id;
-        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id/' . $id);
-        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
-            return redirect()->back()->with(['error' => $response['message']]);
-        }
-        else
-        {
-            $classes= @json_decode(json_encode($classesResponse['dataList'],true));
-            return view('fees.create')
-                ->with('classes', $classes);
 
-        }
+        return view('fees.create');
+//        $base_url=config('app.base_url');
+//        $id = Auth::user()->institution_id;
+//        $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id/' . $id);
+//        if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
+//            return redirect()->back()->with(['error' => $response['message']]);
+//        }
+//        else
+//        {
+//            $classes= @json_decode(json_encode($classesResponse['dataList'],true));
+//            return view('fees.create')
+//                ->with('classes', $classes);
+//
+//        }
     }
 
     /**
@@ -67,12 +72,11 @@ class FeesController extends Controller
     {
         //
         $institution_url=config('app.institution_url');
-        $id = Auth::user()->id;
+        $id = Auth::user()->institution_id;
         $data = [
-
-            'classId' => $request->classId,
+            'classId' => session('class_id'),
             'institutionId' => $id,
-            'termId' => $request->termId,
+            'termId' => intval($request->termId),
             'narration' => $request->narration,
             'status' => $request->status,
             'amount' => $request->amount,
@@ -80,8 +84,9 @@ class FeesController extends Controller
             'createdBy' => $id
             ];
 
-         $response = $this->tHttpClientWrapper->postRequest($institution_url.'fees-structures/save',$data);
-        return redirect()->route('fees.index')->with('success','Fees Added Successfully!!');
+          $response = $this->tHttpClientWrapper->postRequest($institution_url.'fees-structures/save',$data);
+         return $this->classFees( session('class_id'))->with('success','Fees Added Successfully!!');
+       // return redirect()->route('fees.index')->with('success','Fees Added Successfully!!');
 
     }
 
@@ -118,13 +123,14 @@ class FeesController extends Controller
     public function update(Request $request, $id)
     {
         //return $request->all();
-        $fees = Fees::find($id);
+       $fees = Fees::find($id);
         $fees->narration=$request->narration;
         $fees->term_id=$request->termId;
         $fees->amount=$request->amount;
         $fees->currency=$request->currency;
         $fees->status=$request->status;
         $fees->save();
+        return $this->classFees($fees->class_id)->with('success','Fees Added Successfully!!');
         return redirect()->route('fees.index')->with('success','Fees edited Successfully!!');
 
 
@@ -139,5 +145,11 @@ class FeesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function classFees($id){
+        session(['class_id'=> $id]);
+         $fees = Fees::where('class_id', $id)->get();
+        return view('fees.view-fees')->with('records',$fees);
     }
 }

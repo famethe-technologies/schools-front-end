@@ -85,8 +85,6 @@
                         </a>
                     </li>
 
-
-
                     <li class="nav-item">
                         <a href="{{route("fees.index")}}" class="nav-link" id="tests">
                             <i class="nav-icon fas fa-eye"></i>
@@ -106,14 +104,32 @@
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route("receipts.create")}}" class="nav-link" id="branches">
-                            <i class="fas fa-plus nav-icon"></i>
-                            <p>{{__('Add')}}</p>
-                        </a>
-                    </li>
-                </ul>
+            <li class="nav-item">
+                <a href="{{route("receipts.create")}}" class="nav-link" id="branches">
+                    <i class="fas fa-plus nav-icon"></i>
+                    <p>{{__('Add')}}</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{route("receipts.create-bulk")}}" class="nav-link" id="branches">
+                    <i class="fas fa-plus nav-icon"></i>
+                    <p>{{__('Bulk Receipting')}}</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{route("receipts.printPage")}}" class="nav-link" id="branches">
+                    <i class="fas fa-print nav-icon"></i>
+                    <p>{{__('Print Receipts')}}</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route("receipts.cpcPage")}}" class="nav-link" id="branches">
+                    <i class="fas fa-print nav-icon"></i>
+                    <p>{{__('Print CPC')}}</p>
+                </a>
+            </li>
 
             <li class="nav-item has-treeview" id="prices">
                 <a href="#" class="nav-link" id="prices_link">
@@ -544,7 +560,16 @@
                         <a href="{{route('classes.index')}}" class="nav-link" id="tests">
                             <i class="nav-icon fas fa-eye"></i>
                             <p>
-                                {{__('View')}}
+                                {{__('View Active Classes')}}
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('viewAllClass')}}" class="nav-link" id="tests">
+                            <i class="nav-icon fas fa-clipboard"></i>
+                            <p>
+                                {{__('View All Classes')}}
                             </p>
                         </a>
                     </li>
@@ -591,13 +616,20 @@
                 </a>
                 <ul class="nav nav-treeview">
 
-
                     <li class="nav-item">
                         <a href="{{route("receipts.create")}}" class="nav-link" id="branches">
                             <i class="fas fa-plus nav-icon"></i>
                             <p>{{__('Add')}}</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{route("receipts.create-bulk")}}" class="nav-link" id="branches">
+                            <i class="fas fa-plus nav-icon"></i>
+                            <p>{{__('Bulk Receipting')}}</p>
+                        </a>
+                    </li>
+
                         <li class="nav-item">
                             <a href="{{route("receipts.printPage")}}" class="nav-link" id="branches">
                                 <i class="fas fa-print nav-icon"></i>

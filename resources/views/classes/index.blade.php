@@ -63,19 +63,21 @@
                             <td>
 
                                    <a href="/edit/class/{{$record->id}}" class="btn btn-primary btn-sm">
-                                      <i class="fa fa-edit"></i>
+                                      <i>Edit</i>
                                    </a>
 
                                 <a href="/view-by-class/{{$record->id}}" class="btn btn-info btn-sm">
-                                    <i class="fa fa-edit"></i>
+                                    <i>View Class</i>
                                 </a>
 
-                                     <form method="POST" action="" class="d-inline">
-                                         <input type="hidden" name="_method" value="delete">
-                                         <button type="submit" class="btn btn-danger btn-sm delete_branch">
-                                             <i class="fa fa-trash"></i>
-                                                  </button>
-                                                  </form>
+                                <a href="/class-change-status/{{$record->id}}" class="btn btn-success btn-sm">
+                                    <i>Change Status</i>
+                                </a>
+
+                                <a href="/fees-configs/{{$record->id}}" class="btn btn-danger btn-sm">
+                                    <i>Class Fees</i>
+                                </a>
+
                               </td>
                         </tr>
                     @endforeach

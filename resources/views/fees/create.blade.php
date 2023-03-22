@@ -38,22 +38,10 @@
             <form action="{{route("fees.store")}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
-                        <div class="form-group col-md-8">
-                            <label for="status">Narration</label>
-                            <select class="form-control" name="narration" required>
-                                <option value="TUITION">TUITION</option>
-                                <option value="UNIFORM">UNIFORM</option>
-                                <option value="LEVY">LEVY</option>
-                                <option value="EXAM FEE">EXAM FEE</option>
-                                <option value="TRANSPORT">TRANSPORT</option>
-                                <option value="WINTER BEVERAGES">WINTER BEVERAGES</option>
-                                <option value="BOARDING FEE">BOARDING FEE</option>
-                                <option value="ICT LEVY">ICT LEVY</option>
-                                <option value="HOLIDAY LESSONS">HOLIDAY LESSONS</option>
-                                <option value="CALA LEVY">CALA LEVY</option>
-                                <option value="OTHER">OTHER</option>
-                            </select>
-                        </div>
+                    <div class="form-group col-md-4">
+                        <label for="surname">Fees *</label>
+                        <input type="text" class="form-control"   name="narration" required>
+                    </div>
 
                 </div>
 
@@ -70,10 +58,8 @@
                     </div>
 
                     <div class="form-group col-md-4">
-
                         <label for="surname">Amount *</label>
                         <input type="number" class="form-control"   name="amount" required>
-
                     </div>
 
                     <div class="form-group col-md-4">

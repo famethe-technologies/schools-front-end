@@ -36,7 +36,6 @@ class ClassController extends Controller
 
     public function index()
     {
-
         $base_url=config('app.base_url');
         $id = Auth::user()->institution_id;
          $response = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id/' . $id);
@@ -50,6 +49,23 @@ class ClassController extends Controller
 
         }
     }
+
+    public function viewAllClass()
+    {
+        $base_url=config('app.base_url');
+        $id = Auth::user()->institution_id;
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id-all/' . $id);
+
+        if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
+            return redirect()->back()->with(['error' => $response['message']]);
+        } else {
+            $records = @json_decode(json_encode($response['dataList'], true));
+
+            return view('classes.index')->with('records', $records);
+
+        }
+    }
+
     public function store(Request $request)
     {
         $base_url=config('app.base_url');
@@ -74,7 +90,6 @@ class ClassController extends Controller
         }
     }
 
-
     public function edit($id)
     {
 
@@ -96,7 +111,6 @@ class ClassController extends Controller
         }
 
     }
-
 
     public function update(Request $request,$id)
     {
@@ -141,4 +155,26 @@ class ClassController extends Controller
 
         }
     }
+
+    public function destroy($id)
+    {
+        $base_url=config('app.base_url');
+
+        // $id = Auth::user()->institution_id;
+
+         $response = $this->tHttpClientWrapper->deleteRequest($base_url . '/classes/delete-by-id/'. $id);
+        return redirect()->back()->with(['success' => 'Class deactivation successful']);
+//         $records = @json_decode(json_encode($response, true));
+//        return view('students.index')->with('records', $records);
+//
+//        if (isset($response["statusCode"]) && $response["statusCode"] != "200") {
+//            return redirect()->back()->with(['error' => $response['message']]);
+//        } else {
+//            $records = @json_decode(json_encode($response, true));
+//            return view('students.index')->with('records', $records);
+//
+//        }
+    }
+
+
 }

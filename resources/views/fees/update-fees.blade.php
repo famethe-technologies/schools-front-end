@@ -40,20 +40,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="status">Narration</label>
-                        <select class="form-control" name="narration" required>
-                            <option value="{{ $records->narration }}">{{ $records->narration }}</option>
-                            <option value="TUITION">TUITION</option>
-                            <option value="UNIFORM">UNIFORM</option>
-                            <option value="LEVY">LEVY</option>
-                            <option value="EXAM FEE">EXAM FEE</option>
-                            <option value="TRANSPORT">TRANSPORT</option>
-                            <option value="WINTER BEVERAGES">WINTER BEVERAGES</option>
-                            <option value="BOARDING FEE">BOARDING FEE</option>
-                            <option value="ICT LEVY">ICT LEVY</option>
-                            <option value="HOLIDAY LESSONS">HOLIDAY LESSONS</option>
-                            <option value="CALA LEVY">CALA LEVY</option>
-                            <option value="OTHER">OTHER</option>
-                        </select>
+                        <input type="text" class="form-control"   name="narration" value="{{ $records->narration }}" required>
                     </div>
 
                 </div>
