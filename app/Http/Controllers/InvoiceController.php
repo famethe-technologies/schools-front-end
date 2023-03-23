@@ -275,7 +275,7 @@ class InvoiceController extends Controller
     {
         $id = Auth::user()->institution_id;
         $institution_url=config('app.institution_url');
-        $response = $this->tHttpClientWrapper->getRequest($institution_url.'invoices/generate-for-class/'. $request->classId. '/' . $request->termId .'/' . Auth::user()->id. '/' . $id);
+      return  $response = $this->tHttpClientWrapper->getRequest($institution_url.'invoices/generate-for-class/'. session('class_id'). '/' . $request->termId .'/' . Auth::user()->id. '/' . $id);
         if(isset($response["status"] ) && $response["status"] != "200"){
             session()->flash('error',$response['message']);
             //return view('auth.login');

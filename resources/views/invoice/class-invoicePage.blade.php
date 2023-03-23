@@ -38,14 +38,14 @@
             <form action="{{route("generateClassInvoice")}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="gender">Class</label>
-                        <select class="form-control" name="classId" required>
-                            @foreach($classes as $class)
-                                <option value="{{$class->id}}">{{$class->nameOfClass}} {{$class->code}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+{{--                    <div class="form-group col-md-6">--}}
+{{--                        <label for="gender">Class</label>--}}
+{{--                        <select class="form-control" name="classId" required>--}}
+{{--                            @foreach($classes as $class)--}}
+{{--                                <option value="{{$class->id}}">{{$class->nameOfClass}} {{$class->code}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
 
                     <div class="form-group col-md-6">
                         <label for="gender">Term</label>

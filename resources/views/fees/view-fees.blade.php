@@ -40,6 +40,8 @@
             <br>
             <div>
                 <a href="{{route('fees.create')}}">Create Class Profile</a>
+                ||
+                <a href="/class/invoice">Generate Invoice</a>
             </div>
         </div>
 
