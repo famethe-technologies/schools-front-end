@@ -227,10 +227,13 @@
                             <option value="Normal">Normal</option>
                             <option value="Trustee">Trustee</option>
                             <option value="Teaching Staff">Teaching Staff</option>
-                            <option value="Admin Staff">Admin Staff</option>
-                            <option value="Ancillary Staff">Ancillary Staff</option>
-                            <option value="Full Scholarship">Full Scholarship</option>
-                            <option value="Partial Scholarship">Partial Scholarship</option>
+                            <option value="Non-Teaching Staff">Non-Teaching Staff</option>
+                            <option value="Scholarship 100">Scholarship 100</option>
+                            <option value="Scholarship 50">Scholarship 50</option>
+                            <option value="Scholarship 25">Scholarship 25</option>
+                            <option value="Scholarship 25">Scholarship 25</option>
+                            <option value="Scholarship 10">Scholarship 10</option>
+                            <option value="Scholarship 5">Scholarship 5</option>
                         </select>
                     </div>
 {{--                    <div class="form-group col-md-6">--}}
