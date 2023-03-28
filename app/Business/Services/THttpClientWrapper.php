@@ -53,7 +53,10 @@ class THttpClientWrapper{
             CURLOPT_CUSTOMREQUEST       => 'POST',
             CURLOPT_POSTFIELDS          =>  json_encode($data),
             CURLOPT_HTTPHEADER          => array(
-                            'Content-Type: application/json'
+                            'Content-Type: application/json',
+                            'accept: */*'
+
+
             ),
         ));
 

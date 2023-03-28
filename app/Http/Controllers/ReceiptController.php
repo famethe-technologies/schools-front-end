@@ -71,13 +71,15 @@ class ReceiptController extends Controller
     {
         $id = Auth::user()->institution_id;
         $institution_url=config('app.institution_url');
+
+
          $data = [
             'amount' => $request->amount,
-            'currency' => $request->currency,
+            'currency' => "USD",
             'receiptDate' => $request->receiptDate . 'T00:00:58.573Z',
             'description' => $request->description,
             'institutionId' => $id,
-            'methodOfPayment' => $request->methodOfPayment,
+            'methodOfPayment' => "CASH",
             'receiptNumber' => $request->receiptNumber,
             'studentId' => $request->studentId,
             'createdBy' => Auth::user()->email
@@ -85,13 +87,15 @@ class ReceiptController extends Controller
             ];
 
         $response = $this->tHttpClientWrapper->postRequest($institution_url.'receipts/create',$data);
+        $balance = $this->tHttpClientWrapper->getRequest($institution_url.'receipts/student-balance/'. $request->studentId);
+
 
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-            return redirect()->back()->with('success','Receipt created Successfully!!');
+            return redirect()->back()->with('success',"Receipt created Successfully!!, new balance is " .  $balance['balance'] );
         }
 
 
@@ -314,7 +318,6 @@ class ReceiptController extends Controller
     }
 
 
-
     public function postBulkReceipts(Request $request){
         ini_set('max_execution_time', '60000');
 
@@ -335,7 +338,7 @@ class ReceiptController extends Controller
 
                 $arr =[];
                 if($amount > 5){
-                    
+
                     return redirect()->back()->with(['error' => 'Amount cannot be bulk receipted']);
                 }
 

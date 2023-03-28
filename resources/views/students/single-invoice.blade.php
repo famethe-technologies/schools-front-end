@@ -38,13 +38,15 @@
         <form action="{{route("generateSingleInvoice")}}" method="post" enctype="multipart/form">
         @csrf
         <div class="form-row">
+
             <div class="form-group col-md-6">
-                <label for="gender">Fees</label>
-                <select class="form-control" name="feesId" required>
-                    @foreach($fees as $class)
-                    <option value="{{$class->id}}">{{$class->narration}}</option>
-                    @endforeach
-                </select>
+                <label for="gender">Fees Name</label>
+                <input type="text" class="form-control" name="description" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="gender">Amount</label>
+                <input type="number" class="form-control" name="amount" required>
             </div>
 
             <div class="form-group col-md-6">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Business\Services\THttpClientWrapper;
 use App\Models\Fees;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -273,21 +274,26 @@ class StudentController extends Controller
     }
 
     public function generateSingleInvoice(Request $request){
+        $base_url=config('app.base_url');
+        $response = $this->tHttpClientWrapper->getRequest($base_url . '/student/by-id/'. $request->studentId);
         $schools = Auth::user()->institution_id;
         $user= Auth::user()->email;
-        $url = env('RECEIPT_API') . "invoices/generate-for-student/$schools/$request->feesId/$request->termId/$user/$request->studentId";
-        $response  = $this->tHttpClientWrapper->getRequest($url);
-        if(isset($response["status"])){
-            return redirect()->route('students.view')->with('failed',$response['message']);
-        }else{
-            return redirect()->route('students.view')->with('success','Student Added Successfully!!');
-        }
 
+         $data = [
+            'feesId' => 1,
+            'studentId' =>  $request->studentId,
+            'termId' =>  $request->termId,
+            'institutionId' => $schools,
+            'invoiceNumber' => Carbon::now()->timestamp,
+            'amount' => $request->amount,
+            'description' =>  $request->description . ' ' . "SINGLE - $user",
+            'classs' => $response['data']['classes']['id'] ?? null,
+        ];
 
-
-//        return view('students.single-invoice')->with([
-//           'id' => $id
-//        ]);
+        $url = env('RECEIPT_API') . "invoices/";
+         $responses  = $this->tHttpClientWrapper->postRequest($url,$data);
+        return redirect()->route('students.view')->with('success','Single invoice successful posted.');
+       // return redirect('/view/students')->with(['success', 'Single invoice successful posted.']);
     }
 
 

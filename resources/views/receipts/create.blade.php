@@ -76,6 +76,11 @@
                         <label for="surname">Receipt No *</label>
                         <input type="text" class="form-control"   name="receiptNumber" required>
                     </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="surname">Receipt Date</label>
+                        <input type="date" class="form-control"   name="receiptDate" required>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
