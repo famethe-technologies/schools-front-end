@@ -54,8 +54,6 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-
-
                         <label for="surname">Description *</label>
                         <select class="form-control" name="description" required>
                             <option value="TUITION">TUITION</option>
@@ -69,6 +67,19 @@
                             <option value="HOLIDAY LESSONS">HOLIDAY LESSONS</option>
                             <option value="CALA LEVY">CALA LEVY</option>
                             <option value="OTHER">OTHER</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="surname">Payment Method *</label>
+                        <select class="form-control" name="paymentMethod" required>
+                            <option value="CASH USD">CASH USD</option>
+                            <option value="CASH ZWL">CASH ZWL</option>
+                            <option value="CBZ NOSTRO">CBZ NOSTRO</option>
+                            <option value="CBZ SWIPE">CBZ SWIPE</option>
+                            <option value="CBZ TRANSFER">CBZ TRANSFER</option>
+                            <option value="TRANSFER NBS">TRANSFER NBS</option>
+                            <option value="ECOCASH">ECOCASH</option>
                         </select>
                     </div>
 

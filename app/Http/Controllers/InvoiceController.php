@@ -231,20 +231,26 @@ class InvoiceController extends Controller
     public function getTermInvoicePage()
     {
         $base_url=config('app.base_url');
+        $institution_url=config('app.institution_url');
         $id = Auth::user()->institution_id;
+
+
         $response = $this->tHttpClientWrapper->getRequest($base_url.'/institutions/by-id/'.$id);
+        $fees = $this->tHttpClientWrapper->getRequest($institution_url.'fees-structures/by-school-id/'. $id);
+        $class = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id/' . $id);
+
         if(isset($response["code"] ) && $response["code"] != "200"){
             return redirect()->back()->with(['error' => $response['message']]);
         }
         else
         {
-         //   return  $response['data'];
-//           $records= @json_decode(json_encode($response['data'][0],true));
-
             return view('invoice.term-invoicePage')
                 ->with([
                     'id' => $response['data']['id'],
-                    'institutionName' => $response['data']['institutionName']]);
+                    'institutionName' => $response['data']['institutionName'],
+
+                ])->with('fees',$fees)
+                ->with('classes', $class['dataList']);
 
         }
 
@@ -253,8 +259,10 @@ class InvoiceController extends Controller
     //Class Invoice Report
     public function getTermInvoice(Request $request)
     {
+        //return $request->all();
         $institution_url=config('app.institution_url');
-        $response = $this->tHttpClientWrapper->getRequest($institution_url.'invoices/generate-for-school/'. $request->institutionId. '/' . $request->termId .'/' . Auth::user()->id);
+        $id = Auth::user()->institution_id;
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'invoices/generate-for-class/'.$request->class_id . '/' . $request->termId .'/' . Auth::user()->id. '/' . $id . '/' . $request->fees_id);
         if(isset($response["status"] ) && $response["status"] != "200"){
             session()->flash('error',$response['message']);
             //return view('auth.login');
@@ -275,7 +283,7 @@ class InvoiceController extends Controller
     {
         $id = Auth::user()->institution_id;
         $institution_url=config('app.institution_url');
-      return  $response = $this->tHttpClientWrapper->getRequest($institution_url.'invoices/generate-for-class/'. session('class_id'). '/' . $request->termId .'/' . Auth::user()->id. '/' . $id);
+        $response = $this->tHttpClientWrapper->getRequest($institution_url.'invoices/generate-for-class/'. session('class_id'). '/' . $request->termId .'/' . Auth::user()->id. '/' . $id);
         if(isset($response["status"] ) && $response["status"] != "200"){
             session()->flash('error',$response['message']);
             //return view('auth.login');

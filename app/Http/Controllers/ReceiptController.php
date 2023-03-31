@@ -79,7 +79,7 @@ class ReceiptController extends Controller
             'receiptDate' => $request->receiptDate . 'T00:00:58.573Z',
             'description' => $request->description,
             'institutionId' => $id,
-            'methodOfPayment' => "CASH",
+            'methodOfPayment' => $request->paymentMethod,
             'receiptNumber' => $request->receiptNumber,
             'studentId' => $request->studentId,
             'createdBy' => Auth::user()->email

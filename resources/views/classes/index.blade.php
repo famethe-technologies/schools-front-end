@@ -74,9 +74,9 @@
                                     <i>Change Status</i>
                                 </a>
 
-                                <a href="/fees-configs/{{$record->id}}" class="btn btn-danger btn-sm">
-                                    <i>Class Fees</i>
-                                </a>
+{{--                                <a href="/fees-configs/{{$record->id}}" class="btn btn-danger btn-sm">--}}
+{{--                                    <i>Class Fees</i>--}}
+{{--                                </a>--}}
                               </td>
                         </tr>
                     @endforeach

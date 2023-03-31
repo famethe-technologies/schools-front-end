@@ -84,6 +84,24 @@
                                 <option value="3">3 </option>
                         </select>
                     </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="gender">Fees</label>
+                        <select class="form-control" name="fees_id" required>
+                            @foreach($fees as $f)
+                            <option value="{{$f['id']}}">{{ $f['narration'] . ' ' . $f['currency'] . $f['amount'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="gender">Class</label>
+                        <select class="form-control" name="class_id" required>
+                        @foreach($classes as $class)
+                            <option value="{{$class['id']}}">{{$class['nameOfClass'] .'  |  '. $class['code']}}</option>
+                        @endforeach
+                        </select>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

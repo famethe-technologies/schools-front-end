@@ -38,11 +38,11 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Fees</h6>
             <br>
-            <div>
-                <a href="{{route('fees.create')}}">Create Class Profile</a>
-                ||
-                <a href="/class/invoice">Generate Invoice</a>
-            </div>
+{{--            <div>--}}
+{{--                <a href="{{route('fees.create')}}">Create Class Profile</a>--}}
+{{--                ||--}}
+{{--                <a href="/class/invoice">Generate Invoice</a>--}}
+{{--            </div>--}}
         </div>
 
 
@@ -67,7 +67,7 @@
                             <td>{{$record->id}}</td>
                             <td>{{$record->amount}}</td>
                             <td>{{$record->narration}}</td>
-                            <td>{{$record->term_id}}</td>
+                            <td>{{$record->termId}}</td>
                             <td>{{$record->status}}</td>
                             <td>
 
