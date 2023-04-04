@@ -7,6 +7,7 @@ use App\Models\Fees;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -141,8 +142,22 @@ class StudentController extends Controller
         }
         else
         {
+            $sql = "
+                SELECT f.narration AS description, i.id, COALESCE(i.amount, 0) AS debit, COALESCE(NULL, 0) AS credit
+                FROM invoices i
+                INNER JOIN fees_structure f ON i.fees_id = f.id
+                WHERE i.student_id = 3
+                UNION
+                SELECT description, id, COALESCE(NULL, 0) AS debit, COALESCE(amount, 0) AS credit
+                FROM receipt
+                WHERE student = 3
+                UNION
+                SELECT description, id, COALESCE(NULL, 0) AS debit, COALESCE(amount, 0) AS credit
+                FROM receipts r
+                WHERE student_details = 3";
+              $report = DB::select(DB::raw($sql));
             $records= @json_decode(json_encode($response,true));
-            return view('receipts.school-balance')->with('records', $records);
+            return view('receipts.student-balance')->with('records', $records)->with('reports', $report);
         }
 
     }
@@ -157,6 +172,20 @@ class StudentController extends Controller
         }
         else
         {
+            $sql = "
+                SELECT f.narration AS description, i.id, COALESCE(i.amount, 0) AS debit, COALESCE(NULL, 0) AS credit
+                FROM invoices i
+                INNER JOIN fees_structure f ON i.fees_id = f.id
+                WHERE i.student_id = 3
+                UNION
+                SELECT description, id, COALESCE(NULL, 0) AS debit, COALESCE(amount, 0) AS credit
+                FROM receipt
+                WHERE student = 3
+                UNION
+                SELECT description, id, COALESCE(NULL, 0) AS debit, COALESCE(amount, 0) AS credit
+                FROM receipts r
+                WHERE student_details = 3";
+          return  $report = DB::select(DB::raw($sql));
             $records= @json_decode(json_encode($response,true));
             return view('receipts.school-balance')->with('records', $records);
         }

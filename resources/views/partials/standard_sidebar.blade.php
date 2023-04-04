@@ -739,31 +739,31 @@
                     {{--                        <p>{{__('Add')}}</p>--}}
                     {{--                    </a>--}}
                     {{--                </li>--}}
-                    <li class="nav-item">
-                        <a href="{{route("invoices.classPage")}}" class="nav-link" id="tests">
-                            {{--                        <i class="nav-icon fas fa-home"></i>--}}
-                            <p>
-                                {{__('View Class Invoice')}}
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route("invoices.schoolPage")}}" class="nav-link" id="tests">
-                            {{--                        <i class="nav-icon fas fa-home"></i>--}}
-                            <p>
-                                {{__('View School Invoices')}}
-                            </p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route("invoices.classPage")}}" class="nav-link" id="tests">--}}
+{{--                            --}}{{--                        <i class="nav-icon fas fa-home"></i>--}}
+{{--                            <p>--}}
+{{--                                {{__('View Class Invoice')}}--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route("invoices.schoolPage")}}" class="nav-link" id="tests">--}}
+{{--                            --}}{{--                        <i class="nav-icon fas fa-home"></i>--}}
+{{--                            <p>--}}
+{{--                                {{__('View School Invoices')}}--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li class="nav-item">
-                        <a href="{{route("invoices.classPage")}}" class="nav-link" id="tests">
-                            {{--                        <i class="nav-icon fas fa-home"></i>--}}
-                            <p>
-                                {{__('Generate Class Invoices')}}
-                            </p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route("invoices.classPage")}}" class="nav-link" id="tests">--}}
+{{--                            --}}{{--                        <i class="nav-icon fas fa-home"></i>--}}
+{{--                            <p>--}}
+{{--                                {{__('Generate Class Invoices')}}--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
                     <li class="nav-item">
                         <a href="{{route("invoices.termPage")}}" class="nav-link" id="tests">
@@ -773,6 +773,25 @@
                             </p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{route("reports.generator")}}" class="nav-link" id="tests">
+                            {{--                        <i class="nav-icon fas fa-home"></i>--}}
+                            <p>
+                                {{__('Reports')}}
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{route("invoices.termPage")}}" class="nav-link" id="tests">
+                            {{--                        <i class="nav-icon fas fa-home"></i>--}}
+                            <p>
+                                {{__('Student Statement')}}
+                            </p>
+                        </a>
+                    </li>
+
 
 
                 </ul>

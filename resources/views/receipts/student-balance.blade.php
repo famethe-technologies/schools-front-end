@@ -35,30 +35,40 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Student Balance</h6>
-        </div>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Balance : {{ $records->balance }} </h6>
+            </div>
 
-        <div class="card-body">
-            <div class="table-responsive">
-                <table  id ="example" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Balance</th>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table  id ="example" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Narration</th>
+                            <th>Debit</th>
+                            <th>Credit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($reports as $record)
+                            <tr>
+                                <td>{{$record->id}}</td>
+                                <td>{{$record->description}}</td>
+                                <td>{{$record->debit}}</td>
+                                <td>{{$record->credit}}</td>
+                            </tr>
+                        @endforeach
 
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td></td>
-                        <td>{{$records->balance}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
+
     </div>
 
 

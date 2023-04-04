@@ -3,6 +3,7 @@
 use App\Http\Controllers\FeesController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\ReportsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -122,6 +123,10 @@ Route::get('/school/invoice/create', [InvoiceController::class, 'getSchoolInvoic
 Route::post('/school/invoice/report', [InvoiceController::class, 'getSchoolInvoice'])->name('invoices.school');
 Route::get('/term/invoice/create', [InvoiceController::class, 'getTermInvoicePage'])->name('invoices.termPage');
 Route::post('/term/invoice/report', [InvoiceController::class, 'getTermInvoice'])->name('invoices.term');
+
+
+Route::get('/reports-finders', [ReportsController::class, 'reportsFinder'])->name('reports.generator');
+Route::post('/reports-finders', [ReportsController::class, 'generateReport'])->name('generateReport');
 
 
 
