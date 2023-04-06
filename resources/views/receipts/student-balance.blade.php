@@ -56,7 +56,7 @@
                         @foreach($reports as $record)
                             <tr>
                                 <td>{{$record->id}}</td>
-                                <td>{{$record->description}}</td>
+                                <td>{{$record->description ?? null}}</td>
                                 <td>{{$record->debit}}</td>
                                 <td>{{$record->credit}}</td>
                             </tr>

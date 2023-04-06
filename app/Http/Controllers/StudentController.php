@@ -143,18 +143,13 @@ class StudentController extends Controller
         else
         {
             $sql = "
-                SELECT f.narration AS description, i.id, COALESCE(i.amount, 0) AS debit, COALESCE(NULL, 0) AS credit
+             SELECT (select narration from fees_structure where id=fees_id), i.id, COALESCE(i.amount, 0) AS debit, COALESCE(NULL, 0) AS credit
                 FROM invoices i
-                INNER JOIN fees_structure f ON i.fees_id = f.id
-                WHERE i.student_id = 3
+                WHERE i.student_id =$id
                 UNION
                 SELECT description, id, COALESCE(NULL, 0) AS debit, COALESCE(amount, 0) AS credit
-                FROM receipt
-                WHERE student = 3
-                UNION
-                SELECT description, id, COALESCE(NULL, 0) AS debit, COALESCE(amount, 0) AS credit
-                FROM receipts r
-                WHERE student_details = 3";
+                FROM receipts
+                WHERE student =$id";
               $report = DB::select(DB::raw($sql));
             $records= @json_decode(json_encode($response,true));
             return view('receipts.student-balance')->with('records', $records)->with('reports', $report);
