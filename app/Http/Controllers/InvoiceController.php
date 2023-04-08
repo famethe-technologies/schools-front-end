@@ -146,6 +146,7 @@ class InvoiceController extends Controller
     public function getClassInvoicePage()
     {
 
+       // return 1;
         $base_url=config('app.base_url');
         $id = Auth::user()->institution_id;
          $response = $this->tHttpClientWrapper->getRequest($base_url . '/classes/by-institution-id/' . $id);

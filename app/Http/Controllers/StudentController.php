@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Business\Services\THttpClientWrapper;
 use App\Models\Fees;
+use App\Models\School;
+use App\Models\Student;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -134,7 +137,10 @@ class StudentController extends Controller
 
     public function viewBalance ($id)
     {
-        $institution_url=config('app.institution_url');
+         $institution_id = Auth::user()->institution_id;
+         $image =  "images/" . $this->imageRenderer($institution_id);
+        $school =  School::find($institution_id);
+         $institution_url=config('app.institution_url');
         $response = $this->tHttpClientWrapper->getRequest($institution_url.'receipts/student-balance/'. $id);
 
         if(isset($response["statusCode"] ) && $response["statusCode"] != "200"){
@@ -143,15 +149,29 @@ class StudentController extends Controller
         else
         {
             $sql = "
-             SELECT (select narration from fees_structure where id=fees_id), i.id, COALESCE(i.amount, 0) AS debit, COALESCE(NULL, 0) AS credit
+             SELECT (select narration from fees_structure where id=fees_id) as narration, i.id, COALESCE(i.amount, 0) AS debit, COALESCE(NULL, 0) AS credit
                 FROM invoices i
                 WHERE i.student_id =$id
                 UNION
                 SELECT description, id, COALESCE(NULL, 0) AS debit, COALESCE(amount, 0) AS credit
                 FROM receipts
-                WHERE student =$id";
-              $report = DB::select(DB::raw($sql));
-            $records= @json_decode(json_encode($response,true));
+                WHERE student_details =$id";
+            $report = DB::select(DB::raw($sql));
+            //$records= @json_decode(json_encode($response,true));
+            $student= Student::find($id);
+            $pdf = PDF::loadView('reports.student-statement-pdf',[
+                'reports'=>$report,
+                'student' => $student->student_first_name . ' ' . $student->student_surname,
+                'school' => $school,
+                'image' => $image,
+                'total' => $response['balance'],
+
+            ]);
+
+            return $pdf->download('balance-and-statement.pdf');
+
+
+
             return view('receipts.student-balance')->with('records', $records)->with('reports', $report);
         }
 
@@ -319,6 +339,12 @@ class StudentController extends Controller
         return redirect()->route('students.view')->with('success','Single invoice successful posted.');
        // return redirect('/view/students')->with(['success', 'Single invoice successful posted.']);
     }
+
+    public function imageRenderer($schoolId){
+        $school = School::find($schoolId);
+        return $school->institution_code . ".png";
+    }
+
 
 
 

@@ -81,8 +81,8 @@
                     <div class="form-group col-md-6">
                         <label for="gender">Fees</label>
                         <select class="form-control" name="fees_type" required>
-                            <option value="School Billing Report">School Billing Report By Class & Fees</option>
-                            <option value="Student Billing Report By Student">School Billing Report By Student & Fees</option>
+                            <option value="School Billing Report">Class Billing Report</option>
+{{--                            <option value="Student Billing Report By Student">School Billing Report By Student & Fees</option>--}}
                             <option value="Arrears Report By School">Arrears Report By School</option>
                             <option value="Arrears Report By Class">Arrears Report By Class</option>
                         </select>
