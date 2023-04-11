@@ -102,15 +102,16 @@
             <th>Narration</th>
             <th>Debit</th>
             <th>Credit</th>
+            <th>Date</th>
         </tr>
         </thead>
-        <tbody>
         @foreach($reports as $record)
             <tr>
                 <td>{{$record->id}}</td>
-                <td>{{$record->description ?? null}}</td>
+                <td>{{$record->narration ?? null}}</td>
                 <td>{{$record->debit}}</td>
                 <td>{{$record->credit}}</td>
+                <td>{{$record->created_at}}</td>
             </tr>
             @endforeach
             </tr>

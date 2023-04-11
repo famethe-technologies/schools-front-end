@@ -148,13 +148,12 @@ class StudentController extends Controller
         }
         else
         {
-            $sql = "
-             SELECT (select narration from fees_structure where id=fees_id) as narration, i.id, COALESCE(i.amount, 0) AS debit, COALESCE(NULL, 0) AS credit
+            $sql = "SELECT i.created_date as created_at,i.description as narration, i.id, COALESCE(i.amount, 0) AS debit, COALESCE(NULL, 0) AS credit
                 FROM invoices i
                 WHERE i.student_id =$id
                 UNION
-                SELECT description, id, COALESCE(NULL, 0) AS debit, COALESCE(amount, 0) AS credit
-                FROM receipts
+                SELECT r.receipt_date as created_at,r.description as narration, r.narration as id, COALESCE(NULL, 0) AS debit, COALESCE(r.amount, 0) AS credit
+                FROM receipts r
                 WHERE student_details =$id";
             $report = DB::select(DB::raw($sql));
             //$records= @json_decode(json_encode($response,true));
