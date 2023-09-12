@@ -16,7 +16,7 @@ jobs:
             cd /
             cd /home/jars/schools-front-end
             git stash -u
-            git pull https://flanchoooo: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@github.com/famethe-technologies/schools-front-end develop
+            git pull https://flanchoooo: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@github.com/famethe-technologies/schools-front-end develop
             docker stop schools-front-end
             docker rm schools-front-end
             docker rmi schools-front-end
