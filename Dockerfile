@@ -23,10 +23,13 @@ WORKDIR /var/www/html
 ADD . /var/www/html
 RUN mv .env.prod .env
 
+
 ADD  httpd.conf /etc/httpd/conf/httpd.conf
 ADD  welcome.conf /etc/httpd/conf.d/welcome.conf
 
 RUN composer install --no-dev
+
+RUN chmod - R 777 storage
 
 EXPOSE 80
 
