@@ -1,0 +1,24 @@
+name: USSD-Test
+on:
+  push:
+    branches: [ develop ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to QA
+        uses: appleboy/ssh-action@master
+        with:
+          username: root
+          host: 167.86.86.168
+          password: UnderstandablePassword2021
+          script: |
+            cd /
+            cd /home/jars/schools-front-end
+            git stash -u
+            git pull https://flanchoooo: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@github.com/famethe-technologies/schools-front-end develop
+            docker stop schools-front-end
+            docker rm schools-front-end
+            docker rmi schools-front-end
+            docker build -t schools-front-end .
+            docker run -d -p 1111:1111 --name=schools-front-end --restart=always schools-front-end
