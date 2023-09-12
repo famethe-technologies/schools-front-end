@@ -22,3 +22,4 @@ jobs:
             docker rmi schools-front-ends
             docker build -t schools-front-ends .
             docker run -d -p 1111:1111 --name=schools-front-ends --restart=always schools-front-ends
+
