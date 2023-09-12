@@ -17,8 +17,8 @@ jobs:
             cd /home/jars/schools-front-end
             git stash -u
             git pull https://flanchoooo:${{secrets.TOKEN}}@github.com/famethe-technologies/schools-front-end develop
-            docker stop schools-front-end
-            docker rm schools-front-end
-            docker rmi schools-front-end
-            docker build -t schools-front-end .
-            docker run -d -p 1111:1111 --name=schools-front-end --restart=always schools-front-end
+            docker stop schools-front-ends
+            docker rm schools-front-ends
+            docker rmi schools-front-ends
+            docker build -t schools-front-ends .
+            docker run -d -p 1111:1111 --name=schools-front-ends --restart=always schools-front-ends
