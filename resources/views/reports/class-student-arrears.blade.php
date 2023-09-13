@@ -60,6 +60,7 @@
                             <td>{{$record->code}}</td>
                             <td>{{$record->description}}</td>
                             <td>{{$record->amount}}</td>
+                            <td>{{$record->student_type}}</td>
 {{--                            <td>{{$term}}</td>--}}
                         </tr>
                     @endforeach

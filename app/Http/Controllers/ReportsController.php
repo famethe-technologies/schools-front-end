@@ -120,11 +120,11 @@ class ReportsController extends Controller
         }
 
         if($request->fees_type == "Class-Student-Billing-Report"){
-            $sql = "select s.student_first_name, s.student_surname, i.amount,c.code,i.description from invoices i
+            $sql = "select s.student_first_name, s.student_surname, i.amount,c.code,i.description,s.student_type from invoices i
                     inner join school.student s on i.student_id = s.id
                     inner join school.classes c on s.classs = c.id
                     where c.id=$request->class_id and i.term_id=$request->termId and c.is_deleted=false
-                    group by i.amount, s.student_surname, s.student_first_name, c.code, i.description";
+                    group by i.amount, s.student_surname, s.student_first_name, c.code, i.description,s.student_type";
              $report = DB::select(DB::raw($sql));
             return view('reports.class-student-arrears')->with('records', $report)->with([ 'term' => $request->termId ]);
         }
