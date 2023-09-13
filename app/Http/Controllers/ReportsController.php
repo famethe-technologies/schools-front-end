@@ -34,11 +34,15 @@ class ReportsController extends Controller
         $base_url=config('app.base_url');
         $id = Auth::user()->institution_id;
         $classesResponse = $this->tHttpClientWrapper->getRequest($base_url . 'classes/by-institution-id/' . $id);
-         $classes = @json_decode(json_encode($classesResponse['dataList'], true));
+        $classes = @json_decode(json_encode($classesResponse['dataList'], true));
         return view('reports.index')->with('classes',$classes);
     }
 
     public function generateReport(Request $request){
+
+      //return  $request->all();
+
+
         $institution_id = Auth::user()->institution_id;
         if($request->fees_type == "School Billing Report"){
            $period =  Carbon::now()->format('Y');
@@ -115,13 +119,18 @@ class ReportsController extends Controller
             return view('reports.class-arrears')->with('records', $report)->with([ 'term' => $request->termId ]);
         }
 
+        if($request->fees_type == "Class-Student-Billing-Report"){
+            $sql = "select s.student_first_name, s.student_surname, i.amount,c.code,i.description from invoices i
+                    inner join school.student s on i.student_id = s.id
+                    inner join school.classes c on s.classs = c.id
+                    where c.id=$request->class_id and i.term_id=$request->termId and c.is_deleted=false
+                    group by i.amount, s.student_surname, s.student_first_name, c.code, i.description";
+             $report = DB::select(DB::raw($sql));
+            return view('reports.class-student-arrears')->with('records', $report)->with([ 'term' => $request->termId ]);
+        }
 
-//        "termId": "1",
-//"fees_id": "School Billing Report",
-//"class_id": "173"
 
 
-       // return $request->all();
     }
 
 
