@@ -9,9 +9,9 @@ jobs:
       - name: Deploy to QA
         uses: appleboy/ssh-action@master
         with:
-          username: test
-          host: 127.0.0.1
-          password: test
+          username: root
+          host: 167.86.86.168
+          password: UnderstandablePassword2021
           script: |
             cd /
             cd /home/jars/schools-front-end
