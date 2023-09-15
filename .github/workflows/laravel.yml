@@ -1,4 +1,4 @@
-name: USSD-Test
+name: ci/cd-pipeline
 on:
   push:
     branches: [ develop ]
@@ -9,9 +9,9 @@ jobs:
       - name: Deploy to QA
         uses: appleboy/ssh-action@master
         with:
-          username: root
-          host: 167.86.86.168
-          password: UnderstandablePassword2021
+          username: test
+          host: 127.0.0.1
+          password: test
           script: |
             cd /
             cd /home/jars/schools-front-end
