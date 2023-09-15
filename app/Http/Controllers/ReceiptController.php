@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BulkReceipts;
 use App\Models\Student;
 use Couchbase\QueryException;
 use Exception;
@@ -321,7 +322,7 @@ class ReceiptController extends Controller
     public function postBulkReceipts(Request $request){
         ini_set('max_execution_time', '60000');
 
-         $request->all();
+       // return $request->all();
 
 
         $file     = $request->file('files');
@@ -333,32 +334,38 @@ class ReceiptController extends Controller
             $read = fopen($file, "r");
             while (($fileopen = fgetcsv($read, 1000, ",")) !== false) {
                 $studentId = $fileopen[0];
-                $amount = $fileopen[2];
-                $reference = $fileopen[3];
+                $amount = $fileopen[1];
+                $reference = $fileopen[2];
 
-                $arr =[];
-                if($amount > 5){
+//                $arr =[];
+//                if($amount > 5){
+//                    return redirect()->back()->with(['error' => 'Amount cannot be bulk receipted']);
+//                }
 
-                    return redirect()->back()->with(['error' => 'Amount cannot be bulk receipted']);
-                }
-
-                $studentId= Student::where('id', $studentId)->first();
-                if(!isset($studentId)){
-                    return redirect()->back()->with(['error' => "Student with ID $studentId not found"]);
+                $student= Student::where('id', $studentId)->first();
+                if(!isset($student)){
+                    return redirect()->back()->with(['error' => "Student with ID $student not found"]);
                 }
 
                 try {
                     DB::beginTransaction();
-
-
+                    $receipt  = new BulkReceipts();
+                    $receipt->student_id=$studentId;
+                    $receipt->amount=$amount;
+                    $receipt->description=$reference;
+                    $receipt->classs=$student->classs;
+                    $receipt->institution_id=$student->institution;
+                    $receipt->save();
+                    DB::commit();
                 }catch(QueryException $e){
+                    return $e;
                     DB::rollBack();
                 }
 
             }
 
         }catch (Exception $exception){
-
+            return $exception;
 
         }
     }
