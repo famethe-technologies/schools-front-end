@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BulkFeesType;
 use App\Models\BulkReceipts;
+use App\Models\Classes;
+use App\Models\School;
 use App\Models\Student;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Couchbase\QueryException;
 use Exception;
 use Illuminate\Http\Request;
@@ -336,38 +340,155 @@ class ReceiptController extends Controller
                 $studentId = $fileopen[0];
                 $amount = $fileopen[1];
                 $reference = $fileopen[2];
+                $term_id = $fileopen[3];
 
-//                $arr =[];
-//                if($amount > 5){
-//                    return redirect()->back()->with(['error' => 'Amount cannot be bulk receipted']);
-//                }
+                $fee = BulkFeesType::where('id', $reference)->first();
+                if(!isset($fee)){
+                    return redirect()->back()->with(['error' => "Fees does not exists."]);
+                }
 
                 $student= Student::where('id', $studentId)->first();
                 if(!isset($student)){
-                    return redirect()->back()->with(['error' => "Student with ID $student not found"]);
+                    return redirect()->back()->with(['error' => "Student with ID: $studentId not found"]);
                 }
+
+                if($fee->institution_id != $student->institution){
+                    return redirect()->back()->with(['error' => "Student with id: $studentId  does not belong to the school."]);
+                }
+
+            }
+
+            //return 1;
+            //return null;
+            $files     = $request->file('files');
+            $reads = fopen($files, "r");
+            while (($filesopen = fgetcsv($reads, 1000, ",")) !== false) {
+                $studentId = $filesopen[0];
+                $amount = $filesopen[1];
+                $reference = $filesopen[2];
+                $term_id = $filesopen[3];
+
+
+                $fee = BulkFeesType::where('id', $reference)->first();
 
                 try {
                     DB::beginTransaction();
-                    $receipt  = new BulkReceipts();
-                    $receipt->student_id=$studentId;
-                    $receipt->amount=$amount;
-                    $receipt->description=$reference;
-                    $receipt->classs=$student->classs;
-                    $receipt->institution_id=$student->institution;
+                    $receipt = new BulkReceipts();
+                    $receipt->student_id = $studentId;
+                    $receipt->amount = $amount;
+                    $receipt->description = $fee->name;
+                    $receipt->classs = $student->classs;
+                    $receipt->fees_id = $fee->id;
+                    $receipt->term_id = $term_id;
+                    $receipt->institution_id = $student->institution;
                     $receipt->save();
                     DB::commit();
-                }catch(QueryException $e){
-                    return $e;
+                }catch(QueryException $exception){
                     DB::rollBack();
+                    return $exception;
                 }
-
             }
 
         }catch (Exception $exception){
             return $exception;
 
         }
+       return redirect()->back()->with(['success' => "Payment successfully uploaded."]);
+    }
+
+
+    public function bulkFeesType(){
+        $institutionId = Auth::user()->institution_id;;
+        $records = BulkFeesType::where('institution_id', $institutionId)->get();
+        return view('fees.view-bulk-fees')->with('records', $records);
+
+    }
+
+
+    public function bulkFeesTypeEdit($id){
+        $records = BulkFeesType::where('id', $id)->first();
+        return view('fees.bulk-update-fees')->with('records', $records);
+
+    }
+
+    public function updateBulkFees(Request  $request){
+        $records = BulkFeesType::where('id', $request->id)->first();
+        $records->name=$request->name;
+        $records->amount=$request->amount;
+        $records->save();
+        return $this->bulkFeesType();
+
+    }
+
+    public function createBulkView(){
+        return view('fees.create-bulk');
+    }
+
+    public function createBulkFees(Request $request){
+        $institutionId = Auth::user()->institution_id;;
+        $records = new BulkFeesType();
+        $records->name=$request->name;
+        $records->amount=$request->amount;
+        $records->institution_id=$institutionId;
+        $records->save();
+        return $this->bulkFeesType();
+    }
+
+    public function viewBulkCPC(){
+        $institutionId = Auth::user()->institution_id;
+        $schools = Classes::where('institution', $institutionId)->get();
+        return view('receipts.view-bulk-classes')->with('records', $schools);
+
+    }
+
+
+    public function bulkCpcDownload (Request  $request)
+    {
+        $institution_id = Auth::user()->institution_id;
+
+        $start = "'" .  $request->startDate . "'";
+        $end = "'" .  $request->endDate . "'";
+
+         $class_name = Classes::find($request->class);
+         $schools = School::find($class_name->institution);
+         $image = "images/" . $this->imageRenderer($class_name->institution);
+
+        if($request->endDate === $request->startDate){
+             $sql = "SELECT s.student_first_name, s.student_surname, s.student_type, br.amount, br.description
+            FROM bulk_receipts br INNER JOIN school.student s ON br.student_id = s.id
+            WHERE br.classs=$request->class and br.created_at LIKE '%$request->startDate%'";
+
+             $sql2 = "SELECT sum(br.amount) as total FROM bulk_receipts br
+                    INNER JOIN school.student s ON br.student_id = s.id
+                      WHERE br.classs=173 and br.created_at LIKE '%2023-09-17%'";
+
+        }else{
+            $sql = "SELECT s.student_first_name, s.student_surname, s.student_type, br.amount, br.description
+                    FROM bulk_receipts br INNER JOIN school.student s ON br.student_id = s.id
+                WHERE br.classs=$request->class and br.created_at BETWEEN $start AND $end";
+
+           $sql2="SELECT SELECT sum(br.amount) as total
+                    FROM bulk_receipts br INNER JOIN school.student s ON br.student_id = s.id
+                WHERE br.classs=$request->class and br.created_at BETWEEN $start AND $end";
+        }
+
+        $report = DB::select(DB::raw($sql));
+        $sum = DB::select(DB::raw($sql2));
+
+        $pdf = PDF::loadView('receipts.class-cp',[
+            'reports'=>$report,
+            'total' => $sum[0]->total,
+            'image' => $image,
+            'class_name' => $class_name->name_of_class,
+            'schools' => $schools->institution_name,
+        ]);
+        return $pdf->download('class-cpc.pdf');
+
+    }
+
+    public function imageRenderer($schoolId){
+        $school = School::find($schoolId);
+        return $school->institution_code . ".png";
     }
 
 

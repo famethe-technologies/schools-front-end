@@ -77,6 +77,9 @@
 {{--                                <a href="/fees-configs/{{$record->id}}" class="btn btn-danger btn-sm">--}}
 {{--                                    <i>Class Fees</i>--}}
 {{--                                </a>--}}
+{{--                                <a href="/download-billing/{{$record->id}}" class="btn btn-danger btn-sm">--}}
+{{--                                    <i>Download Billing Statements</i>--}}
+{{--                                </a>--}}
                               </td>
                         </tr>
                     @endforeach

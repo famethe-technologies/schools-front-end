@@ -24,7 +24,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active">{{__('Institutions')}}</li>
+                            <li class="breadcrumb-item active">{{__('Fees')}}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -36,33 +36,41 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Student Billing Report</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Fees</h6>
+            <br>
+            <div>
+                <a href="{{route('createBulkView')}}">Create Bulk Fee Type</a>
+            </div>
         </div>
+
 
         <div class="card-body">
             <div class="table-responsive">
                 <table  id ="example" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-
+                        <th>Id</th>
                         <th>Name</th>
-                        <th>Class</th>
-                        <th>Narration</th>
-                        <th>Balance</th>
-                        <th>Type</th>
-{{--                        <th>Term</th>--}}
+                        <th>Amount</th>
+                        <th>Created</th>
+                        <th>Action</th>
+
 
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($records as $record)
                         <tr>
-                            <td>{{$record->student_first_name . ' ' . $record->student_surname}}</td>
-                            <td>{{$record->code}}</td>
-                            <td>{{$record->description}}</td>
+                            <td>{{$record->id}}</td>
+                            <td>{{$record->name}}</td>
                             <td>{{$record->amount}}</td>
-                            <td>{{$record->student_type}}</td>
-{{--                            <td>{{$term}}</td>--}}
+                            <td>{{$record->created_at}}</td>
+                            <td>
+
+                                <a href="{{route("bulkFeesTypeEdit", $record->id)}}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
 

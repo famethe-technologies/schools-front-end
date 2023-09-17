@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>School Billing Report</title>
+    <title>Class Bulk Receipting CPC</title>
 </head>
 <style type="text/css">
     body{
@@ -81,17 +81,16 @@
 <div class="head-title">
     <h1 class="text-center m-0 p-0"> <img src="{{ public_path("$image") }}" alt="" style="width: 150px; height: 150px;"></h1>
     <br>
-    <h1 class="text-center m-0 p-0">STATEMENT</h1>
+    <h1 class="text-center m-0 p-0">Class Bulk Receipting CPC</h1>
     <div class="w-50 float-right logo mt-10">
 
     </div>
 </div>
 <div class="add-detail mt-10">
     <div class="w-50 float-left mt-10">
-        <p class="m-0 pt-5  w-100">{{'Student Name : ' . $student }}  <span class="gray-color"></span></p>
-        <p class="m-0 pt-5  w-100">{{'Student ID : ' . $student_id }}  <span class="gray-color"></span></p>
-        <p class="m-0 pt-5  w-100">{{'School Name : ' . $school->institution_name}}  <span class="gray-color"></span></p>
-        <p class="m-0 pt-5  w-100">{{'Class Name : ' . $class}}  <span class="gray-color"></span></p>
+        <p class="m-0 pt-5  w-100">{{'Class Name : ' . $class_name }}  <span class="gray-color"></span></p>
+        <p class="m-0 pt-5  w-100">{{'School Name : ' . $schools }}  <span class="gray-color"></span></p>
+
 
         <br><br>
     </div>
@@ -102,27 +101,21 @@
 
     <table class="table w-100 mt-10">
         <tr>
-            <th>Id</th>
-            <th>Narration</th>
-            <th>Debit</th>
-            <th>Credit</th>
-            <th>Date</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Fee</th>
         </tr>
         </thead>
         @foreach($reports as $record)
             <tr>
-                <td>{{$record->id}}</td>
-                <td>{{$record->narration ?? null}}</td>
-                <td>{{$record->debit}}</td>
-                <td>{{$record->credit}}</td>
-                <td>@php
-                        $date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s.u', $record->created_at);
-                        echo $formattedDate = $date->format('Y-m-d');
-                        @endphp</td>
+                <td>{{$record->student_first_name . ' ' . $record->student_surname}}</td>
+                <td>{{$record->student_type}}</td>
+                <td>{{$record->description}}</td>
+                <td>{{$record->amount}}</td>
             </tr>
             @endforeach
             </tr>
-
     </table>
 <br>
 <br>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Business\Services\THttpClientWrapper;
+use App\Models\Classes;
 use App\Models\Fees;
 use App\Models\School;
 use App\Models\Student;
@@ -156,21 +157,20 @@ class StudentController extends Controller
                 FROM receipts r
                 WHERE student_details =$id";
             $report = DB::select(DB::raw($sql));
-            //$records= @json_decode(json_encode($response,true));
             $student= Student::find($id);
+            $class = Classes::find($student->classs);
             $pdf = PDF::loadView('reports.student-statement-pdf',[
                 'reports'=>$report,
                 'student' => $student->student_first_name . ' ' . $student->student_surname,
                 'school' => $school,
+                'student_id' => $student->id,
                 'image' => $image,
-                'total' => $response['balance'],
+                'class' => $class->name_of_class,
+                'total' => number_format($response['balance'],2)
 
             ]);
 
             return $pdf->download('balance-and-statement.pdf');
-
-
-
             return view('receipts.student-balance')->with('records', $records)->with('reports', $report);
         }
 
@@ -199,7 +199,7 @@ class StudentController extends Controller
                 SELECT description, id, COALESCE(NULL, 0) AS debit, COALESCE(amount, 0) AS credit
                 FROM receipts r
                 WHERE student_details = 3";
-          return  $report = DB::select(DB::raw($sql));
+            $report = DB::select(DB::raw($sql));
             $records= @json_decode(json_encode($response,true));
             return view('receipts.school-balance')->with('records', $records);
         }

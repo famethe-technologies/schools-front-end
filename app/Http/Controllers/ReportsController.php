@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
 use App\Models\Invoices;
 use App\Models\School;
 use App\Models\Student;
@@ -120,17 +121,35 @@ class ReportsController extends Controller
         }
 
         if($request->fees_type == "Class-Student-Billing-Report"){
-            $sql = "select s.student_first_name, s.student_surname, i.amount,c.code,i.description,s.student_type from invoices i
+
+            $class_name = Classes::find($request->class_id);
+            $schools = School::find($institution_id);
+            $image = "images/" . $this->imageRenderer($institution_id);
+
+            $sql = "select s.student_first_name, s.student_surname,s.student_type, i.amount,c.code,i.description from invoices i
                     inner join school.student s on i.student_id = s.id
                     inner join school.classes c on s.classs = c.id
                     where c.id=$request->class_id and i.term_id=$request->termId and c.is_deleted=false
-                    group by i.amount, s.student_surname, s.student_first_name, c.code, i.description,s.student_type";
-             $report = DB::select(DB::raw($sql));
-            return view('reports.class-student-arrears')->with('records', $report)->with([ 'term' => $request->termId ]);
+                    group by i.amount,s.student_type, s.student_surname, s.student_first_name, c.code, i.description";
+
+            $sql2 = "select  sum(i.amount) as total from invoices i
+                    inner join school.student s on i.student_id = s.id
+                    inner join school.classes c on s.classs = c.id
+                    where c.id=$request->class_id and i.term_id=$request->termId and c.is_deleted=false";
+
+            $report = DB::select(DB::raw($sql));
+            $sum = DB::select(DB::raw($sql2));
+
+            $pdf = PDF::loadView('reports.class-billing-pdf',[
+                'reports'=>$report,
+                'total' => $sum[0]->total,
+                'image' => $image,
+                'class_name' => $class_name->name_of_class,
+                'schools' => $schools->institution_name,
+            ]);
+
+            return $pdf->download('class-billing.pdf');
         }
-
-
-
     }
 
 

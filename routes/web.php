@@ -129,6 +129,14 @@ Route::get('/reports-finders', [ReportsController::class, 'reportsFinder'])->nam
 Route::post('/reports-finders', [ReportsController::class, 'generateReport'])->name('generateReport');
 
 
+Route::get('/bulk-fees-type', [ReceiptController::class, 'bulkFeesType'])->name('bulkFeesType');
+Route::get('/bulk-fees-type/{id}', [ReceiptController::class, 'bulkFeesTypeEdit'])->name('bulkFeesTypeEdit');
+Route::post('/bulk-fees-type', [ReceiptController::class, 'updateBulkFees'])->name('updateBulkFees');
+Route::get('/bulk-fee-create-view', [ReceiptController::class, 'createBulkView'])->name('createBulkView');
+Route::post('/bulk-fee-create', [ReceiptController::class, 'createBulkFees'])->name('createBulkFees');
+Route::get('/view-bulk-cpc', [ReceiptController::class, 'viewBulkCPC'])->name('viewBulkCPC');
+Route::post('/view-bulk-cpc', [ReceiptController::class, 'bulkCpcDownload'])->name('bulkCpcDownload');
+
 
 
 

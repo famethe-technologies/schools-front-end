@@ -31,47 +31,30 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Bulk Receipting</h6>
-            @if (session('error'))
-                <div style="text-align: center;"> <div class="alert alert-danger" id="flash-message">
-                        {{ session('error') }}
-                    </div>
-                </div>
-            @endif
-
-{{--            @if (session('success'))--}}
-{{--                <div style="text-align: center;"> <div class="alert alert-danger" id="flash-message">--}}
-{{--                        {{ session('success') }}--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            @endif--}}
-
-
-            <style>
-                #flash-message {
-                    animation: fadeOut 15s forwards;
-                }
-
-                @keyframes fadeOut {
-                    to {
-                        opacity: 0;
-                        visibility: hidden;
-                    }
-                }
-
-            </style>
+            <h6 class="m-0 font-weight-bold text-primary">View</h6>
         </div>
 
         <div class="card-body">
-            <form action="{{route("receipts.bulk")}}" method="post" enctype="multipart/form-data">
+            <form action="{{route("bulkCpcDownload")}}" method="post" enctype="multipart/form">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="surname">Amount *</label>
-                        <input type="file" class="form-control"   name="files" required>
+                        <label for="gender">Class</label>
+                        <select class="form-control" name="class" required>
+                            @foreach($records as $classes)
+                                <option value="{{$classes->id}}">{{$classes->name_of_class}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="firstname">Start Date *</label>
+                        <input type="date" class="form-control" name="startDate"  required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="firstname">End Date *</label>
+                        <input type="date" class="form-control" name="endDate"  required>
                     </div>
                 </div>
-
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -86,10 +69,5 @@
     <!-- Switch -->
     <script src="{{url('plugins/swtich-netliva/js/netliva_switch.js')}}"></script>
     <script src="{{url('js/admin/dashboard.js')}}"></script>
-    <script>
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-        });
-    </script>
 @endsection
 

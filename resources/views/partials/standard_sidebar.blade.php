@@ -104,6 +104,8 @@
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
+
+
             <li class="nav-item">
                 <a href="{{route("receipts.create")}}" class="nav-link" id="branches">
                     <i class="fas fa-plus nav-icon"></i>
@@ -114,7 +116,14 @@
             <li class="nav-item">
                 <a href="{{route("receipts.create-bulk")}}" class="nav-link" id="branches">
                     <i class="fas fa-plus nav-icon"></i>
-                    <p>{{__('Bulk Receipting')}}</p>
+                    <p>{{__('Bulks Receipting')}}</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{route("viewBulkCPC")}}" class="nav-link" id="branches">
+                    <i class="fas fa-print nav-icon"></i>
+                    <p>{{__('Print Bulk Receipts CPC')}}</p>
                 </a>
             </li>
 
@@ -130,6 +139,7 @@
                     <p>{{__('Print CPC')}}</p>
                 </a>
             </li>
+
 
             <li class="nav-item has-treeview" id="prices">
                 <a href="#" class="nav-link" id="prices_link">
@@ -630,6 +640,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{route("viewBulkCPC")}}" class="nav-link" id="branches">
+                            <i class="fas fa-print nav-icon"></i>
+                            <p>{{__('Print Bulk Receipts CPC')}}</p>
+                        </a>
+                    </li>
+
                         <li class="nav-item">
                             <a href="{{route("receipts.printPage")}}" class="nav-link" id="branches">
                                 <i class="fas fa-print nav-icon"></i>
@@ -717,6 +734,17 @@
                             </p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{route("bulkFeesType")}}" class="nav-link" id="tests">
+                            <i class="nav-icon fas fa-eye"></i>
+                            <p>
+                                {{__('View Bulk Fees Type')}}
+                            </p>
+                        </a>
+                    </li>
+
+
 
 
                 </ul>
