@@ -1,6 +1,15 @@
 <nav class="mt-2" >
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
+
+        <li class="nav-item">
+            <a href="{{route('requisitions.index')}}" class="nav-link" id="profile">
+                <i class="nav-icon fas fa-user-circle"></i>
+                <p>
+                    {{__('Requisition')}}
+                </p>
+            </a>
+        </li>
             @if(Auth::user()->role=='superadmin')
                 <a href="/home" class="nav-link" id="dashboard">
                     <i class="nav-icon fas fa-th"></i>
@@ -15,14 +24,6 @@
                         {{__('Home')}}
                     </p>
                 </a>
-        <li class="nav-item">
-            <a href="{{route('requisitions.index')}}" class="nav-link" id="profile">
-                <i class="nav-icon fas fa-user-circle"></i>
-                <p>
-                    {{__('Requisition')}}
-                </p>
-            </a>
-        </li>
             @endif
         </li>
 
