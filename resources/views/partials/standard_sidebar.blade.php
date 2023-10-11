@@ -15,6 +15,14 @@
                         {{__('Home')}}
                     </p>
                 </a>
+        <li class="nav-item">
+            <a href="{{route('requisitions.index')}}" class="nav-link" id="profile">
+                <i class="nav-icon fas fa-user-circle"></i>
+                <p>
+                    {{__('Requisition')}}
+                </p>
+            </a>
+        </li>
             @endif
         </li>
 
@@ -492,16 +500,6 @@
         @endif
 
         @if(Auth::user()->role =='superadmin')
-
-            <li class="nav-item">
-                <a href="" class="nav-link" id="profile">
-                    <i class="nav-icon fas fa-user-circle"></i>
-                    <p>
-                        {{__('Profile')}}
-                    </p>
-                </a>
-            </li>
-
             <li class="nav-item has-treeview" id="prices">
                 <a href="#" class="nav-link" id="prices_link">
                     <i class="nav-icon fas fa-user-graduate"></i>

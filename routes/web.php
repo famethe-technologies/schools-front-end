@@ -4,6 +4,7 @@ use App\Http\Controllers\FeesController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\RequisitionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -137,6 +138,12 @@ Route::post('/bulk-fee-create', [ReceiptController::class, 'createBulkFees'])->n
 Route::get('/view-bulk-cpc', [ReceiptController::class, 'viewBulkCPC'])->name('viewBulkCPC');
 Route::post('/view-bulk-cpc', [ReceiptController::class, 'bulkCpcDownload'])->name('bulkCpcDownload');
 
+Route::resource('requisitions', RequisitionController::class);
+Route::any('update/requisitions/{id}',[RequisitionController::class, 'update']);
+Route::any('/delete-requisitions/{id}/{status}',[RequisitionController::class, 'destroy']);
+Route::any('/create-requisition',[RequisitionController::class, 'createRequisition'])->name('requisitions.createRequisition');
+Route::any('/view-attachments/{id}/{qt}',[RequisitionController::class, 'viewAttachements']);
+Route::any('/download-requisition/{id}',[RequisitionController::class, 'approvalForm']);
 
 
 
