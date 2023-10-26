@@ -72,7 +72,7 @@
                             <td>{{ $item->type }}</td>
                             <td>{{ $item->currency }}</td>
                             <td>{{ $item->recommended_amount }}</td>
-                            <td>{{ $item->recommended_supplier }}</td>
+                            <td>{{ \App\Models\Suppliers::find($item->recommended_supplier)->supplier_name }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>
                                 <div class="dropdown">
@@ -87,6 +87,11 @@
                                         @if($user->role=='COO')
                                             <a class="dropdown-item" href="/delete-requisitions/{{$item->id}}/DECLINED_BY_COO">Decline</a>
                                             <a class="dropdown-item" href="/delete-requisitions/{{$item->id}}/APPROVED">COO Approval</a>
+                                        @endif
+
+                                        @if($user->role=='HEADMASTER')
+                                            <a class="dropdown-item" href="/delete-requisitions/{{$item->id}}/DECLINED_BY_HEADMASTER">Decline</a>
+                                            <a class="dropdown-item" href="/delete-requisitions/{{$item->id}}/PENDING_FINANCE_APPROVAL">Headmaster Approval</a>
                                         @endif
 
                                         @if($user->role=='FINANCE')

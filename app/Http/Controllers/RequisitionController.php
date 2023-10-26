@@ -8,6 +8,7 @@ use App\Models\LeaveBalances;
 use App\Models\Requisition;
 use App\Models\School;
 use App\Models\Student;
+use App\Models\Suppliers;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -32,8 +33,15 @@ class RequisitionController extends Controller
             return view('requisitions.index')->with('records',$records);
         }
 
+
         if($userId->role =='FINANCE'){
             $records = Requisition::where('status', 'PENDING_FINANCE_APPROVAL')
+                ->get();
+            return view('requisitions.index')->with('records',$records);
+        }
+
+        if($userId->role =='HEADMASTER'){
+            $records = Requisition::where('status', 'PENDING_HEADMASTER_APPROVAL')
                 ->get();
             return view('requisitions.index')->with('records',$records);
         }
@@ -60,26 +68,26 @@ class RequisitionController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->all();
+       $suppliers = Suppliers::all();
         if($request->type === 'PETTY_CASH'){
             return view('requisitions.recurring-petty')->with([
                 'description' => $request->description,
                 'type' => $request->type,
-            ]);
+            ])->with('supplier', $suppliers);
         }
 
         if($request->type === 'RECURRING'){
             return view('requisitions.recurring-petty')->with([
                 'description' => $request->description,
                 'type' => $request->type,
-            ]);
+            ])->with('supplier', $suppliers);
         }
 
         if($request->type === 'CAPEX'){
             return view('requisitions.capex')->with([
                 'description' => $request->description,
                 'type' => $request->type,
-            ]);
+            ])->with('supplier', $suppliers);
         }
     }
 
@@ -92,6 +100,7 @@ class RequisitionController extends Controller
      */
     public function createRequisition(Request $request)
     {
+        // return $request->all();
        //return  $userId = Auth::user();
         try {
             $userId = Auth::user();
@@ -99,12 +108,12 @@ class RequisitionController extends Controller
                 $records = new Requisition();
                 $records->type = $request->type;
                 $records->description = $request->description;
-                $records->status = 'PENDING_FINANCE_APPROVAL';
+                $records->status = 'PENDING_HEADMASTER_APPROVAL';
                 $records->currency = $request->currency;
                 $records->company_id = $userId->institution_id;
                 $records->employee_id = $userId->staff_id;
                 $records->recommended_amount = $request->amount;
-                $records->recommended_supplier = 'N/A';
+                $records->recommended_supplier =$request->suppliers;
                 $records->save();
 
                 toast('Requisition successfully created', 'success');
@@ -115,12 +124,12 @@ class RequisitionController extends Controller
                 $records = new Requisition();
                 $records->type = $request->type;
                 $records->description = $request->description;
-                $records->status = 'PENDING_FINANCE_APPROVAL';
+                $records->status = 'PENDING_HEADMASTER_APPROVAL';
                 $records->currency = $request->currency;
                 $records->company_id = $userId->institution_id;
                 $records->employee_id = $userId->staff_id;
                 $records->recommended_amount = $request->amount;
-                $records->recommended_supplier = 'N/A';
+                $records->recommended_supplier =$request->suppliers;
                 $records->save();
                 toast('Requisition successfully created', 'success');
                 return  redirect('/requisitions');
@@ -141,7 +150,7 @@ class RequisitionController extends Controller
             $records = new Requisition();
             $records->type = $request->type;
             $records->description = $request->description;
-            $records->status = 'PENDING_FINANCE_APPROVAL';
+            $records->status = 'PENDING_HEADMASTER_APPROVAL';
             $records->currency = $request->currency;
             $records->company_id = $userId->institution_id;
             $records->employee_id = $userId->staff_id;

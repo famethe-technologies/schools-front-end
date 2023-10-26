@@ -60,6 +60,14 @@
                             <option value="ZWL">ZWL</option>
                         </select>
                     </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1" class="form-label">Suppliers</label>
+                        <select type="text" class="form-control" id="validationDefault02" name="suppliers">
+                            @foreach($supplier as $item)
+                                <option value="{{$item->id}}">{{$item->supplier_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>

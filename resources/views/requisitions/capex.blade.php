@@ -98,10 +98,20 @@
                         <input type="file" class="form-control" name="file_three"  >
                     </div>
 
-                    <div class="col-md-4">
-                        <label for="exampleInputEmail1" class="form-label">Recommend Supplier</label>
-                        <input type="text" class="form-control" name="recommended_supplier"  >
+
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1" class="form-label">Suppliers</label>
+                        <select type="text" class="form-control" id="validationDefault02" name="recommended_supplier">
+                            @foreach($supplier as $item)
+                                <option value="{{$item->id}}">{{$item->supplier_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
+
+{{--                    <div class="col-md-4">--}}
+{{--                        <label for="exampleInputEmail1" class="form-label">Recommend Supplier</label>--}}
+{{--                        <input type="text" class="form-control" name="recommended_supplier"  >--}}
+{{--                    </div>--}}
 
 
                     <div class="col-md-4">
