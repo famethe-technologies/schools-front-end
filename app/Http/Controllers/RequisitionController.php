@@ -160,6 +160,7 @@ class RequisitionController extends Controller
             toast('Requisition successfully created', 'success');
             return  redirect('/requisitions');
         }catch (\Exception $e){
+            return $e;
 
         }
     }
