@@ -9,6 +9,17 @@
                     {{__('Requisition')}}
                 </p>
             </a>
+
+            @if(Auth::user()->role=='superadmin' || Auth::user()->role=='COO' || Auth::user()->role=='FINANCE' || Auth::user()->role=='HEADMASTER')
+                <a href="/suppliers" class="nav-link" id="#1">
+                    <i class="nav-icon fas fa-search-plus"></i>
+                    <p>
+                        {{__('Suppliers')}}
+                    </p>
+                </a>
+            @endif
+
+
         </li>
             @if(Auth::user()->role=='superadmin')
                 <a href="/home" class="nav-link" id="dashboard">

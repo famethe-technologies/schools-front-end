@@ -9,7 +9,7 @@
 @endsection
 
 @section('breadcrumb')
-    @include('sweetalert::alert')
+{{--    @include('sweetalert::alert')--}}
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -107,18 +107,20 @@
                             @endforeach
                         </select>
                     </div>
-
-{{--                    <div class="col-md-4">--}}
-{{--                        <label for="exampleInputEmail1" class="form-label">Recommend Supplier</label>--}}
-{{--                        <input type="text" class="form-control" name="recommended_supplier"  >--}}
-{{--                    </div>--}}
-
-
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Currency</label>
                         <select type="text" class="form-control" id="validationDefault02" name="currency">
                             <option value="USD">USD</option>
                             <option value="ZWL">ZWL</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="exampleInputEmail1" class="form-label">Payment Method</label>
+                        <select type="text" class="form-control" id="validationDefault02" name="payment_method">
+                            <option value="CASH USD">CASH USD</option>
+                            <option value="RTGS">RTGS</option>
+                            <option value="NOSTRO">NOSTRO</option>
                         </select>
                     </div>
                 </div>

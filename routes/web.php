@@ -144,6 +144,10 @@ Route::any('/delete-requisitions/{id}/{status}',[RequisitionController::class, '
 Route::any('/create-requisition',[RequisitionController::class, 'createRequisition'])->name('requisitions.createRequisition');
 Route::any('/view-attachments/{id}/{qt}',[RequisitionController::class, 'viewAttachements']);
 Route::any('/download-requisition/{id}',[RequisitionController::class, 'approvalForm']);
+Route::get('/suppliers',[RequisitionController::class, 'viewSuppliers']);
+Route::get('/create-supplier',[RequisitionController::class, 'createSupplier']);
+Route::post('/create-supplier',[RequisitionController::class, 'createSup']);
+Route::get('/suppliers/{id}',[RequisitionController::class, 'delete']);
 
 
 

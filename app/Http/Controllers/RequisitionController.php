@@ -114,9 +114,10 @@ class RequisitionController extends Controller
                 $records->employee_id = $userId->staff_id;
                 $records->recommended_amount = $request->amount;
                 $records->recommended_supplier =$request->suppliers;
+                $records->payment_method = $request->payment_method;
                 $records->save();
 
-                toast('Requisition successfully created', 'success');
+               // toast('Requisition successfully created', 'success');
                 return  redirect('/requisitions');
             }
 
@@ -130,8 +131,9 @@ class RequisitionController extends Controller
                 $records->employee_id = $userId->staff_id;
                 $records->recommended_amount = $request->amount;
                 $records->recommended_supplier =$request->suppliers;
+                $records->payment_method = $request->payment_method;
                 $records->save();
-                toast('Requisition successfully created', 'success');
+               // toast('Requisition successfully created', 'success');
                 return  redirect('/requisitions');
             }
             //return $request->all();
@@ -160,13 +162,14 @@ class RequisitionController extends Controller
             $records->file_one = $one;
             $records->file_two = $two;
             $records->file_three = $three;
+            $records->payment_method = $request->payment_method;
             $records->amount_one = $request->amount_one;
             $records->amount_two = $request->amount_two;
             $records->amount_three = $request->amount_three;
             $records->recommended_amount = $request->amount;
             $records->recommended_supplier = $request->recommended_supplier;
             $records->save();
-            toast('Requisition successfully created', 'success');
+           // toast('Requisition successfully created', 'success');
             return  redirect('/requisitions');
         }catch (\Exception $e){
             return $e;
@@ -221,18 +224,18 @@ class RequisitionController extends Controller
 
         $records = Requisition::find($id);
         if($records->status=='APPROVED'){
-            toast('Leave already updated', 'error');
+           // toast('Leave already updated', 'error');
             return redirect()->back();
         }
 
         if($records->status=='CANCELLED'){
-            toast('Leave already updated', 'error');
+           // toast('Leave already updated', 'error');
             return redirect()->back();
         }
 
         $records->status=$status;
         $records->save();
-        toast('Requisition successfully cancelled', 'success');
+        //toast('Requisition successfully cancelled', 'success');
         return redirect()->route('requisitions.index');
     }
 
@@ -256,6 +259,7 @@ class RequisitionController extends Controller
     {
 
         $requisition = Requisition::find($id);
+        $supplier = Suppliers::find($requisition->recommended_supplier);
         $school =  School::find($requisition->company_id);
         $user= User::find($requisition->employee_id);
         $image =  "images/" . $school->institution_code . ".png";;
@@ -264,8 +268,40 @@ class RequisitionController extends Controller
                 'data'=>$requisition,
                 'school' => $school,
                 'user' => $user,
+                'supplier' => $supplier,
                 'image' => $image
             ]);
             return $pdf->download('balance-and-statement.pdf');
+    }
+
+
+    public function viewSuppliers(){
+        $suppliers = Suppliers::all();
+        return view('suppliers.index')->with('records', $suppliers);
+    }
+
+    public function delete($id){
+        Suppliers::destroy($id);
+        $suppliers = Suppliers::all();
+        return view('suppliers.index')->with('records', $suppliers);
+    }
+
+    public function createSupplier(){
+        return view('suppliers.create');
+    }
+
+    public function createSup(Request  $request){
+
+        $supplier = new Suppliers();
+        $supplier->address=$request->address;
+        $supplier->email=$request->email;
+        $supplier->phone=$request->phone;
+        $supplier->address=$request->address;
+        $supplier->supplier_name=$request->name;
+        $supplier->bank_name=$request->bank;
+        $supplier->account_number=$request->account_number;
+        $supplier->save();
+        return $this->viewSuppliers();
+        //return view('suppliers.create');
     }
 }

@@ -86,7 +86,7 @@
         padding: 20px;
     }
     .title {
-        font-size: 12px;
+        font-size: 10px;
         text-align: center;
         margin-top: 20px;
     }
@@ -117,18 +117,22 @@
 <div class="head-title">
     <h1 class="text-center m-0 p-0"> <img src="{{ public_path("$image") }}" alt="" style="width: 150px; height: 150px;"></h1>
     <br>
-    <h1 class="text-center m-0 p-0">Requisition</h1>
+    <h1 class="text-center m-0 p-0" style="font-size: 14px">Requisition</h1>
     <div class="w-50 float-right logo mt-10">
 
     </div>
 </div>
 <div class="add-detail mt-10">
     <div class="w-50 float-left mt-10">
-        <p class="m-0 pt-5  w-100">{{'Requested By : ' . $user->first_name . ' ' . $user->last_name }}  <span class="gray-color"></span></p>
-        <p class="m-0 pt-5  w-100">{{'School Name : ' . $school->institution_name}}  <span class="gray-color"></span></p>
-        <p class="m-0 pt-5  w-100">{{'Type : ' . $data->type}}  <span class="gray-color"></span></p>
-        <p class="m-0 pt-5  w-100">{{'Requisition Date : ' . $data->created_at}}  <span class="gray-color"></span></p>
+        <p class="m-0 pt-5  w-100" style="font-size: 10px">{{'Requested By : ' . $user->first_name . ' ' . $user->last_name }}  <span class="gray-color"></span></p>
+        <p class="m-0 pt-5  w-100" style="font-size: 10px">{{'School Name : ' . $school->institution_name}}  <span class="gray-color"></span></p>
+        <p class="m-0 pt-5  w-100" style="font-size: 10px">{{'Type : ' . $data->type}}  <span class="gray-color"></span></p>
+        <p class="m-0 pt-5  w-100" style="font-size: 10px">{{'Requisition Date : ' . $data->created_at}}  <span class="gray-color"></span></p>
+        <p class="m-0 pt-5  w-100" style="font-size: 10px">{{'Supplier:' . $supplier->name  }}  <span class="gray-color"></span></p>
+        <p class="m-0 pt-5  w-100" style="font-size: 10px">{{'Supplier Account Details:' . $supplier->account_number  }}  <span class="gray-color"></span></p>
+        <p class="m-0 pt-5  w-100" style="font-size: 10px">{{'Supplier Bank Details:' . $supplier->bank_name  }}  <span class="gray-color"></span></p>
         <br><br>
+
     </div>
 
 
@@ -138,27 +142,30 @@
 @if($data->type=='PETTY_CASH')
     <table class="table w-100 mt-10">
         <tr>
-            <th>Reference</th>
+            <th>Requisition No.</th>
             <th>Description</th>
             <th>Amount</th>
             <th>Currency</th>
+            <th>Payment Method</th>
         </tr>
         </thead>
             <tr>
                 <td>{{$data->id }}</td>
                 <td>{{$data->description }}</td>
-                <td>{{$data->recommended_amount }}</td>
+                <td>{{number_format($data->recommended_amount,2) }}</td>
                 <td>{{$data->currency}}</td>
+                <td>{{$data->payment_method}}</td>
             </tr>
     </table>
 @else
     <table class="table w-100 mt-10">
         <tr>
-            <th>Reference</th>
+            <th>Requisition No.</th>
             <th>Description</th>
             <th>Supplier</th>
             <th>Supplier Amount</th>
             <th>Currency</th>
+            <th>Payment Method</th>
         </tr>
         </thead>
         <tr>
@@ -167,6 +174,7 @@
             <td>{{$data->s_one }}</td>
             <td>{{$data->amount_one }}</td>
             <td>{{$data->currency}}</td>
+            <td>{{$data->payment_method}}</td>
         </tr>
         <tr>
             <td>{{$data->id }}</td>
@@ -210,7 +218,7 @@
     <div class="signatory">
         <div class="signed-text">.</div>
         <div class="signature-line"></div>
-        <div class="title">Managing Director: Peace Pundu</div>
+        <div class="title">Managing Director Signature & Date: Peace Pundu</div>
     </div>
 </div>
 
@@ -220,5 +228,38 @@
 <hr>
 <p align="right" >Amount: {{ $data->recommended_amount }}</p>
 <hr>
+<div>
+
+    <style>
+        .table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+
+        .md-comments {
+            height: 60px;
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+    </style>
+
+    <table class="table">
+        <tr>
+            <th>Managing Director Comments:</th>
+        </tr>
+        <tr>
+            <td class="md-comments" contenteditable="true">
+
+            </td>
+        </tr>
+    </table>
+</div>
 </div>
 </html>
